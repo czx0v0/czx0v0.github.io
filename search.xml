@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[world”]]></title>
-    <url>%2Funcategorized%2Fworld%E2%80%9D%2F</url>
+    <title></title>
+    <url>%2Fworld%E2%80%9D%2F</url>
     <content type="text"></content>
+      <categories>
+        <category>数学笔记</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+        <tag>多项式</tag>
+        <tag>圆</tag>
+      </tags>
   </entry>
 </search>
