@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Yates|Lab</title>
+  
+  <subtitle>研究日记</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-07-12T00:59:28.102Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Yates</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>world”</title>
+    <link href="http://yoursite.com/uncategorized/world%E2%80%9D/"/>
+    <id>http://yoursite.com/uncategorized/world”/</id>
+    <published>2019-07-12T00:59:28.000Z</published>
+    <updated>2019-07-12T00:59:28.102Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
