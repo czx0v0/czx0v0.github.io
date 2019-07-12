@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Yates|Lab</title>
+  <title>Yates | Lab</title>
   
   <subtitle>研究日记</subtitle>
   <link href="/atom.xml" rel="self"/>
@@ -18,8 +18,8 @@
   
   <entry>
     <title></title>
-    <link href="http://yateslab.xyz/world%E2%80%9D/"/>
-    <id>http://yateslab.xyz/world”/</id>
+    <link href="http://yateslab.xyz/suanfa/"/>
+    <id>http://yateslab.xyz/suanfa/</id>
     <published>2019-07-12T03:13:28.000Z</published>
     <updated>2019-07-12T03:32:18.046Z</updated>
     
