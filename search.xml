@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title><![CDATA[条件语句与循环语句]]></title>
     <url>%2Fsuanfa%2F</url>
     <content type="text"></content>
       <categories>
@@ -9,8 +9,6 @@
       </categories>
       <tags>
         <tag>算法</tag>
-        <tag>多项式</tag>
-        <tag>圆</tag>
       </tags>
   </entry>
 </search>
