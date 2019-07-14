@@ -232,7 +232,7 @@
 			"tags"
 		]
 	};
-	var s = '[{"title":"条件结构与循环结构：应用","date":"2019-07-12T03:13:28.000Z","content":"条件结构🔀（可以按 含有Else 和 不含Else 分为两种形式。\n区别在于否的线路是否有其他执行体。）\n条件结构的框图含有判断框，会产生分支。\n条件结构本身并不循环。\n循环结构🔁可以分为 当型(WHILE)循环结构 和 直到型(UNTIL)循环结构。\n当型是Y入N出；直到型是Y出，至少执行一次。\n循环结构中反复执行的步骤称为 循环体。\n如果循环体没有帮助尾部判断结果接近界限，那么会导致无限循环。\n循环结构中一定包含条件结构（分支），判断循环改变的界限。\n选择💭从目的来看，重要的并非Y与N的区别，Y与N是可以简单转换的。\n如果需要执行一次判断，那么只需要一个条件结构。\n需要判定进入且需要有限循环，用当型循环；不需要判定进入，采用直到型循环。\n可以借助一些辅助变量帮助计数，储存。\n应用🚗1 按大小排序（条件结构）12345678INPUT a,b=; a,b,cIF b &gt; a THEN    x = a    a = b    b = xEND IFPRINT 从大到小; a,bEND\n\n规范📏\n书写程序框图时，判断框内要写问号，之后的两条线上要标明是否（YN）。\nABS( ) 求绝对值，SQR( ) 求非负数的算术平方根。\n\n\n（概念：《数学3 必修》）\n","tags":["算法","程序","思维"],"path":"branch-and-loop-structure_to-use/","external_link":""}]';
+	var s = '[{"title":"算法案例整理","date":"2019-07-14T11:37:25.000Z","content":"求最大公约数♍###　辗转相除法（欧几里得算法）➗\n大数除小数，取余数，直到余数为零，取最后除数。\nbasic12345678INPUT m, n DO    r = m MOD n    m = n    n = rLOOP UNTIL r=0PRINT mEND\n\n更相减损术 ➖约减为偶数，大数减小数，直到得数相等，取等数（还原约简）。\nbasic123456789101112INPUT m, nWHILE m MOD 2 = 0 AND n MOD 2 = 0    m = m  2    n = n  2WENDDo    r = m - n    m = n    n = rLOOP UNTIL n = rprint nEND\n\n求多项式的值 ➕秦九韶算法 ⏭每一次利用上一次的计算结果。\nv0 = an ,  v1 = v0x + an-1 ,  vk = vk-1 x + an-k (k = 1, 2, …，n)\n(注意每个字母代表的含义。)\nbasic12345678910111213INPUT &quot;n=&quot;; nINPUT &quot;an&quot;; aINPUT &quot;x &quot;; xv = ai = n - 1WHILE i &gt;= 0    PRINT &quot;i=&quot; i    INPUT &quot;ai=&quot; a 输入ai    v = v*x + a    i = i - 1WENDPRINT vEND\n\n进位制###　二进制化十进制\n十进制转化二进制\n（《数学3 必修》语法）\n","tags":["算法","程序","多项式","进位制，欧几里得"],"path":"algorithm-cases/","external_link":""},{"title":"条件结构与循环结构：应用","date":"2019-07-12T03:13:28.000Z","content":"条件结构🔀（可以按 含有Else 和 不含Else 分为两种形式。\n区别在于否的线路是否有其他执行体。）\n条件结构的框图含有判断框，会产生分支。\n条件结构本身并不循环。\n循环结构🔁可以分为 当型(WHILE)循环结构 和 直到型(UNTIL)循环结构。\n当型是Y入N出；直到型是Y出，至少执行一次。\n循环结构中反复执行的步骤称为 循环体。\n如果循环体没有帮助尾部判断结果接近界限，那么会导致无限循环。\n循环结构中一定包含条件结构（分支），判断循环改变的界限。\n选择💭从目的来看，重要的并非Y与N的区别，Y与N是可以简单转换的。\n如果需要执行一次判断，那么只需要一个条件结构。\n需要判定进入且需要有限循环，用当型循环；不需要判定进入，两种循环均可。\n先画程序框图，再书写算法语句，分割结构。\n可以借助一些辅助变量帮助计数，储存。\n应用🚗1 按大小排序（条件结构）basic12345678INPUT &quot;a,b=&quot;; a,b,cIF b &gt; a THEN    x = a    a = b    b = xEND IFPRINT &quot;从大到小：&quot;; a,bEND\n\n规范📏\n书写程序框图时，判断框内要写问号，之后的两条线上要标明是否（YN）。\nABS( ) 求绝对值，SQR( ) 求非负数的算术平方根。\n\n\n（《数学3 必修》语法）\n","tags":["算法","程序","思维"],"path":"branch-and-loop-structure_to-use/","external_link":""}]';
 
 	s = s.replace(/\\n/g, "\\n")
                .replace(/\\'/g, "\\'")
@@ -273,7 +273,7 @@
 
 <div class='tagcloud-container'>
 <div class='tag-cloud'>
-	<a href="/tags/思维/" style="font-size: 0.8em; color: #488baf">思维</a> <a href="/tags/程序/" style="font-size: 0.8em; color: #488baf">程序</a> <a href="/tags/算法/" style="font-size: 0.8em; color: #488baf">算法</a>
+	<a href="/tags/多项式/" style="font-size: 0.8em; color: #488baf">多项式</a> <a href="/tags/思维/" style="font-size: 0.8em; color: #488baf">思维</a> <a href="/tags/程序/" style="font-size: 2em; color: #d63e0a">程序</a> <a href="/tags/算法/" style="font-size: 2em; color: #d63e0a">算法</a> <a href="/tags/进位制，欧几里得/" style="font-size: 0.8em; color: #488baf">进位制，欧几里得</a>
 </div>
 </div>
 
@@ -380,20 +380,6 @@
 
 
 
-    <script src="/js/lightgallery.min.js"></script>
-<script src="/js/lg-zoom.min.js"></script>
-<script type='text/javascript'>
-    $(document).ready(function() {
-        $("#lightgallery").lightGallery(); 
-        $(".article-content img").each(function(){
-            console.log($(this).attr('src'))
-            $(this).attr('data-src', $(this).attr('src')).lightGallery({
-                selector: 'this'
-            })
-        });
-    });
-</script>
-
 
 
 
@@ -423,7 +409,7 @@ changeLayoutOnTouchScreen();
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   
- <script type="text/javascript" color='cc3333' opacity='0.5' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+ <script type="text/javascript" color='#cc3333' opacity='0.5' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
  
 </body>
 </html>

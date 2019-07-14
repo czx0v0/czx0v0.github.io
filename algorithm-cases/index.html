@@ -10,7 +10,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
   
-      <title>条件结构与循环结构：应用 - Yates | Lab</title>
+      <title>算法案例整理 - Yates | Lab</title>
   
 
   
@@ -126,7 +126,7 @@
 
 <div class='toc-container'>
 <i class="far fa-times-circle" id='toc-close' onclick='closeTOC(event);' ontouchstart='closeTOC(event);'></i>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#条件结构🔀"><span class="toc-number">1.</span> <span class="toc-text">条件结构🔀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环结构🔁"><span class="toc-number">2.</span> <span class="toc-text">循环结构🔁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择💭"><span class="toc-number">3.</span> <span class="toc-text">选择💭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用🚗"><span class="toc-number">4.</span> <span class="toc-text">应用🚗</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#求最大公约数♍"><span class="toc-number">1.</span> <span class="toc-text">求最大公约数♍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求多项式的值-➕"><span class="toc-number">2.</span> <span class="toc-text">求多项式的值 ➕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进位制"><span class="toc-number">3.</span> <span class="toc-text">进位制</span></a></li></ol>
 </div>
 <div class="toc-button" onclick='toggleTOC(event);' ontouchstart='toggleTOC(event);'>
     <img src="/images/icons/colorful-outlined/toc.svg" alt="">
@@ -236,14 +236,14 @@
 
 
 
-<article class="article" id="/branch-and-loop-structure_to-use/" data-name='条件结构与循环结构：应用' data-version="">
+<article class="article" id="/algorithm-cases/" data-name='算法案例整理' data-version="">
 
     <!-- Title -->
     <div class='article-header'>
          
          <h1 class='article-title'>
-            <a href="/branch-and-loop-structure_to-use/">
-                条件结构与循环结构：应用
+            <a href="/algorithm-cases/">
+                算法案例整理
             </a>
         </h1>
         <!-- TODO: support nested categories,display them nicely -->
@@ -262,7 +262,7 @@
     <!-- Date and Author -->
     <div class='article-meta'>
     <ul>
-            <li><i class='fa fa-calendar'></i> 2019-07-12</li>
+            <li><i class='fa fa-calendar'></i> 2019-07-14</li>
             
             <li><i class="fa fa-user"></i> YatesAra</li>
             <li><i class="fas fa-copyright"></i>
@@ -279,7 +279,7 @@
 <div class="tags">
 	
 		
-			<label class='tag-1'><a href="/tags/思维/">思维</a></label>
+			<label class='tag-1'><a href="/tags/多项式/">多项式</a></label>
 		
 	
 		
@@ -288,6 +288,10 @@
 	
 		
 			<label class='tag-3'><a href="/tags/算法/">算法</a></label>
+		
+	
+		
+			<label class='tag-4'><a href="/tags/进位制，欧几里得/">进位制，欧几里得</a></label>
 		
 	
 	</div>
@@ -346,13 +350,12 @@
   <h3>Quick Read</h3>
 </div>
 <div class="card-text">
-  <p id='text-post-summary'>条件结构🔀（可以按 含有Else 和 不含Else 分为两种形式。
-区别在于否的线路是否有其他执行体。）
-条件结构的框图含有判断框，会产生分支。
-条件结构本身并不循环。
-循环结构🔁可以分为 当型(WHILE)循环结构 和 直到型(UNTIL)循环结构。
-当型是Y入N出；直到型是Y出，至少执行一次。
-循环结构中反复执行的步骤称为...</p>
+  <p id='text-post-summary'>求最大公约数♍###　辗转相除法（欧几里得算法）➗
+大数除小数，取余数，直到余数为零，取最后除数。
+basic12345678INPUT m, n DO    r = m MOD n    m = n    n = rLOOP UNTIL r=0PRINT mEND
+
+更相减损术 ➖约减为偶数，大数减小数，直到得数相等，取等数（还原约简）。
+basic123456789101112INPUT m, nWHILE m MOD 2 = 0 AND n MOD 2 = 0    m = m / 2    n = n / 2WENDDo    r = m - n    m = n    n =...</p>
 </div>
         </div> -->
     </div>
@@ -370,7 +373,7 @@
 
 <div class='toc-container'>
 <i class="far fa-times-circle" id='toc-close' onclick='closeTOC(event);' ontouchstart='closeTOC(event);'></i>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#条件结构🔀"><span class="toc-number">1.</span> <span class="toc-text">条件结构🔀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环结构🔁"><span class="toc-number">2.</span> <span class="toc-text">循环结构🔁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择💭"><span class="toc-number">3.</span> <span class="toc-text">选择💭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用🚗"><span class="toc-number">4.</span> <span class="toc-text">应用🚗</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#求最大公约数♍"><span class="toc-number">1.</span> <span class="toc-text">求最大公约数♍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求多项式的值-➕"><span class="toc-number">2.</span> <span class="toc-text">求多项式的值 ➕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进位制"><span class="toc-number">3.</span> <span class="toc-text">进位制</span></a></li></ol>
 </div>
 <div class="toc-button" onclick='toggleTOC(event);' ontouchstart='toggleTOC(event);'>
     <img src="/images/icons/colorful-outlined/toc.svg" alt="">
@@ -378,27 +381,20 @@
 
     </div>
     <div class='article-content'>
-    <h2 id="条件结构🔀"><a href="#条件结构🔀" class="headerlink" title="条件结构🔀"></a>条件结构🔀</h2><p>（可以按 含有Else 和 不含Else 分为两种形式。</p>
-<p>区别在于否的线路是否有其他执行体。）</p>
-<p>条件结构的框图含有判断框，会产生分支。</p>
-<p>条件结构<strong>本身并不循环</strong>。</p>
-<h2 id="循环结构🔁"><a href="#循环结构🔁" class="headerlink" title="循环结构🔁"></a>循环结构🔁</h2><p>可以分为 当型(WHILE)循环结构 和 直到型(UNTIL)循环结构。</p>
-<p>当型是Y入N出；直到型是Y出，至少执行一次。</p>
-<p>循环结构中反复执行的步骤称为 <font color="red"><strong>循环体</strong></font>。</p>
-<p>如果循环体没有帮助尾部判断结果接近界限，那么会导致无限循环。</p>
-<p><strong>循环结构中一定包含条件结构</strong>（分支），判断循环改变的界限。</p>
-<h2 id="选择💭"><a href="#选择💭" class="headerlink" title="选择💭"></a>选择💭</h2><p>从目的来看，重要的并非Y与N的区别，Y与N是可以简单转换的。</p>
-<p>如果需要执行一次判断，那么只需要一个条件结构。</p>
-<p>需要判定进入且需要有限循环，用当型循环；不需要判定进入，两种循环均可。</p>
-<p>先画程序框图，再书写算法语句，分割结构。</p>
-<p>可以借助一些辅助变量帮助计数，储存。</p>
-<h2 id="应用🚗"><a href="#应用🚗" class="headerlink" title="应用🚗"></a>应用🚗</h2><h3 id="1-按大小排序（条件结构）"><a href="#1-按大小排序（条件结构）" class="headerlink" title="1 按大小排序（条件结构）"></a>1 按大小排序（条件结构）</h3><figure class="highlight plain"><figcaption><span>basic</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">INPUT &quot;a,b=&quot;; a,b,c</span><br><span class="line">IF b &gt; a THEN</span><br><span class="line">    x = a</span><br><span class="line">    a = b</span><br><span class="line">    b = x</span><br><span class="line">END IF</span><br><span class="line">PRINT &quot;从大到小：&quot;; a,b</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+    <h2 id="求最大公约数♍"><a href="#求最大公约数♍" class="headerlink" title="求最大公约数♍"></a>求最大公约数♍</h2><p>###　辗转相除法（欧几里得算法）➗</p>
+<p>大数除小数，取<strong>余数</strong>，直到余数为零，取最后除数。</p>
+<figure class="highlight plain"><figcaption><span>basic</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">INPUT m, n </span><br><span class="line">DO</span><br><span class="line">    r = m MOD n</span><br><span class="line">    m = n</span><br><span class="line">    n = r</span><br><span class="line">LOOP UNTIL r=0</span><br><span class="line">PRINT m</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
 
-<h3 id="规范📏"><a href="#规范📏" class="headerlink" title="规范📏"></a>规范📏</h3><ul>
-<li>书写程序框图时，判断框内要写问号，之后的两条线上要标明是/否（Y/N）。</li>
-<li>ABS( ) 求绝对值，SQR( ) 求非负数的算术平方根。</li>
-</ul>
-<hr>
+<h3 id="更相减损术-➖"><a href="#更相减损术-➖" class="headerlink" title="更相减损术 ➖"></a>更相减损术 ➖</h3><p>约减为<strong>偶数</strong>，大数减小数，直到得数相等，取等数（还原约简）。</p>
+<figure class="highlight plain"><figcaption><span>basic</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">INPUT m, n</span><br><span class="line">WHILE m MOD 2 = 0 AND n MOD 2 = 0</span><br><span class="line">    m = m / 2</span><br><span class="line">    n = n / 2</span><br><span class="line">WEND</span><br><span class="line">Do</span><br><span class="line">    r = m - n</span><br><span class="line">    m = n</span><br><span class="line">    n = r</span><br><span class="line">LOOP UNTIL n = r</span><br><span class="line">print n</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h2 id="求多项式的值-➕"><a href="#求多项式的值-➕" class="headerlink" title="求多项式的值 ➕"></a>求多项式的值 ➕</h2><h3 id="秦九韶算法-⏭"><a href="#秦九韶算法-⏭" class="headerlink" title="秦九韶算法 ⏭"></a>秦九韶算法 ⏭</h3><p>每一次利用上一次的计算结果。</p>
+<p>v<del>0</del> = a<del>n</del> ,  v<del>1</del> = v<del>0</del>x + a<del>n-1</del> ,  v<del>k</del> = v<del>k-1</del> x + a<del>n-k</del> (k = 1, 2, …，n)</p>
+<p>(注意每个字母代表的含义。)</p>
+<figure class="highlight plain"><figcaption><span>basic</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">INPUT &quot;n=&quot;; n</span><br><span class="line">INPUT &quot;an&quot;; a</span><br><span class="line">INPUT &quot;x &quot;; x</span><br><span class="line">v = a</span><br><span class="line">i = n - 1</span><br><span class="line">WHILE i &gt;= 0</span><br><span class="line">    PRINT &quot;i=&quot; i</span><br><span class="line">    INPUT &quot;ai=&quot; a //输入ai</span><br><span class="line">    v = v*x + a</span><br><span class="line">    i = i - 1</span><br><span class="line">WEND</span><br><span class="line">PRINT v</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+
+<h2 id="进位制"><a href="#进位制" class="headerlink" title="进位制"></a>进位制</h2><p>###　二进制化十进制</p>
+<h3 id="十进制转化二进制"><a href="#十进制转化二进制" class="headerlink" title="十进制转化二进制"></a>十进制转化二进制</h3><hr>
 <p><em>（《数学3 必修》语法）</em></p>
 
     
@@ -447,7 +443,7 @@
 
 <div class='toc-container'>
 <i class="far fa-times-circle" id='toc-close' onclick='closeTOC(event);' ontouchstart='closeTOC(event);'></i>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#条件结构🔀"><span class="toc-number">1.</span> <span class="toc-text">条件结构🔀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环结构🔁"><span class="toc-number">2.</span> <span class="toc-text">循环结构🔁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择💭"><span class="toc-number">3.</span> <span class="toc-text">选择💭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用🚗"><span class="toc-number">4.</span> <span class="toc-text">应用🚗</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#求最大公约数♍"><span class="toc-number">1.</span> <span class="toc-text">求最大公约数♍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#求多项式的值-➕"><span class="toc-number">2.</span> <span class="toc-text">求多项式的值 ➕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进位制"><span class="toc-number">3.</span> <span class="toc-text">进位制</span></a></li></ol>
 </div>
 <div class="toc-button" onclick='toggleTOC(event);' ontouchstart='toggleTOC(event);'>
     <img src="/images/icons/colorful-outlined/toc.svg" alt="">
@@ -535,7 +531,7 @@
   loadjs(['/libs/jshashes/hashes.min.js', '/libs/js-cookie/src/js.cookie.js', '/js/post.v2.js'], 'post-version');
   loadjs.ready('post-version', function(){
     
-    new Postv2('hashit_427fc4532a26de1a832a88c921aff790a630d2609815856cdadc367d8fb74278').update('hashit_b1539dd2def63447cc68e5849845183880e0c599d3c51017021be933369a3bd4', function(){});
+    new Postv2('hashit_a4edc0d448c4eb82f0df2c6c8b33294f582f39f17716897344f6c82ce46e0f27').update('hashit_2f39a842489d5e437cab070502115ce579dbc07943a8190e919e3cfa8aa88752', function(){});
   });
   
 </script>
