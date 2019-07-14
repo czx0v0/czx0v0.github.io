@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[条件语句与循环语句]]></title>
-    <url>%2Fsuanfa%2F</url>
-    <content type="text"></content>
+    <title><![CDATA[条件与循环结构：界限]]></title>
+    <url>%2Fbranch-and-loop-structure-border%2F</url>
+    <content type="text"><![CDATA[1.1 条件结构🔀条件结构一般会产生分支。 (可以按 含有Else 和 不含Else 分为两种形式。)对应的程序框图在于否后的流程线中有无另一步骤。 1.2 循环结构🔁循环结构中反复执行的步骤称为循环体。 可以分为 当型循环结构 和 直到型循环结构。 循环结构中一定包含条件结构,这样才能判断改变的界限。 注意规范💊 （数学3 必修） {"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12} var code = document.getElementById("flowchart-0-code").value; var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value)); var diagram = flowchart.parse(code); diagram.drawSVG("flowchart-0", options);]]></content>
       <categories>
-        <category>数学笔记</category>
+        <category>数学</category>
       </categories>
       <tags>
         <tag>算法</tag>
+        <tag>程序，思维</tag>
       </tags>
   </entry>
 </search>

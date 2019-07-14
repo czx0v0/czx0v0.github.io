@@ -3609,3 +3609,14 @@ body {
   background-color: #06D6A0;
   color: #fff; }
 
+body {
+  background: linear-gradient(to left, #fecaca, #fff);
+}
+p {
+  font-size: 15px;
+  color: #00f !important;
+  background: transparent;
+}
+footer {
+  color: #808080 !important;
+}
