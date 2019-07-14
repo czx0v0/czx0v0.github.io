@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Yates | Lab</title>
   
-  <subtitle>研究日记</subtitle>
+  <subtitle>Blog of Studying</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yateslab.xyz/"/>
-  <updated>2019-07-14T00:01:08.585Z</updated>
+  <updated>2019-07-14T11:21:15.103Z</updated>
   <id>https://yateslab.xyz/</id>
   
   <author>
@@ -17,18 +17,18 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>条件与循环结构：界限</title>
-    <link href="https://yateslab.xyz/branch-and-loop-structure-border/"/>
-    <id>https://yateslab.xyz/branch-and-loop-structure-border/</id>
+    <title>条件结构与循环结构：应用</title>
+    <link href="https://yateslab.xyz/branch-and-loop-structure_to-use/"/>
+    <id>https://yateslab.xyz/branch-and-loop-structure_to-use/</id>
     <published>2019-07-12T03:13:28.000Z</published>
-    <updated>2019-07-14T00:01:08.585Z</updated>
+    <updated>2019-07-14T11:21:15.103Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;h4 id=&quot;1-1-条件结构🔀&quot;&gt;&lt;a href=&quot;#1-1-条件结构🔀&quot; class=&quot;headerlink&quot; title=&quot;1.1 条件结构🔀&quot;&gt;&lt;/a&gt;1.1 条件结构🔀&lt;/h4&gt;&lt;p&gt;条件结构一般会产生分支。&lt;/p&gt;
-&lt;p&gt;(可以按 &lt;strong&gt;含有Els
+        &lt;h2 id=&quot;条件结构🔀&quot;&gt;&lt;a href=&quot;#条件结构🔀&quot; class=&quot;headerlink&quot; title=&quot;条件结构🔀&quot;&gt;&lt;/a&gt;条件结构🔀&lt;/h2&gt;&lt;p&gt;（可以按 含有Else 和 不含Else 分为两种形式。&lt;/p&gt;
+&lt;p&gt;区别在于否的线路是否有其他执行体。）
       
     
     </summary>
@@ -38,7 +38,9 @@
     
       <category term="算法" scheme="https://yateslab.xyz/tags/%E7%AE%97%E6%B3%95/"/>
     
-      <category term="程序，思维" scheme="https://yateslab.xyz/tags/%E7%A8%8B%E5%BA%8F%EF%BC%8C%E6%80%9D%E7%BB%B4/"/>
+      <category term="程序" scheme="https://yateslab.xyz/tags/%E7%A8%8B%E5%BA%8F/"/>
+    
+      <category term="思维" scheme="https://yateslab.xyz/tags/%E6%80%9D%E7%BB%B4/"/>
     
   </entry>
   

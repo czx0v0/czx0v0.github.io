@@ -3610,13 +3610,16 @@ body {
   color: #fff; }
 
 body {
-  background: linear-gradient(to left, #fecaca, #fff);
+  background: linear-gradient(to right, #fff, #fecaca);
 }
 p {
-  font-size: 15px;
-  color: #00f !important;
   background: transparent;
+  font-size: 15px;
 }
 footer {
-  color: #808080 !important;
+  font-size: 14px;
+  color: #36c;
+}
+b {
+  color: #000;
 }

@@ -10,7 +10,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
   
-      <title>tags - Yates | Lab</title>
+      <title>程序 - Tag - Yates | Lab</title>
   
 
   
@@ -185,30 +185,90 @@
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div style="flex: 1;">
-      <style>
-    body {
-        background-color: white;
-    }
-</style>
+      <div class='archive-container'>
 
-<section class="page">
-    <div class='page-meta'>
-        <p><small></small></p>
-    </div>
-    <!-- Title -->
-    <div class='article-header' id='article-header'>
-         <h1 class='article-title'>
-            <a href="/tags/index.html">
-                tags
-            </a>
-        </h1>
-    </div>
-    <!-- Content -->
-    <div class='article-content' id='article-content'>
-    No content
-    </div>
-    
-</section>
+
+	
+		<h2 class='archive-title'>#   程序</h2>
+	
+	<div class="archive-cards">
+	
+		
+
+
+
+
+<div class='Card-archive' id='hashit_427fc4532a26de1a832a88c921aff790a630d2609815856cdadc367d8fb74278' data-name='条件结构与循环结构：应用' data-version=''>
+	<mark class='Card-badge'></mark>
+	<div class="Card-body">
+		<h3 class='Card-title'>
+			
+				<a href="/branch-and-loop-structure_to-use/">
+			
+			条件结构与循环结构：应用</a>
+		</h3>
+		<div class="Card-meta">
+			<div class='Card-tags'>
+<div class="tags">
+	
+		
+			
+				<label class='tag-1'><a href="/tags/思维/">思维</a></label>
+			
+		
+	
+		
+			
+				<label class='tag-2'><a href="/tags/程序/">程序</a></label>
+			
+		
+	
+		
+			
+				<label class='tag-3'><a href="/tags/算法/">算法</a></label>
+			
+		
+	
+	</div>
+</div>
+			<ul>
+					<li>
+						<a href="/archives/">
+							<i class='fa fa-calendar'></i> 2019-07-12
+						</a>
+					</li>
+					
+					
+					
+			</ul>
+		</div>
+	</div>
+</div>
+
+	
+	</div>
+
+
+
+<div class='pagination'>
+	
+	
+	
+	
+		
+		
+		<div class="pagination-item">
+			
+			
+				<span>1</span>
+			
+		</div>
+		
+		
+	
+	
+</div>
+</div>
   </div>
 
   
@@ -334,6 +394,22 @@
 <script type='text/javascript'>
 
   
+    loadjs(['/libs/jshashes/hashes.min.js', '/libs/js-cookie/src/js.cookie.js', '/js/post.v2.js'], 'post-version');
+    loadjs.ready('post-version', {
+      success: function(){
+        console.log('ready to run badge script')
+        
+          
+          
+          
+            var postBadge = document.querySelector('#hashit_427fc4532a26de1a832a88c921aff790a630d2609815856cdadc367d8fb74278 mark.Card-badge');
+            $(postBadge).fadeOut();
+            
+          
+        
+      }
+    })
+  
 </script>
 
 
@@ -348,6 +424,20 @@ initHeadroom();
 
 changeLayoutOnTouchScreen();
 
+// 
+// var post = new Post('', '');
+// $('.Card-archive').each(function(){
+//     var post_url = $(this).attr('id');
+//     var true_url = $(this).find('.Card-title a').first().attr('href');
+//     var card = this;
+//     post.getCommentCount(post_url, function(count){
+//         $(card).find('.card-comment-count').first().text(count);
+//     });
+//     post.getVisitCount(post_url, function(count){
+//         $(card).find('.card-visit-count').first().text(count);
+//     });
+    
+// });
 // 
 </script>
 

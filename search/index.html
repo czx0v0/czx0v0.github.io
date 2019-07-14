@@ -15,7 +15,7 @@
 
   
   
-  <meta name="description" content="记录与思索">
+  <meta name="description" content="Recording and Thinking">
   <meta name="author" content="YatesAra">
 
   <!-- Mobile Specific Metas
@@ -91,7 +91,7 @@
 				<a href="/">Yates | Lab</a>
 			</h1>
 			<subtitle>
-				研究日记
+				Blog of Studying
 			</subtitle>
 		</div>
 		
@@ -113,7 +113,7 @@
 					<div class="nav-name">
 				
 					<a class='nav-link' href="/panel/">
-						<span>面板 </span>
+						<span>Panel </span>
 					</a>
 				</div>
 			</div>
@@ -155,7 +155,7 @@
 			<div class='nav-more-item'>
 					<div class="nav-name">
 						<a class='nav-link' href="/panel/">
-							<span>面板</span>
+							<span>Panel</span>
 						</a>
 					</div>
 			</div>
@@ -232,7 +232,7 @@
 			"tags"
 		]
 	};
-	var s = '[{"title":"条件与循环结构：界限","date":"2019-07-12T03:13:28.000Z","content":"1.1 条件结构🔀条件结构一般会产生分支。\n(可以按 含有Else 和 不含Else 分为两种形式。)对应的程序框图在于否后的流程线中有无另一步骤。\n1.2 循环结构🔁循环结构中反复执行的步骤称为循环体。\n可以分为 当型循环结构 和 直到型循环结构。\n循环结构中一定包含条件结构,这样才能判断改变的界限。\n\n\n注意规范💊\n\n（数学3 必修）\n\n{scale:1,line-width:2,line-length:50,text-margin:10,font-size:12}  var code = document.getElementById(flowchart-0-code).value;  var options = JSON.parse(decodeURIComponent(document.getElementById(flowchart-0-options).value));  var diagram = flowchart.parse(code);  diagram.drawSVG(flowchart-0, options);","tags":["算法","程序，思维"],"path":"branch-and-loop-structure-border/","external_link":""}]';
+	var s = '[{"title":"条件结构与循环结构：应用","date":"2019-07-12T03:13:28.000Z","content":"条件结构🔀（可以按 含有Else 和 不含Else 分为两种形式。\n区别在于否的线路是否有其他执行体。）\n条件结构的框图含有判断框，会产生分支。\n条件结构本身并不循环。\n循环结构🔁可以分为 当型(WHILE)循环结构 和 直到型(UNTIL)循环结构。\n当型是Y入N出；直到型是Y出，至少执行一次。\n循环结构中反复执行的步骤称为 循环体。\n如果循环体没有帮助尾部判断结果接近界限，那么会导致无限循环。\n循环结构中一定包含条件结构（分支），判断循环改变的界限。\n选择💭从目的来看，重要的并非Y与N的区别，Y与N是可以简单转换的。\n如果需要执行一次判断，那么只需要一个条件结构。\n需要判定进入且需要有限循环，用当型循环；不需要判定进入，采用直到型循环。\n可以借助一些辅助变量帮助计数，储存。\n应用🚗1 按大小排序（条件结构）12345678INPUT a,b=; a,b,cIF b &gt; a THEN    x = a    a = b    b = xEND IFPRINT 从大到小; a,bEND\n\n规范📏\n书写程序框图时，判断框内要写问号，之后的两条线上要标明是否（YN）。\nABS( ) 求绝对值，SQR( ) 求非负数的算术平方根。\n\n\n（概念：《数学3 必修》）\n","tags":["算法","程序","思维"],"path":"branch-and-loop-structure_to-use/","external_link":""}]';
 
 	s = s.replace(/\\n/g, "\\n")
                .replace(/\\'/g, "\\'")
@@ -273,7 +273,7 @@
 
 <div class='tagcloud-container'>
 <div class='tag-cloud'>
-	<a href="/tags/程序，思维/" style="font-size: 0.8em; color: #488baf">程序，思维</a> <a href="/tags/算法/" style="font-size: 0.8em; color: #488baf">算法</a>
+	<a href="/tags/思维/" style="font-size: 0.8em; color: #488baf">思维</a> <a href="/tags/程序/" style="font-size: 0.8em; color: #488baf">程序</a> <a href="/tags/算法/" style="font-size: 0.8em; color: #488baf">算法</a>
 </div>
 </div>
 
@@ -347,7 +347,7 @@
 			<div class='nav-more-item'>
 					<div class="nav-name">
 						<a class='nav-link' href="/panel/">
-							<span>面板</span>
+							<span>Panel</span>
 						</a>
 					</div>
 			</div>
@@ -423,7 +423,7 @@ changeLayoutOnTouchScreen();
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   
- <script type="text/javascript"  color="black" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+ <script type="text/javascript" color='cc3333' opacity='0.5' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
  
 </body>
 </html>
