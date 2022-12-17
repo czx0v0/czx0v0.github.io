@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yatesara.github.io">
-  <title>Archives | ChangZX0v0的宇宙自习室</title>
+  <title>python学习笔记📒|第五章 | ChangZX0v0的宇宙自习室</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ChangZX0v0的宇宙自习室">
-<meta property="og:url" content="https://yatesara.github.io/archives/index.html">
+  <meta name="description" content="1 python变量的指针本质python 的数据类型基本数据类型：int,float,complex组合数据类型：字符串     str元组        tuple     （无法改变值？）列表        list字典        dict集合        set isinstance函数isinstance(x,y) 查询数据x是否是y类型 len函数len函数可以用来求组合数据类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python学习笔记📒|第五章">
+<meta property="og:url" content="https://yatesara.github.io/2022/12/16/python-5/index.html">
 <meta property="og:site_name" content="ChangZX0v0的宇宙自习室">
+<meta property="og:description" content="1 python变量的指针本质python 的数据类型基本数据类型：int,float,complex组合数据类型：字符串     str元组        tuple     （无法改变值？）列表        list字典        dict集合        set isinstance函数isinstance(x,y) 查询数据x是否是y类型 len函数len函数可以用来求组合数据类型">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-16T02:58:23.000Z">
+<meta property="article:modified_time" content="2022-12-17T17:02:55.320Z">
 <meta property="article:author" content="ChangZX0v0">
-<meta property="article:tag" content="study">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="学习笔记">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ChangZX0v0的宇宙自习室" type="application/atom+xml">
@@ -135,36 +140,154 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-python-5" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      python学习笔记📒|第五章
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/12/16/python-5/" class="archive-article-date">
+
+        
+        <a href="/2022/12/16/python-5/" class="archive-article-date">
   	<time datetime="2022-12-16T02:58:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-16</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/16/python-5/">python学习笔记📒|第五章</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-python变量的指针本质"><a href="#1-python变量的指针本质" class="headerlink" title="1 python变量的指针本质"></a>1 python变量的指针本质</h2><h3 id="python-的数据类型"><a href="#python-的数据类型" class="headerlink" title="python 的数据类型"></a>python 的数据类型</h3><p>基本数据类型：int,float,complex<br>组合数据类型：<br>字符串     str<br>元组        tuple     （无法改变值？）<br>列表        list<br>字典        dict<br>集合        set</p>
+<h3 id="isinstance函数"><a href="#isinstance函数" class="headerlink" title="isinstance函数"></a>isinstance函数</h3><p>isinstance(x,y) 查询数据x是否是y类型</p>
+<h3 id="len函数"><a href="#len函数" class="headerlink" title="len函数"></a>len函数</h3><p>len函数可以用来求组合数据类型的元素个数</p>
+<h3 id="python-中的变量都是指针"><a href="#python-中的变量都是指针" class="headerlink" title="python 中的变量都是指针"></a>python 中的变量都是指针</h3><p>python中所有可赋值的东西，即可以出现在赋值号“&#x3D;”左边的东西，都是指针<br>指针即代表内存单元的地址。<br>可以将指针理解成箭头。<br>对变量进行赋值的本质：让变量箭头指向某个地方。<br>x is y 表示x和y是否指向同一个地方。<br>x &#x3D;&#x3D; y 表示x和y的内容是否相同。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">b = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="built_in">print</span>(a == b)</span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> b)</span><br><span class="line"></span><br><span class="line">c = a</span><br><span class="line"><span class="built_in">print</span>(c <span class="keyword">is</span> a)</span><br><span class="line">a[<span class="number">2</span>] = <span class="string">&quot;ok&quot;</span></span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>True<br>False<br>True<br>[1, 2, ‘ok’, 4]</p>
+</blockquote>
+<p><strong>a和c指向同一个地方，所以修改a[2],c[2]也改变</strong><br>注意✨：</p>
+<ul>
+<li>对int，float，complex，str，tuple类型的变量a和b只需关注a &#x3D;&#x3D; b是否成立，关注 a is b 无意义，因为这些数据本身都不会更改，不会产生a指向的东西改变了b指向的东西也跟着变的情况。</li>
+<li>对 list，dict，set类型的变量a和b，a &#x3D;&#x3D; b 和a is b的结果都需要关注。因这些数据本身会改变，改别了a指向的内容，说不定，b指向的内容也变了。</li>
+</ul>
+<h3 id="列表元素的指针本质"><a href="#列表元素的指针本质" class="headerlink" title="列表元素的指针本质"></a>列表元素的指针本质</h3><p>列表的元素可以赋值，因此也是指针。<br>a[0],b[0]等元素也是指针，指向1等数字。</p>
+<h2 id="2-函数参数的传递"><a href="#2-函数参数的传递" class="headerlink" title="2 函数参数的传递"></a>2 函数参数的传递</h2><p>函数参数传递的方式都是传值，即形参是实际参数的一个拷贝。函数参数也是指针。形参和实参指向同一个地方。对形参赋值（让其指向别处）不会影响实参，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">Swap</span>(<span class="params">x,y</span>):</span><br><span class="line">    tmp = x</span><br><span class="line">    x = y</span><br><span class="line">    y = tmp</span><br><span class="line">a = <span class="number">4</span></span><br><span class="line">b = <span class="number">5</span></span><br><span class="line">Swap(a,b)</span><br><span class="line"><span class="built_in">print</span>(a,b)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>输出：4，5</p>
+</blockquote>
+<p>x和y是a，b的拷贝，改变a，b的拷贝的指向，没有改变a，b。<br>如果执行过程中改变形参所指向的地方的内容，则改变实参。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">swap2</span>(<span class="params">x,y</span>):</span><br><span class="line">    tmp = x[<span class="number">0</span>]</span><br><span class="line">    x[<span class="number">0</span>] = y[<span class="number">0</span>]         <span class="comment"># 若x，y是列表，tmp，x[0],y[0]都是指针</span></span><br><span class="line">    y[<span class="number">0</span>] = tmp</span><br><span class="line"></span><br><span class="line">a = [<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">b = [<span class="number">6</span>,<span class="number">7</span>]</span><br><span class="line">swap2(a,b)              <span class="comment"># 进入函数后，x和a指向相同的地方，y和b指向相同的地方</span></span><br><span class="line"><span class="built_in">print</span>(a,b)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>[6, 5] [4, 7]</p>
+</blockquote>
+<h2 id="3-字符串的转义字符"><a href="#3-字符串的转义字符" class="headerlink" title="3 字符串的转义字符"></a>3 字符串的转义字符</h2><p>‘&#39;及后面的某些字符会构成转义字符，即两个字符当成一个字符看<br>\n      换行<br>\t      制表<br>&quot;      双引号<br>\      斜杠<br>转义字符只能出现在字符串里面，必须用引号扩起来。</p>
+<h3 id="不转义的字符串"><a href="#不转义的字符串" class="headerlink" title="不转义的字符串"></a>不转义的字符串</h3><p><code>print(r&#39;ab\ncd&#39;)</code><br>r 表示字符串里面的\就是\，不和后面的字符合并起来看待。</p>
+<h2 id="4-字符串的切片（子串）"><a href="#4-字符串的切片（子串）" class="headerlink" title="4 字符串的切片（子串）"></a>4 字符串的切片（子串）</h2><p>字符串的切片（也叫子串，即连续的一部分）<br>a[x:y]表示字符串a里从下标x到下标y那一部分的子串（<strong>不包括下标y的那个字符</strong>）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;ABCD&quot;</span></span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">1</span>:<span class="number">2</span>])</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>:-<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(a[-<span class="number">3</span>:-<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">2</span>:])</span><br><span class="line"><span class="built_in">print</span>(a[:<span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;abcd&quot;</span>[<span class="number">2</span>:<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>B<br>ABC<br>BC<br>CD<br>ABC<br>c</p>
+</blockquote>
+<p>a[x:y:z]表示从a[x]到a[y]（a[y]不算），每z个字符取一个，然后拼起来，<br>为负数表示倒着取。<br>x，y可以省略，x，y全省略表示从头取到尾或从尾取到头。<br><strong>字符串切片的写法也可以用于元组和列表</strong></p>
+<h2 id="5-字符串的分割（split）"><a href="#5-字符串的分割（split）" class="headerlink" title="5 字符串的分割（split）"></a>5 字符串的分割（split）</h2><p>s.split(x)<br>split函数可以带参数，上句表示用字符串x作分隔符分割字符串x，得到分割后的列表。<strong>两个相邻分割符之间会被分割出一个空串</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;12..34.5346...a&quot;</span></span><br><span class="line"><span class="built_in">print</span>(a.split(<span class="string">&quot;..&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(a.split(<span class="string">&quot;.&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(a.split(<span class="string">&quot;34&quot;</span>))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>[‘12’, ‘34.5346’, ‘.a’]<br>[‘12’, ‘’, ‘34’, ‘5346’, ‘’, ‘’, ‘a’]<br>[‘12..’, ‘.5’, ‘6…a’]</p>
+</blockquote>
+<h3 id="字符串高级分割"><a href="#字符串高级分割" class="headerlink" title="字符串高级分割"></a>字符串高级分割</h3><p>多个分割串分割</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">a = <span class="string">&#x27;Beautiful, is; better*than\nugly&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(re.split(<span class="string">&#x27;;| |,|\*|\n&#x27;</span>,a))        <span class="comment"># 分割串用｜隔开</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>[‘Beautiful’, ‘’, ‘is’, ‘’, ‘better’, ‘than’, ‘ugly’]</p>
+</blockquote>
+<h2 id="6-字符串的函数"><a href="#6-字符串的函数" class="headerlink" title="6 字符串的函数"></a>6 字符串的函数</h2><h3 id="count-求子串出现次数"><a href="#count-求子串出现次数" class="headerlink" title="count 求子串出现次数"></a>count 求子串出现次数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&#x27;thisAAbb AA&#x27;</span></span><br><span class="line">s.count(<span class="string">&#x27;AA&#x27;</span>)       <span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
+<h3 id="len-字符串长度"><a href="#len-字符串长度" class="headerlink" title="len 字符串长度"></a>len 字符串长度</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&#x27;1234&#x27;</span></span><br><span class="line"><span class="built_in">len</span>(s)              <span class="comment"># 4</span></span><br></pre></td></tr></table></figure>
+<h3 id="upper-lower-转大写，小写"><a href="#upper-lower-转大写，小写" class="headerlink" title="upper,lower 转大写，小写"></a>upper,lower 转大写，小写</h3><p>s.upper（）</p>
+<h3 id="find，rfind，index，rindex"><a href="#find，rfind，index，rindex" class="headerlink" title="find，rfind，index，rindex"></a>find，rfind，index，rindex</h3><p>在字符串中查找子串，返回找到的位置（下标）。找不到的话，find返回-1，index引发异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&quot;1234abc567abc12&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.find(<span class="string">&quot;ab&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(s.rfind(<span class="string">&quot;ab&quot;</span>))        <span class="comment"># rfind从末尾开始找，find从头开始找</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    s.index(<span class="string">&quot;afb&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>4<br>10<br>substring not found</p>
+</blockquote>
+<p> find 还可以指定查找起点<br> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&quot;1234abc567abc12&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.find(<span class="string">&quot;12&quot;</span>,<span class="number">4</span>))</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>13</p>
+</blockquote>
+<h3 id="replace替换"><a href="#replace替换" class="headerlink" title="replace替换"></a>replace替换</h3><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>isdigit(),islower(),isupper()判断字符串是否是数，是否全是小写等</li>
+<li>startwith，endwith 判断字符串是否以某子串开头、结尾。</li>
+<li>strip（s),lstrip(s),strip(s)返回除去两端、左端、右端 在s中出现的字符后的字符串</li>
+</ul>
+<h2 id="7-字符串的格式化"><a href="#7-字符串的格式化" class="headerlink" title="7 字符串的格式化"></a>7 字符串的格式化</h2><h3 id="字符串的编码"><a href="#字符串的编码" class="headerlink" title="字符串的编码"></a>字符串的编码</h3><p>字符串的编码在内存中是unicode的，虽然写入文件时，可能是gbk或utf-8的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ord</span>(a)      <span class="comment"># &gt;&gt; 97</span></span><br><span class="line"><span class="built_in">chr</span>(<span class="number">97</span>)     <span class="comment"># &gt;&gt; a</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="string">&quot;Hello &#123;0&#125; &#123;1:10&#125;,you get $&#123;2:0.4f&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;Mr.&quot;</span>,<span class="string">&quot;Jack&quot;</span>,<span class="number">3.2</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line">x = <span class="string">&quot;Hello &#123;0&#125; &#123;1:&gt;10&#125;,you get $&#123;2:0.4f&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;Mr.&quot;</span>,<span class="string">&quot;Jack&quot;</span>,<span class="number">3.2</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Hello Mr. Jack      ,you get $3.2000<br>Hello Mr.       Jack,you get $3.2000</p>
+</blockquote>
+<p>{序号：宽度.精度 类型}           宽度可以是0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;: 右对齐</span><br><span class="line">&lt;: 左对齐</span><br><span class="line">^: 中对齐</span><br></pre></td></tr></table></figure>
+<h2 id="8-元组"><a href="#8-元组" class="headerlink" title="8 元组"></a>8 元组</h2><p>一个元组由数个逗号分隔的值组成，前后可加括号<br>元组不能修改，即不可增删元素，不可对元素赋值，不可修改元素顺序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">t = <span class="number">12345</span>,<span class="number">54321</span>,<span class="string">&#x27;hello&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(t[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">u = t,(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(u)</span><br><span class="line"><span class="built_in">print</span>(u[<span class="number">0</span>][<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>12345<br>((12345, 54321, ‘hello’), (1, 2, 3, 4, 5))<br>54321</p>
+</blockquote>
+<p>元组的元素内容有可能被修改。<br>例如：如果元素是列表，可以修改该列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v = (<span class="string">&quot;hello&quot;</span>,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>])</span><br><span class="line"><span class="comment"># v[1] = 32</span></span><br><span class="line">v[<span class="number">1</span>][<span class="number">0</span>] = <span class="string">&#x27;world&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(v)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(v))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>(‘hello’, [‘world’, 2, 3], [3, 2, 1])<br>3</p>
+</blockquote>
+<h3 id="元组元素的指针本质"><a href="#元组元素的指针本质" class="headerlink" title="元组元素的指针本质"></a>元组元素的指针本质</h3><p>元组的元素都是指针。元组元素不可修改，是指不可改变元素的指向，但是元组元素指向的内容是有可能被修改的。<br>类似足球队的队员。</p>
+<h3 id="用下标访问元组，以及元组切片"><a href="#用下标访问元组，以及元组切片" class="headerlink" title="用下标访问元组，以及元组切片"></a>用下标访问元组，以及元组切片</h3><p>用法和字符串一样。</p>
+<h3 id="可以对元组进行连接组合"><a href="#可以对元组进行连接组合" class="headerlink" title="可以对元组进行连接组合"></a>可以对元组进行连接组合</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (<span class="number">12</span>,<span class="number">34.56</span>)</span><br><span class="line">tup2 = (<span class="string">&#x27;abc&#x27;</span>,<span class="string">&#x27;xyz&#x27;</span>)</span><br><span class="line">tup3 = tup1+tup2</span><br><span class="line">tup3 += (<span class="number">10</span>,<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="元组的运算和迭代"><a href="#元组的运算和迭代" class="headerlink" title="元组的运算和迭代"></a>元组的运算和迭代</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)*<span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(x)                <span class="comment">#&gt;&gt;(1,2,3,1,2,3,1,2,3)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="number">3</span> <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))     <span class="comment">#&gt;&gt;true</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>):</span><br><span class="line">    <span class="built_in">print</span>(i,end =<span class="string">&quot;&quot;</span>)    <span class="comment">#&gt;&gt;123</span></span><br></pre></td></tr></table></figure>
+<h3 id="元组赋值"><a href="#元组赋值" class="headerlink" title="元组赋值"></a>元组赋值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">b = x</span><br><span class="line"><span class="built_in">print</span>(b <span class="keyword">is</span> x)</span><br><span class="line">x += (<span class="number">100</span>,)         <span class="comment"># 等价于x = x+（100，）新建了一个元组。x与b不指向一个地方了！</span></span><br><span class="line"><span class="built_in">print</span>(x)            <span class="comment"># （1，2，3，100）</span></span><br><span class="line"><span class="built_in">print</span>(b)            <span class="comment"># （1，2，3）</span></span><br></pre></td></tr></table></figure>
+<h3 id="元组比大小"><a href="#元组比大小" class="headerlink" title="元组比大小"></a>元组比大小</h3><ul>
+<li>两个元组比大小。就是逐个元素比大小，直到分出胜负</li>
+<li>如果有两个对应元素不可比大小，则输出runtime error</li>
+</ul>
+<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><p><strong>可以修改元组t和列表内容，不能修改t[0]</strong><br>a &#x3D;[1,2,3]<br>b &#x3D; （a,a）<br>b[0][1] &#x3D; 100<br>都指向同一个地方，b[0][1]被修改了,a全都变了</p>
+<h2 id="9-示例：万年历"><a href="#9-示例：万年历" class="headerlink" title="9 示例：万年历"></a>9 示例：万年历</h2><h3 id="用元组（列表）取代复杂分支结构"><a href="#用元组（列表）取代复杂分支结构" class="headerlink" title="用元组（列表）取代复杂分支结构"></a>用元组（列表）取代复杂分支结构</h3><p>输入1-7，输出星期几</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">weekdays = <span class="string">&quot;Monday&quot;</span>,<span class="string">&quot;Tuesday&quot;</span>,<span class="string">&quot;Wednesday&quot;</span>,<span class="string">&quot;Thursday&quot;</span>,\</span><br><span class="line">                <span class="string">&quot;Friday&quot;</span>,<span class="string">&quot;Saturday&quot;</span>,<span class="string">&quot;Sunday&quot;</span></span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"><span class="keyword">if</span> n&gt;<span class="number">7</span> <span class="keyword">or</span> n&lt;<span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Illegal&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(weekdays[n-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p>例题：已知2012年1月25日星期三，输出之后的一个日期的是星期几<br>如：Input 2015 11 02 Output 1</p>
+<ol>
+<li>累加法<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">monthDays =[-<span class="number">1</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>]</span><br><span class="line">days = <span class="number">0</span></span><br><span class="line">lst = <span class="built_in">input</span>().split()</span><br><span class="line">year,month,date = <span class="built_in">int</span>(lst[<span class="number">0</span>]),<span class="built_in">int</span>(lst[<span class="number">1</span>]),<span class="built_in">int</span>(lst[<span class="number">2</span>])</span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2012</span>,year):</span><br><span class="line">    <span class="keyword">if</span> y%<span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> y%<span class="number">100</span> != <span class="number">0</span> <span class="keyword">or</span> y%<span class="number">400</span> == <span class="number">0</span>:</span><br><span class="line">        days += <span class="number">366</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        days += <span class="number">365</span></span><br><span class="line"><span class="keyword">if</span> y%<span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> y%<span class="number">100</span> != <span class="number">0</span> <span class="keyword">or</span> y%<span class="number">400</span> == <span class="number">0</span>:</span><br><span class="line">    monthDays[<span class="number">2</span>] = <span class="number">29</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,month):</span><br><span class="line">    days += monthDays[i]</span><br><span class="line">days += date</span><br><span class="line">days -= <span class="number">22</span></span><br><span class="line"><span class="built_in">print</span>(days%<span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+Q</li>
+</ol>
+<h2 id="10-习题"><a href="#10-习题" class="headerlink" title="10 习题"></a>10 习题</h2><h3 id="字符串例题：大小写互换"><a href="#字符串例题：大小写互换" class="headerlink" title="字符串例题：大小写互换"></a>字符串例题：大小写互换</h3><p>小写字母比大写字母大32<br>end &#x3D; ‘’’’</p>
+<h3 id="石头剪刀布"><a href="#石头剪刀布" class="headerlink" title="石头剪刀布"></a>石头剪刀布</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">result</span>(<span class="params">a,b</span>):</span><br><span class="line">    <span class="keyword">if</span> a == b:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> a ==<span class="number">5</span> <span class="keyword">and</span> b ==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="number">0</span> <span class="keyword">and</span> b ==<span class="number">5</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> a&lt;b:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">s = <span class="built_in">input</span>().split()</span><br><span class="line">n,na,nb = <span class="built_in">int</span>(s[<span class="number">0</span>]),<span class="built_in">int</span>(s[<span class="number">1</span>]),<span class="built_in">int</span>(s[<span class="number">2</span>])</span><br><span class="line">sa = <span class="built_in">input</span>().split()</span><br><span class="line">sb = <span class="built_in">input</span>().split()</span><br><span class="line">winA = winB = <span class="number">0</span></span><br><span class="line">ptrA = ptrB = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    r = result( <span class="built_in">int</span>(sa[ptrA]),<span class="built_in">int</span>(sb[ptrB]))</span><br><span class="line">    <span class="keyword">if</span> r ==<span class="number">1</span>:</span><br><span class="line">        winA +=<span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> r ==<span class="number">1</span>:</span><br><span class="line">        winB +=<span class="number">1</span></span><br><span class="line">    ptrA = (ptrA + <span class="number">1</span>)%na</span><br><span class="line">    ptrB = (ptrB + <span class="number">1</span>)%nb</span><br><span class="line"><span class="keyword">if</span> winA &gt; winB:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;A&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> winB &gt; winA:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;B&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;draw&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>10 3 4<br>0 2 5<br>0 5 0 2<br>A</p>
+</blockquote>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -180,7 +303,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -197,131 +320,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yatesara.github.io/2022/12/16/python-5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/12/14/python-4/" class="archive-article-date">
-  	<time datetime="2022-12-14T09:10:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/12/14/python-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python学习笔记📒｜第四章</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/14/python-4/">python学习笔记📒｜第四章</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/12/11/python-3/" class="archive-article-date">
-  	<time datetime="2022-12-11T13:53:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/11/python-3/">python学习笔记📒｜第三章</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/python//" class="article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -344,8 +440,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

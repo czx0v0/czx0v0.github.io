@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yatesara.github.io">
-  <title>python｜第三章 | ChangZX0v0的宇宙自习室</title>
+  <title>python学习笔记📒｜第四章 | ChangZX0v0的宇宙自习室</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第三章 循环语句for 循环12345678for i in range(5): # [0,5)    print(i)for i in range(5,9):    print(i)for i in range(0,10,3):# 步长3    print(i)for i in range(-10,-100,-30):    print(i) A 3,6,9 终点不能算在内！！for 遍历列表l">
+  <meta name="description" content="1 函数的概念与用法函数的定义1234def function_name1(parameter1.parameter2):    sentencesdef function_name2():            # 也可以没有参数    sentences   函数的调用1function_name1(parameter1.parameter2) 也可以由函数内部return语句决定 1retu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python｜第三章">
-<meta property="og:url" content="https://yatesara.github.io/2022/12/15/python-3/index.html">
+<meta property="og:title" content="python学习笔记📒｜第四章">
+<meta property="og:url" content="https://yatesara.github.io/2022/12/14/python-4/index.html">
 <meta property="og:site_name" content="ChangZX0v0的宇宙自习室">
-<meta property="og:description" content="第三章 循环语句for 循环12345678for i in range(5): # [0,5)    print(i)for i in range(5,9):    print(i)for i in range(0,10,3):# 步长3    print(i)for i in range(-10,-100,-30):    print(i) A 3,6,9 终点不能算在内！！for 遍历列表l">
+<meta property="og:description" content="1 函数的概念与用法函数的定义1234def function_name1(parameter1.parameter2):    sentencesdef function_name2():            # 也可以没有参数    sentences   函数的调用1function_name1(parameter1.parameter2) 也可以由函数内部return语句决定 1retu">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-12-15T13:53:18.000Z">
-<meta property="article:modified_time" content="2022-12-15T14:02:32.647Z">
+<meta property="article:published_time" content="2022-12-14T09:10:58.000Z">
+<meta property="article:modified_time" content="2022-12-17T17:03:06.919Z">
 <meta property="article:author" content="ChangZX0v0">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="学习笔记">
@@ -140,43 +140,70 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-python-3" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-python-4" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      python｜第三章
+      python学习笔记📒｜第四章
     </h1>
   
 
         
-        <a href="/2022/12/15/python-3/" class="archive-article-date">
-  	<time datetime="2022-12-15T13:53:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-15</time>
+        <a href="/2022/12/14/python-4/" class="archive-article-date">
+  	<time datetime="2022-12-14T09:10:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="第三章-循环语句"><a href="#第三章-循环语句" class="headerlink" title="第三章 循环语句"></a>第三章 循环语句</h1><h2 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>): <span class="comment"># [0,5)</span></span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>,<span class="number">9</span>):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">10</span>,<span class="number">3</span>):<span class="comment"># 步长3</span></span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(-<span class="number">10</span>,-<span class="number">100</span>,-<span class="number">30</span>):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
-<p>A 3,6,9 <strong>终点不能算在内！！</strong><br>for 遍历列表<br>len():可以用来求列表的长度（元素个数），也可以求字符串长度<br>break 语句的作用：跳出整个循环<br>continue 跳到下次循环</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">26</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&quot;a&quot;</span>)+i),end=<span class="string">&quot;&quot;</span>) <span class="comment">#&gt;&gt;abcdefghijklmnopqrstuvwxyz</span></span><br></pre></td></tr></table></figure>
-<p>ord(x) 求字符x的编码<br>chr(x) 求编码x的字符<br>可以用8个连续的0或1（即一个字节）来表示一个字母，数字或标点符号</p>
-<h2 id="for-循环的简单例题"><a href="#for-循环的简单例题" class="headerlink" title="for 循环的简单例题"></a>for 循环的简单例题</h2><p>加和<br>因子<br>多重循环 n*m次<br>8:0 1 0 2 1 1 1 2 Q没有2？？<br>（1，n）（i+1，n+1）<br>第一个数比第二个小</p>
-<h2 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> x:</span><br><span class="line">    sentence1</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    sentence2</span><br></pre></td></tr></table></figure>
-<p>aaaaaaa<br>最小公倍数：枚举!!<br>while not(n%x &#x3D;&#x3D; 0 and n% y &#x3D;&#x3D;0 and n % z &#x3D;&#x3D;0)<br>n&#x3D;m&#x3D;max(x,y,z)<br>n+&#x3D;m()<br>（没必要一个个试）</p>
-<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>如何判断循环结束<br>try：<br>except：</p>
-<ol>
-<li>不合适转换</li>
-<li>输入已经结束的inut</li>
-<li>除法的除数为0</li>
-<li>整数字符串相加</li>
-<li>列表的下标越界</li>
-</ol>
-<p>ctrl + Z:告诉程序输入已经没了！<br>ctrl + D:在pycharm里面告诉程序输入已经没了</p>
+        <h2 id="1-函数的概念与用法"><a href="#1-函数的概念与用法" class="headerlink" title="1 函数的概念与用法"></a>1 函数的概念与用法</h2><h3 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">function_name1</span>(<span class="params">parameter1.parameter2</span>):</span><br><span class="line">    sentences</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">function_name2</span>():            <span class="comment"># 也可以没有参数</span></span><br><span class="line">    sentences  </span><br></pre></td></tr></table></figure>
+<h3 id="函数的调用"><a href="#函数的调用" class="headerlink" title="函数的调用"></a>函数的调用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function_name1(parameter1.parameter2)</span><br></pre></td></tr></table></figure>
+<p>也可以由函数内部return语句决定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return return_value</span><br></pre></td></tr></table></figure>
+<p>一个函数内部可以出现多条return语句，每个return语句返回值可以不同<br>例1:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">Max</span>(<span class="params">x,y</span>):       <span class="comment"># x,y形参</span></span><br><span class="line">    <span class="keyword">if</span> x&gt;y:</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> y</span><br><span class="line">n = Max(<span class="number">4</span>,<span class="number">6</span>)        <span class="comment"># 实参</span></span><br><span class="line"><span class="built_in">print</span>(n,Max(<span class="number">20</span>,n))</span><br><span class="line"><span class="built_in">print</span>(Max(<span class="string">&quot;about&quot;</span>,<span class="string">&quot;take&quot;</span>))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>6 20<br>take</p>
+</blockquote>
+<p>例2:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">IsPrime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">if</span> n&lt;=<span class="number">1</span> <span class="keyword">or</span> n%<span class="number">2</span> == <span class="number">0</span> <span class="keyword">and</span> n!= <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">elif</span> n==<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>,n,<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">if</span> n % i ==<span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">if</span> i*i &gt; n:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">if</span>(IsPrime(i)):</span><br><span class="line">        <span class="built_in">print</span>(i,end=<span class="string">&quot; &quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 </p>
+</blockquote>
+<h3 id="函数的返回值"><a href="#函数的返回值" class="headerlink" title="函数的返回值"></a>函数的返回值</h3><p>也可以有不返回值的函数和返回多个值（元组）的函数</p>
+<h3 id="函数中的变量"><a href="#函数中的变量" class="headerlink" title="函数中的变量"></a>函数中的变量</h3><ul>
+<li>一个函数内部的变量在函数外部不能使用</li>
+<li>不同函数中的同名变量不会互相影响</li>
+<li>函数中的变量和全局变量同名的情况：<ul>
+<li>如果没有对x进行赋值，函数内部的x是全局的x</li>
+<li>如果对x进行赋值且没有特别声明，则在函数中全局x不起作用，函数中的x就是函数内部起作用的x</li>
+<li>函数内部可以用<code>global x</code>声明x是全局的x</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-递归"><a href="#2-递归" class="headerlink" title="2 递归"></a>2 递归</h2><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>一个概念的定义中用到了这个概念本身，这就叫递归</p>
+<h4 id="用递归的方式定义n的阶乘"><a href="#用递归的方式定义n的阶乘" class="headerlink" title="用递归的方式定义n的阶乘"></a>用递归的方式定义n的阶乘</h4><pre><code>1）“1的阶乘”是1
+2）“n的阶乘”是n乘以“（n-1）的阶乘”
+</code></pre>
+<p>例1: 求n的阶乘</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">Factorial</span>(<span class="params">n</span>):</span><br><span class="line"><span class="keyword">if</span> n&lt;<span class="number">2</span>:                             <span class="comment"># 相当于终止条件</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">return</span> n * Factorial(n-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>例2: 求斐波那契数列第n项</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">Fib</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">if</span> n==<span class="number">1</span> <span class="keyword">or</span> n==<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> Fib(n-<span class="number">1</span>)+Fib(n-<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 
+<h2 id="递归例题：上台阶"><a href="#递归例题：上台阶" class="headerlink" title="递归例题：上台阶"></a>递归例题：上台阶</h2><p>上台阶问题：有n级台阶，每步可以走一级或2级，问有多少种不同的走法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ways</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> ways(n-<span class="number">1</span>)+ways(n-<span class="number">2</span>)</span><br><span class="line">    <span class="comment">#第一步走一级的走法+第一步走二级的走法</span></span><br><span class="line"><span class="built_in">print</span>(ways(<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+<p>(先走第一步）</p>
+<h2 id="4-递归例题：汉诺塔"><a href="#4-递归例题：汉诺塔" class="headerlink" title="4 递归例题：汉诺塔"></a>4 递归例题：汉诺塔</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">Hanoi</span>(<span class="params">n,src,mid,dest</span>):</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>):</span><br><span class="line">        <span class="built_in">print</span>(src+<span class="string">&quot;-&gt;&quot;</span>+dest)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    Hanoi(n-<span class="number">1</span>,src,dest,mid)</span><br><span class="line">    <span class="built_in">print</span>(src+<span class="string">&quot;-&gt;&quot;</span>+dest)</span><br><span class="line">    Hanoi(n-<span class="number">1</span>,mid,src,dest)</span><br><span class="line">n = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">Hanoi(n,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>如果64个盘子，如果一秒1次移动，需要2^64-1次，世界毁灭也移不完<br>手工解决汉诺塔问题：拆子问题</p>
+<!--## 4 递归例题：雪花曲线
+### 雪花曲线的递归定义
+1）长size，方向x的0阶雪花曲线。是方向x上一根长为size的片段
+2）长size，方向x的n阶雪花曲线，由以下四部分依次拼接而成。
+ 
       
 
       
@@ -285,7 +312,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://yatesara.github.io/2022/12/15/python-3/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://yatesara.github.io/2022/12/14/python-4/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -299,9 +326,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2022/12/16/python-5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          python学习笔记📒|第五章
+        
+      </div>
+    </a>
   
-    <a href="/2022/12/15/python-4/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">python-4</div>
+  
+    <a href="/2022/12/11/python-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python学习笔记📒｜第三章</div>
       <i class="icon-circle-right"></i>
     </a>
   
