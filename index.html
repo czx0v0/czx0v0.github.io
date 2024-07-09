@@ -5,19 +5,19 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="https://yatesara.github.io">
-  <title>Yatesara的宇宙自习室</title>
+  <link rel="dns-prefetch" href="https://czx0v0.github.io">
+  <title>czx0v0的宇宙自习室</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Yatesara的宇宙自习室">
-<meta property="og:url" content="https://yatesara.github.io/index.html">
-<meta property="og:site_name" content="Yatesara的宇宙自习室">
+<meta property="og:title" content="czx0v0的宇宙自习室">
+<meta property="og:url" content="https://czx0v0.github.io/index.html">
+<meta property="og:site_name" content="czx0v0的宇宙自习室">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="Yatesara">
+<meta property="article:author" content="czx0v0">
 <meta property="article:tag" content="study">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Yatesara的宇宙自习室" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="czx0v0的宇宙自习室" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -334,6 +334,136 @@ Q</li>
 
 
   
+    <article id="post-第十七章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/12/16/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0/">C语言学习笔记📒|第十七章</a>
+    </h1>
+  
+
+        
+        <a href="/2022/12/16/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0/" class="archive-article-date">
+  	<time datetime="2022-12-16T02:58:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="第十七章"><a href="#第十七章" class="headerlink" title="第十七章"></a>第十七章</h1><p>课程：王道c语言督学营</p>
+<h2 id="17-1-上节课作业讲解"><a href="#17-1-上节课作业讲解" class="headerlink" title="17.1 上节课作业讲解"></a>17.1 上节课作业讲解</h2><p>如果上课的代码不能独立写出来。首先就根据老师的代码，来画图。<br>然后再对照流程图来完成代码。<br>通过for循环读取十个元素。</p>
+<h2 id="17-2-与408关联"><a href="#17-2-与408关联" class="headerlink" title="17.2 与408关联"></a>17.2 与408关联</h2><p>选择排序、堆排序、归并排序</p>
+<h2 id="17-3-选择排序原理及实战"><a href="#17-3-选择排序原理及实战" class="headerlink" title="17.3 选择排序原理及实战"></a>17.3 选择排序原理及实战</h2><p>选择排序分为简单选择排序、<strong>堆排序</strong>。</p>
+<h3 id="简单选择排序-selection-sort"><a href="#简单选择排序-selection-sort" class="headerlink" title="简单选择排序 selection-sort"></a>简单选择排序 selection-sort</h3><p>原理：假设排序表为L[1……n]，第i趟排序是从中选择关键字最小的元素与L[i]交换，每一趟排序可以确定一个元素的最终位置，这样经过n-1趟排序就可使整个排序表有序。<br>用min记录最小值的坐标。</p>
+<blockquote>
+<p>3,87,2,93,78,56,61,38,12,40<br>一趟选择排序后的结果：<br>2,87,3,,93,78,56,61,38,12,40</p>
+</blockquote>
+<h3 id="简单选择排序实战"><a href="#简单选择排序实战" class="headerlink" title="简单选择排序实战"></a>简单选择排序实战</h3><p>每次把最小的交换到前面。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> ElemType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    ElemType *elem;</span><br><span class="line">    <span class="type">int</span> Tablelen;</span><br><span class="line">&#125;SSTable;<span class="comment">//顺序表</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ST_Init</span><span class="params">(SSTable &amp;ST,<span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">    ST.Tablelen=len;</span><br><span class="line">    ST.elem=(ElemType *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(ElemType)*ST.Tablelen);</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    srand(time(<span class="literal">NULL</span>));<span class="comment">//随机树生成，每次执行代码得到随机十个元素</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;ST.Tablelen;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        ST.elem[i]=rand()%<span class="number">100</span>;<span class="comment">//生成的数0-99之间</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">ST_print</span><span class="params">(SSTable ST)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;ST.Tablelen;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%3d&quot;</span>,ST.elem[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(ElemType &amp;a,ElemType &amp;b)</span></span><br><span class="line">&#123;</span><br><span class="line">    ElemType tmp;</span><br><span class="line">    tmp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    SSTable ST;</span><br><span class="line">    ST_Init(ST,<span class="number">10</span>);</span><br><span class="line">    ST_print(ST);</span><br><span class="line"><span class="comment">//    ElemType A[10]=&#123;69,47,99,25,92,72,69,14,10,94&#125;;</span></span><br><span class="line"><span class="comment">//    //内存copy接口，当你copy整型数组，或者浮点型时，要用memcpy，不能用strcpy，初试考memcpy概率很低</span></span><br><span class="line"><span class="comment">//    memcpy(ST.elem,A,sizeof(A));//为了降低调试难度，每组数组数据固定而设计</span></span><br><span class="line">    SelectSort(ST.elem,<span class="number">10</span>);</span><br><span class="line">    ST_print(ST);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">SelectSort</span><span class="params">(ElemType *A,<span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i,j,min;<span class="comment">//min记录最小值元素的下标</span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        min = i;<span class="comment">//我们认为0号元素最小</span></span><br><span class="line">        <span class="keyword">for</span> (j=i+<span class="number">1</span>;j&lt;n;j++)<span class="comment">//找到从i开始到最后的序列的最小值的下标</span></span><br><span class="line">        &#123;<span class="comment">//(j不是每一次都固定的)</span></span><br><span class="line">            <span class="keyword">if</span> (A[j]&lt;A[min])<span class="comment">//当某个元素A[j]小于了最小元素</span></span><br><span class="line">            &#123;</span><br><span class="line">                min = j;<span class="comment">//就把下标j赋值给min，min就记录下来了最小值的下标</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//循环的外面</span></span><br><span class="line">        <span class="keyword">if</span>(min != i)<span class="comment">//其实自己与自己交换也没关系</span></span><br><span class="line">        &#123;</span><br><span class="line">            swap(A[i],A[min]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>选择排序的时间复杂度：<code>O（n^2)</code><br>选择排序的空间复杂度：<code>O(1)</code>（未使用额外的空间）</p>
+<h2 id="17-4-堆排序原理解析"><a href="#17-4-堆排序原理解析" class="headerlink" title="17.4 堆排序原理解析"></a>17.4 堆排序原理解析</h2><h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p><strong>堆</strong>（Heap）是计算机科学中一种特殊的树状数据结构。</p>
+<blockquote>
+<p>若满足以下特性，可以称为堆：Q？一定最大最小哪吗？<br>“给定堆中任意节点P和C，若P是C的父节点，则P的值恒小于等于（或大于等于）C的值。”<br>最小堆（min heap）：父节点的值恒小于子节点的值。（小根堆，小顶堆）<br>最大堆（max heap）：父节点的值恒大于子节点的值。（大根堆，大顶堆）<br>根节点（root）：堆中最顶端的那个节点。</p>
+</blockquote>
+<p>假设把3,87,2,93,78,56,61,38,12,40这10个元素采用层次建树法建成一棵完全二叉树。如果能将二叉树中的每一个元素对应到数组下标的这种数据结构称为堆，比如<strong>最后一个父元素的下标是N&#x2F;2-1，也就是a[4]，对应的值为87</strong>。<br>N&#x2F;2-1？：这是层次建立一棵完全二叉树的特性。如果父节点的下标是dad，那么父节点对应的左子节点的下标值是2*dad+1。</p>
+<p>我们可以依次将每颗子树都调整为父节点最大，最终将整颗子树变为一个大根堆。</p>
+<blockquote>
+<p>学编程要按部就班，要理解了，不要跳跃，不要急躁。</p>
+</blockquote>
+<p>动画地址:(<a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/HeapSort.html">https://www.cs.usfca.edu/~galles/visualization/HeapSort.html</a>)</p>
+<h2 id="17-5-堆排序实战"><a href="#17-5-堆排序实战" class="headerlink" title="17.5 堆排序实战"></a>17.5 堆排序实战</h2><p>建议：一些前置步骤可以不手写。<br>增量编写。第一次写先不用随机的元素。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">AdjustDown1</span><span class="params">(ElemType A[],<span class="type">int</span> k,<span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> dad = k;<span class="comment">//父亲的下标</span></span><br><span class="line">    <span class="type">int</span> son = <span class="number">2</span>*dad+<span class="number">1</span>;<span class="comment">//左孩子的下标</span></span><br><span class="line">    <span class="keyword">while</span>(son&lt;len)</span><br><span class="line">    &#123;<span class="comment">//son+1也要小于len</span></span><br><span class="line">        <span class="keyword">if</span>(son+<span class="number">1</span>&lt;len&amp;&amp;A[son]&lt;A[son+<span class="number">1</span>])<span class="comment">//如果左孩子小于右孩子</span></span><br><span class="line">        &#123;</span><br><span class="line">            son++;<span class="comment">//拿右孩子</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(A[son]&gt;A[dad])</span><br><span class="line">        &#123;</span><br><span class="line">            swap(A[son],A[dad]);<span class="comment">//如果孩子大于父亲就交换</span></span><br><span class="line">            dad = son;<span class="comment">//发生变动后son重新作为dad，去判断下面的子树是否符合大根堆</span></span><br><span class="line">            son = <span class="number">2</span>*dad+<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">HeapSort1</span><span class="params">(ElemType A[],<span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="comment">//第一步就是把堆调整为大根堆</span></span><br><span class="line">    <span class="keyword">for</span>(i =len/<span class="number">2</span><span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)<span class="comment">//i代表的是剩余的无序数组的长度</span></span><br><span class="line">    &#123;</span><br><span class="line">        AdjustDown1(A,i,len);<span class="comment">//10？9？</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//交换根部元素和最后一个元素</span></span><br><span class="line">    swap(A[<span class="number">0</span>],A[len<span class="number">-1</span>]);<span class="comment">//传10要-1。传9不用-1。</span></span><br><span class="line">    <span class="keyword">for</span>(i =len<span class="number">-1</span>;i&gt;<span class="number">1</span>;i--)<span class="comment">//i最小为2，i代表的是剩余的无序数组的长度</span></span><br><span class="line">    &#123;</span><br><span class="line">        AdjustDown1(A,<span class="number">0</span>,i);<span class="comment">//调整剩余元素变为大根域</span></span><br><span class="line">        swap(A[<span class="number">0</span>],A[i<span class="number">-1</span>]);<span class="comment">//交换根部元素和最后一个元素</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  3 87  2 93 78 56 61 38 12 40<br>  2  3 12 38 40 56 61 78 87 93</p>
+</blockquote>
+<p>  （王道书上，从1开始，左孩子是dad2倍）<br>  AdjustDown1最多执行次数(树的高度)<code>\log_2 n</code>.<br>  堆排序的时间复杂度：<code>O(n\log_2 n)</code><br>  堆排序的空间复杂度：<code>O(1)</code></p>
+<h2 id="17-6-归并排序原理及实战"><a href="#17-6-归并排序原理及实战" class="headerlink" title="17.6 归并排序原理及实战"></a>17.6 归并排序原理及实战</h2><h3 id="归并排序的原理解析"><a href="#归并排序的原理解析" class="headerlink" title="归并排序的原理解析"></a>归并排序的原理解析</h3><p>把两个元素归为一组，小组内排序。然后再把两个有序小组合并为一个有序小组，不断进行，最终合并为一个有序数组。<br>动画地址：(<a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html">https://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html</a><br><img src="/../images/16712878932734/16713450424728.jpg"><br>归并排序是递归的。<br>首先：最小下标low与最大下标high相加除以2，得到中间下标mid。</p>
+<h3 id="归并排序实战"><a href="#归并排序实战" class="headerlink" title="归并排序实战"></a>归并排序实战</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 7</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> ElemType;</span><br><span class="line"><span class="comment">//不限制两两归并还是三三归并，但考研考的是两两归并</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Merge</span><span class="params">(ElemType A[],<span class="type">int</span> low,<span class="type">int</span> mid,<span class="type">int</span> high)</span></span><br><span class="line">&#123;<span class="comment">//业界全部使用额外空间，空间复杂度O(n)</span></span><br><span class="line">    <span class="type">static</span> ElemType B[N];<span class="comment">//加static的目的是无论递归调用多少次，都只有一个B[N]</span></span><br><span class="line">    <span class="type">int</span> i,j,k;</span><br><span class="line">    <span class="keyword">for</span>(i = low;i &lt;= high;i++)<span class="comment">//把A[i]里的元素都给B[i]</span></span><br><span class="line">    &#123;</span><br><span class="line">        B[i] = A[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=low,j=mid+<span class="number">1</span>,k=i;i&lt;=mid&amp;&amp;j&lt;=high;)<span class="comment">//合并两个有序数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(B[i]&lt;B[j])</span><br><span class="line">        &#123;</span><br><span class="line">            A[k] = B[i];</span><br><span class="line">            i++;</span><br><span class="line">            k++;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            A[k] = B[j];</span><br><span class="line">            j++;</span><br><span class="line">            k++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//在循环外，把某一个数组中剩余的元素放进来</span></span><br><span class="line">    <span class="keyword">while</span>(i&lt;=mid)<span class="comment">//前一半有剩余的放入</span></span><br><span class="line">    &#123;</span><br><span class="line">        A[k] = B[i];</span><br><span class="line">        i++;</span><br><span class="line">        k++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(j&lt;=high)<span class="comment">//后一半有剩余的放入</span></span><br><span class="line">    &#123;</span><br><span class="line">        A[k] = B[j];</span><br><span class="line">        j++;</span><br><span class="line">        k++;<span class="comment">//这三行等价于A[k++]=B[j++];</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">MergeSort</span><span class="params">(ElemType A[],<span class="type">int</span> low,<span class="type">int</span> high)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(low&lt;high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> mid =(low+high)/<span class="number">2</span>;</span><br><span class="line">        MergeSort(A,low,mid);</span><br><span class="line">        MergeSort(A,mid+<span class="number">1</span>,high);</span><br><span class="line">        Merge(A,low,mid,high);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> *a)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>;i&lt;N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%3d&quot;</span>,a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> A[N] = &#123;<span class="number">49</span>,<span class="number">30</span>,<span class="number">65</span>,<span class="number">97</span>,<span class="number">76</span>,<span class="number">13</span>,<span class="number">27</span>&#125;;</span><br><span class="line">    MergeSort(A,<span class="number">0</span>,<span class="number">6</span>);</span><br><span class="line">    print(A);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>归并排序时间复杂度：<code>O(n\log_2 n)</code><br>归并排序空间复杂度：<code>O(n)</code></p>
+<h3 id="所有排序时间复杂度与空间复杂度汇总"><a href="#所有排序时间复杂度与空间复杂度汇总" class="headerlink" title="所有排序时间复杂度与空间复杂度汇总"></a>所有排序时间复杂度与空间复杂度汇总</h3><p><img src="/../images/16712878932734/16713470203627.jpg"><br>稳定性是指排序前后，相等的元素位置是否会被交换。<br>复杂性是指代码编写的难度。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/C-C//" class="article-tag-list-link color1">C/C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/12/16/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-python-4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -587,7 +717,7 @@ Q</li>
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 Yatesara
+    		&copy; 2024 czx0v0
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -692,6 +822,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">学习笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
             
             <div class="clearfix"></div>
