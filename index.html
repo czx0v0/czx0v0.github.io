@@ -145,6 +145,124 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode-3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/11/leetcode-3/">算法笔记📒 | leetcode-128</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/11/leetcode-3/" class="archive-article-date">
+  	<time datetime="2025-05-11T02:35:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-128-最长连续序列"><a href="#leetcode-128-最长连续序列" class="headerlink" title="leetcode-128 最长连续序列"></a>leetcode-128 最长连续序列</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
+<li>一开始提交有错误，后来加上了最后的一次检查更新以及空数组的特殊情况就都正确了。</li>
+<li>思路1感觉有受到昨天字符串排序的启发，一看到就直接想着先排序然后count最长连续序列了，没有用到哈希表，不过看了一下题解的评论区发现实际不能直接用sort！而且排序后时间复杂度无法达到o(n)</li>
+<li>看了题解后尝试理解思路和复现代码。<ul>
+<li>用哈希表看数组中是否存在一个需要的数可以将时间复杂度优化到o(1)。</li>
+<li>思路是外层循环枚举n个数，内层循环匹配序列，并在外层中加入跳过（判断哈希表中是否存在x-1），这样数组中每个数不会重复进入内层循环，时间复杂度o（n）。</li>
+</ul>
+</li>
+<li>思路2注意：<ul>
+<li>无需用unordered_map,可以直接用unoedered_set,存储数字即可</li>
+<li>也需要在前面加上对空数组的判断</li>
+<li>注意外层循环不是对nums数组循环，而是直接对unorderd_set循环即可，减少重复。<ul>
+<li>unorderd_set可通过<code>for (auto it = st1.begin();it!=st1.end();++it)</code>语句迭代，*it访问迭代器指向的元素。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-答案对比"><a href="#2-答案对比" class="headerlink" title="2 答案对比"></a>2 答案对比</h2><ol>
+<li>最初的简单思路答案（发现实际面试中不可以直接用sort）（审题不够认真+排序时间复杂度记错）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 简单想法1：先排序（至少需要nlogn复杂度）,然后找出最长的数字连续的序列(全遍历一遍需要n复杂度)</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">longestConsecutive</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; sorted_nums = nums;</span><br><span class="line">        ranges::<span class="built_in">sort</span>(sorted_nums);</span><br><span class="line">        <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//注意！空数组的特殊情况</span></span><br><span class="line">        <span class="keyword">if</span>(sorted_nums.<span class="built_in">size</span>() == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; sorted_nums.<span class="built_in">size</span>() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((sorted_nums[i + <span class="number">1</span>] - sorted_nums[i]) == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 如果下一个数字和当前数字连续，count+1</span></span><br><span class="line">                count = count + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sorted_nums[i + <span class="number">1</span>] == sorted_nums[i]) &#123;</span><br><span class="line">                <span class="comment">// 如果下一个数字和当前数字相等，跳过</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 否则，检查更新res</span></span><br><span class="line">                <span class="keyword">if</span> (count &gt; res) &#123;</span><br><span class="line">                    res = count;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//重置count</span></span><br><span class="line">                count = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//注意最后再次检查更新！</span></span><br><span class="line">        <span class="keyword">if</span> (count &gt; res) &#123;</span><br><span class="line">            res = count;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+2.学习题解思路后，完成的版本，借助unordered_set<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 想法2：哈希表</span></span><br><span class="line">    <span class="comment">// 思路：外层循环枚举n个数，内层循环匹配序列，并在外层中加入跳过（判断哈希表中是否存在x-1），这样数组中每个数不会重复进入内层循环，时间复杂度o（n）</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">longestConsecutive</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 判断是否为空数组</span></span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; st1;</span><br><span class="line">        <span class="comment">// 构建哈希表</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            st<span class="number">1.</span><span class="built_in">insert</span>(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 外层循环枚举set中的数字(不是遍历nums)</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = st<span class="number">1.</span><span class="built_in">begin</span>();it!=st<span class="number">1.</span><span class="built_in">end</span>();++it) &#123;</span><br><span class="line">            count = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (st<span class="number">1.</span><span class="built_in">count</span>(*it - <span class="number">1</span>)&gt;<span class="number">0</span>) &#123;<span class="comment">//*it访问迭代器指向的元素</span></span><br><span class="line">                <span class="comment">// 判断哈希表中是否存在x-1，存在则跳过循环</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 内层循环匹配序列;</span></span><br><span class="line">            <span class="type">int</span> j = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (st<span class="number">1.</span><span class="built_in">count</span>(*it + j)&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                count++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 检查更新res</span></span><br><span class="line">            <span class="keyword">if</span> (count &gt; res) &#123;</span><br><span class="line">                res = count;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">哈希表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/11/leetcode-3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -165,16 +283,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="49-字母异位词"><a href="#49-字母异位词" class="headerlink" title="49-字母异位词"></a>49-字母异位词</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ol>
+        <h1 id="49-字母异位词"><a href="#49-字母异位词" class="headerlink" title="49-字母异位词"></a>49-字母异位词</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
 <li>因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。</li>
-<li>可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上<code>sorted_string =</code>）。</li>
+<li>可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上<code>sorted_string =</code>）。 </li>
 <li>除了<code>mp.insert(&#123;sorted_str,&#123;str[i]&#125;&#125;)</code>之外也可以用<code>mp.emplace(sorted_str,vector&lt;string&gt;&#123;strs[i]&#125;)</code>语句实现将键值对插入到unordered_map中！(此外还有leetcode-1笔记中提到的<code>mp[key]=value</code>)。</li>
 <li>参考题解，对vector也可以用<code>.emplace_back()</code>插入最后。</li>
 <li><code>res.reserve(res_hash.size());</code>最后在将键值对的值变为res的元素时可以预留空间。</li>
 <li><code>for(auto it = mp.begin();it!=mp.end();++it)</code>可以遍历键值对，<code>it-&gt;first</code>,<code>it-second</code>分别访问键和值，也可以通过<code>for (auto&amp; [key, value] : mp) </code>或<code>for (auto&amp; pair : mp)</code>访问，第二种要通过<code>pair.first</code>,<code>pair.second</code>访问key，value。</li>
 <li>查看题解后发现，也可以通过26个字母计数的方式对比，这种方法我没有复现代码。</li>
 <li>初始化时不要忘了为0，如<code>int str_keys_length = 0;</code>。</li>
-</ol>
+</ul>
 <h2 id="2-答案对比"><a href="#2-答案对比" class="headerlink" title="2 答案对比"></a>2 答案对比</h2><ol>
 <li>一开始的复杂版本<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 分析：</span></span><br><span class="line">    <span class="comment">// 初步思路：每个字符串对应一个哈希表：键：字符，值：字符在字符串中的索引，如：cat，c-&gt;0,a-&gt;1,t-&gt;2</span></span><br><span class="line">    <span class="comment">// 疑问：如果同一个字符出现多次怎么办？-&gt;改为存储每个字母的出现次数而不是索引，最后加入结果时再判重</span></span><br><span class="line">    <span class="comment">// 字母异位词特点：</span></span><br><span class="line">    <span class="comment">// 1. 字符串长度相同，且中每个字母的出现次数相同 -&gt; 键总数相同，键相同且相同</span></span><br><span class="line">    <span class="comment">// 2. 根据要求，字母异位应该是需要顺序不完全相同的 -&gt;</span></span><br><span class="line">    <span class="comment">// 值数组存在不同（加入结果时判断） 整体流程：</span></span><br><span class="line">    <span class="comment">// 遍历strs中的每个元素，对已在结果数组中的每个数组取第一个元素，判断当前元素是否与结果数组中的元素为字母异位词（键相同且值数组的长度相同），是则判重并加入此数组，不是则新建数组作为第一个元素加入。</span></span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; res;</span><br><span class="line">    vector&lt;unordered_map&lt;<span class="type">char</span>,<span class="type">int</span>&gt;&gt; res_maps;</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; strs.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 遍历strs中的每个字符串</span></span><br><span class="line">            unordered_map&lt;<span class="type">char</span>,<span class="type">int</span>&gt; str_map;</span><br><span class="line">            <span class="comment">// 遍历当前字符串的每个字符，转换为哈希表，并建立键数组</span></span><br><span class="line">            <span class="type">int</span> str_keys_length = <span class="number">0</span>; <span class="comment">//不要忘了初始化为0</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; strs[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (str_map.<span class="built_in">count</span>(strs[i][j])&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="comment">// 如果当前字符strs[i][j]在哈希表中,将新索引加入到值数组</span></span><br><span class="line">                    str_map[strs[i][j]] += <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 否则，新建键为当前字符，值初始化为1</span></span><br><span class="line">                    <span class="comment">// str_map[strs[i][j]] = 1;</span></span><br><span class="line">                    str_map.<span class="built_in">insert</span>(unordered_map&lt;<span class="type">char</span>, <span class="type">int</span>&gt;::<span class="built_in">value_type</span>(strs[i][j], <span class="number">1</span>));</span><br><span class="line">                    <span class="comment">// 加入键数组</span></span><br><span class="line">                    str_keys_length++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 和res_maps（结果数组中的每个数组取第一个元素的哈希表），对比，判断是否为字母异位词</span></span><br><span class="line">            <span class="type">int</span> anagrams_index = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; res_maps.<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="type">bool</span> is_anagrams = <span class="literal">true</span>;</span><br><span class="line">                <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">// 对res_maps中的每个哈希表，建立键数组</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> it = res_maps[j].<span class="built_in">begin</span>(); it != res_maps[j].<span class="built_in">end</span>();++it) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    <span class="comment">// 遍历哈希表中的每个键,判断键是否在当前数组str_map中，并判断值是否相等</span></span><br><span class="line">                    <span class="keyword">if</span> (str_map.<span class="built_in">count</span>(it-&gt;first)&gt;<span class="number">0</span> &amp;&amp;</span><br><span class="line">                        str_map[it-&gt;first] == it-&gt;second) &#123;</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        is_anagrams = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(count != str_keys_length)&#123;</span><br><span class="line">                    is_anagrams = <span class="literal">false</span>;<span class="comment">//这里不能加break</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//判断flag是否为异位词，是则判重并加入此数组，不是则新建数组作为第一个元素加入。</span></span><br><span class="line">                <span class="keyword">if</span>(is_anagrams==<span class="literal">true</span>)&#123;</span><br><span class="line">                    anagrams_index = j;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                    <span class="comment">//这里没有判重</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//最后判断anagrams_index，有则加入对应数组，没有-1则新建数组加入res</span></span><br><span class="line">            <span class="keyword">if</span>(anagrams_index != <span class="number">-1</span>)&#123;</span><br><span class="line">                res[anagrams_index].<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                vector&lt;string&gt; str_vec;</span><br><span class="line">                str_vec.<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">                res.<span class="built_in">push_back</span>(str_vec);</span><br><span class="line">                res_maps.<span class="built_in">push_back</span>(str_map);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 <li>看题解思路后重新完成的字符串排序版本<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 键：排序后的字符串；值：排序后的字符串对应的数组</span></span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; res;</span><br><span class="line">    unordered_map&lt;string,vector&lt;string&gt;&gt; res_hash;</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; strs.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 遍历strs中的每个字符串</span></span><br><span class="line">            <span class="comment">// 排序</span></span><br><span class="line">            string sorted_str = strs[i];</span><br><span class="line">            ranges::<span class="built_in">sort</span>(sorted_str);</span><br><span class="line">            <span class="keyword">if</span>(res_hash.<span class="built_in">count</span>(sorted_str)&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="comment">//已经有键</span></span><br><span class="line">                res_hash[sorted_str].<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//没有，新建字符串键值对并加入</span></span><br><span class="line">                res_hash.<span class="built_in">emplace</span>(sorted_str,vector&lt;string&gt;&#123;strs[i]&#125;);</span><br><span class="line">            &#125;       </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//预留空间</span></span><br><span class="line">        res.<span class="built_in">reserve</span>(res_hash.<span class="built_in">size</span>());</span><br><span class="line">        <span class="comment">//遍历加入结果中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = res_hash.<span class="built_in">begin</span>();it!=res_hash.<span class="built_in">end</span>();++it)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(it-&gt;second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
@@ -275,14 +393,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-两数之和-哈希表"><a href="#1-两数之和-哈希表" class="headerlink" title="1-两数之和(哈希表)"></a>1-两数之和(哈希表)</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ol>
-<li>关于C++中vetcor数组的初始化方式以及基础函数的复习（不要混淆） <ol start="2">
+        <h1 id="1-两数之和-哈希表"><a href="#1-两数之和-哈希表" class="headerlink" title="1-两数之和(哈希表)"></a>1-两数之和(哈希表)</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
+<li>关于C++中vetcor数组的初始化方式以及基础函数的复习（不要混淆） <ul>
 <li>通过 .size() 访问长度（不是length） </li>
 <li>通过 .push_back 加入数组（不是append）</li>
-</ol>
+</ul>
 </li>
 <li>刷题：注意特殊值的判断，最后如果没有找到需要直接返回空数组。</li>
-</ol>
+</ul>
 <h2 id="2-语法复习"><a href="#2-语法复习" class="headerlink" title="2 语法复习"></a>2 语法复习</h2><h3 id="vector复习"><a href="#vector复习" class="headerlink" title="vector复习"></a>vector复习</h3><h4 id="初始化方式"><a href="#初始化方式" class="headerlink" title="初始化方式:"></a>初始化方式:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;T&gt; v1;：默认初始化空向量。</span><br><span class="line">vector&lt;T&gt; v2(n, val);：创建含n个val值的向量。</span><br><span class="line">vector&lt;T&gt; v3(v2.begin(), v2.end());：通过迭代器范围拷贝构造。</span><br><span class="line">vector&lt;T&gt; v4 = &#123;a, b, c&#125;;：列表初始化（C++11）。</span><br><span class="line">vector&lt;T&gt; v5(v4);：拷贝构造函数。</span><br><span class="line">vector&lt;T&gt; v6(arr, arr + size);：从数组构造（arr为数组指针）</span><br></pre></td></tr></table></figure>
 <h4 id="基础函数："><a href="#基础函数：" class="headerlink" title="基础函数："></a>基础函数：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">元素访问：v[i]（下标访问）、v.front()/v.back()（首尾元素）、迭代器（begin()/end()）。</span><br><span class="line">增删操作：</span><br><span class="line">push_back(val)：尾部插入元素。</span><br><span class="line">insert(pos, val)：在迭代器pos前插入元素。</span><br><span class="line">erase(pos)或erase(begin, end)：删除元素。</span><br><span class="line">容量查询：size()、empty()、capacity()（实际分配内存大小）。</span><br><span class="line">调整容量：resize(n)（调整元素数量）、reserve(n)（预分配内存避免扩容开销）。</span><br></pre></td></tr></table></figure>
 <h3 id="哈希表复习"><a href="#哈希表复习" class="headerlink" title="哈希表复习"></a>哈希表复习</h3><p>哈希函数：将键映射到数组索引（如取模运算hash(key) % capacity）<br>方法：</p>
@@ -296,7 +414,7 @@
 <li>借助哈希表（参考其他答案后复现的解法），时间复杂度<code>O(N)</code>。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 新建从数字到索引的键值对哈希表</span></span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; number_idx;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 遍历nums中的元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 将数字-索引键值对加入哈希表</span></span><br><span class="line">            number_idx.<span class="built_in">insert</span>(unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt;::<span class="built_in">value_type</span>(nums[i], i));</span><br><span class="line">            <span class="comment">// 如果当前哈希表中存在target-num[i](需要的数字)，且这个数字不是当前的索引，找到res</span></span><br><span class="line">            <span class="keyword">if</span> (number_idx.<span class="built_in">count</span>(target - nums[i])&gt;<span class="number">0</span> &amp;&amp; number_idx[target - nums[i]] != i) &#123;</span><br><span class="line">                res.<span class="built_in">push_back</span>(number_idx[target - nums[i]]);</span><br><span class="line">                res.<span class="built_in">push_back</span>(i);</span><br><span class="line">                <span class="keyword">return</span> res;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>说明：</p>
-<ol>
+<ul>
 <li><code>unordered_map&lt;int, int&gt; number_idx;</code>:键为nums数组中的数字，值为数字对应的索引</li>
 <li><code>number_idx.insert(unordered_map&lt;int, int&gt;::value_type(nums[i], i));</code>：unordered_map的insert()要求参数为键值对对象，显式使用value_type</li>
 <li><code>if (number_idx.count(target - nums[i])&gt;0 &amp;&amp; number_idx[target - nums[i]] != i)</code>:包括2个判断条件：<ul>
@@ -304,7 +422,7 @@
 <li>target-num[i]不是当前索引的数字</li>
 </ul>
 </li>
-</ol>
+</ul>
 <h2 id="4-疑问解答"><a href="#4-疑问解答" class="headerlink" title="4 疑问解答"></a>4 疑问解答</h2><h3 id="1-C-中数组不同的初始化方式的区别"><a href="#1-C-中数组不同的初始化方式的区别" class="headerlink" title="1 C++中数组不同的初始化方式的区别"></a>1 C++中数组不同的初始化方式的区别</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. int*</span><br><span class="line">//需要手动管理内存 </span><br><span class="line">int *res=NULL;</span><br><span class="line">res=(int*)malloc(sizeof(int)*2);</span><br><span class="line">delete[] res;</span><br><span class="line">2. vector&lt;int&gt;</span><br><span class="line">//自动管理内存,适合频繁插入或删除元素</span><br><span class="line">vector&lt;int&gt; res;</span><br></pre></td></tr></table></figure>
 <h3 id="2-C-中向unordered-map加入键值对的不同方式区别"><a href="#2-C-中向unordered-map加入键值对的不同方式区别" class="headerlink" title="2 C++中向unordered_map加入键值对的不同方式区别"></a>2 C++中向unordered_map加入键值对的不同方式区别</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. u_map[key] = value;</span><br><span class="line">若键nums[i]已存在，会直接覆盖对应的旧值.</span><br><span class="line">若键不存在，会自动插入key → default_value（默认值），再通过赋值操作更新为i。对于int类型，默认值为0。</span><br><span class="line">2. u_map.insert()</span><br><span class="line">若键已存在，插入操作会失败，不会修改原有键值对.</span><br><span class="line">直接插入完整的键值对nums[i] → i，无需中间赋值步骤.</span><br><span class="line">返回pair&lt;iterator, bool&gt;，其中：</span><br><span class="line">    bool表示插入是否成功；</span><br><span class="line">    iterator指向插入后的元素或已存在的元素.</span><br></pre></td></tr></table></figure>
 <h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>注：在语法复习、疑问解答中，有参考AI工具。</p>
@@ -1066,6 +1184,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">哈希表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -1075,10 +1197,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">哈希表</a>
               </li>
             
             <div class="clearfix"></div>
