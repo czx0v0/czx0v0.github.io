@@ -11,7 +11,7 @@
   <meta name="description" content="leetcode-128 最长连续序列1 反思 一开始提交有错误，后来加上了最后的一次检查更新以及空数组的特殊情况就都正确了。 思路1感觉有受到昨天字符串排序的启发，一看到就直接想着先排序然后count最长连续序列了，没有用到哈希表，不过看了一下题解的评论区发现实际不能直接用sort！而且排序后时间复杂度无法达到o(n) 看了题解后尝试理解思路和复现代码。 用哈希表看数组中是否存在一个需要的数可以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法笔记📒 | leetcode-128">
-<meta property="og:url" content="https://czx0v0.github.io/2025/05/11/leetcode-3/index.html">
+<meta property="og:url" content="https://czx0v0.github.io/2025/05/11/leetcode-128/index.html">
 <meta property="og:site_name" content="czx0v0的宇宙自习室">
 <meta property="og:description" content="leetcode-128 最长连续序列1 反思 一开始提交有错误，后来加上了最后的一次检查更新以及空数组的特殊情况就都正确了。 思路1感觉有受到昨天字符串排序的启发，一看到就直接想着先排序然后count最长连续序列了，没有用到哈希表，不过看了一下题解的评论区发现实际不能直接用sort！而且排序后时间复杂度无法达到o(n) 看了题解后尝试理解思路和复现代码。 用哈希表看数组中是否存在一个需要的数可以">
 <meta property="og:locale" content="zh_CN">
@@ -149,7 +149,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-leetcode-3" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-leetcode-128" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -161,7 +161,7 @@
   
 
         
-        <a href="/2025/05/11/leetcode-3/" class="archive-article-date">
+        <a href="/2025/05/11/leetcode-128/" class="archive-article-date">
   	<time datetime="2025-05-11T02:35:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-11</time>
 </a>
         
@@ -267,8 +267,17 @@
   
 <nav id="article-nav">
   
+    <a href="/2025/05/11/leetcode-283/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          算法笔记📒 | leetcode-283
+        
+      </div>
+    </a>
   
-    <a href="/2025/05/10/leetcode-2/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2025/05/10/leetcode-49/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">算法笔记📒 | leetcode-49</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -421,6 +430,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">哈希表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
               </li>
              
               <li class="article-tag-list-item">

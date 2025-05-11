@@ -6,15 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://czx0v0.github.io">
-  <title>Tag: C语言 | czx0v0的宇宙自习室</title>
+  <title>算法笔记📒 | leetcode-283 | czx0v0的宇宙自习室</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="czx0v0的宇宙自习室">
-<meta property="og:url" content="https://czx0v0.github.io/tags/C%E8%AF%AD%E8%A8%80/index.html">
+  <meta name="description" content="leetcode-283 移动零1 反思 是简单题目，解答的基本思路是正确的，有参考题目本身双指针的提示。 仔细查看官方题解后发现思路是相似的但不完全一样。 自己的解法不是交换，是直接替换，多了填充的步骤。 官方解法是设置左右指针，左指针指向处理好的序列尾部，右指针不断向，找到非零数和左指针的数字替换。整体更简洁。    2 答案对比 自己解答123456789101112131415161718">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法笔记📒 | leetcode-283">
+<meta property="og:url" content="https://czx0v0.github.io/2025/05/11/leetcode-283/index.html">
 <meta property="og:site_name" content="czx0v0的宇宙自习室">
+<meta property="og:description" content="leetcode-283 移动零1 反思 是简单题目，解答的基本思路是正确的，有参考题目本身双指针的提示。 仔细查看官方题解后发现思路是相似的但不完全一样。 自己的解法不是交换，是直接替换，多了填充的步骤。 官方解法是设置左右指针，左指针指向处理好的序列尾部，右指针不断向，找到非零数和左指针的数字替换。整体更简洁。    2 答案对比 自己解答123456789101112131415161718">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-11T04:00:01.000Z">
+<meta property="article:modified_time" content="2025-05-11T04:17:40.630Z">
 <meta property="article:author" content="czx0v0">
-<meta property="article:tag" content="study">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="算法笔记">
+<meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="czx0v0的宇宙自习室" type="application/atom+xml">
@@ -143,36 +149,67 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-leetcode-283" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/12/16/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2022-12-16T02:58:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-12-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/12/16/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0/">C语言学习笔记📒|第十七章</a>
+    <h1 class="article-title" itemprop="name">
+      算法笔记📒 | leetcode-283
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2025/05/11/leetcode-283/" class="archive-article-date">
+  	<time datetime="2025-05-11T04:00:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-283-移动零"><a href="#leetcode-283-移动零" class="headerlink" title="leetcode-283 移动零"></a>leetcode-283 移动零</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
+<li>是简单题目，解答的基本思路是正确的，有参考题目本身双指针的提示。</li>
+<li>仔细查看官方题解后发现思路是相似的但不完全一样。<ul>
+<li>自己的解法不是交换，是直接替换，多了填充的步骤。</li>
+<li>官方解法是设置左右指针，左指针指向处理好的序列尾部，右指针不断向，找到非零数和左指针的数字替换。整体更简洁。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-答案对比"><a href="#2-答案对比" class="headerlink" title="2 答案对比"></a>2 答案对比</h2><ol>
+<li>自己解答<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 审题之后一开始以为是排序，之后发现不是排序，只需要保持相对顺序即可。</span></span><br><span class="line">    <span class="comment">// 参考提示，可以选择双指针，一个指针遍历，一个指针操作非0元素</span></span><br><span class="line">    <span class="comment">// 在草稿纸上模拟了一下流程，思路大概是i从头到尾遍历一次，用于标记当前的位置，并记录当前位置是否为0，统计0的数目count</span></span><br><span class="line">    <span class="comment">// j则从头到尾找非0元素，找到了就替换i处的元素，i向后知道到达nums.size()-count,后面都是0</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//当i没有到达nums.size()-count,即j没有找到所有的非零元素时</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt; nums.<span class="built_in">size</span>() - count) &#123;</span><br><span class="line">            <span class="comment">// 对j:当前数字不为0，替换i，为0，count+1</span></span><br><span class="line">            <span class="keyword">if</span> (nums[j] != <span class="number">0</span>) &#123;</span><br><span class="line">                nums[i] = nums[j];</span><br><span class="line">                j++;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                count++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 后面的count个填充为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= count; i++) &#123;</span><br><span class="line">            nums[nums.<span class="built_in">size</span>() - i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>查看官方思路后复现<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 复现官方思路，设置左右指针，左指针指向处理好的序列尾部，右指针不断向，找到非零数和左指针的数字替换</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = <span class="number">0</span>, r = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//当i没有到达nums.size()时循环(r从左到右1次即可)</span></span><br><span class="line">        <span class="keyword">while</span> (r &lt; nums.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="comment">// 对j:当前数字不为0，替换i，为0，count+1</span></span><br><span class="line">            <span class="keyword">if</span> (nums[r] != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">swap</span>(nums[l],nums[r]);</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">            r++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -182,17 +219,17 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -202,24 +239,60 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C-C//" class="article-tag-list-link color1">C/C++</a>
+        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2025/05/11/leetcode-128/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">算法笔记📒 | leetcode-128</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -242,9 +315,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
