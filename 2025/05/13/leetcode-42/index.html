@@ -16,12 +16,13 @@
 <meta property="og:description" content="leetcode-49 接雨水反思 一开始看到是困难题目有点担心来着，可能是昨天做了几道双指针的题目，在草稿纸上模拟了一下居然一遍就过了时间效率也还不错。 想法其实感觉和11-盛最多水的容器很类似，左右指针i和j高度小的走，记录小的高度为baseline，如果当前高度小于baseline，res加上(beseline-当前高度)，如果当前高度大于baseline，重新更新baseline。 看了官">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-13T02:17:29.000Z">
-<meta property="article:modified_time" content="2025-05-13T04:46:24.888Z">
+<meta property="article:modified_time" content="2025-05-13T07:15:23.779Z">
 <meta property="article:author" content="czx0v0">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="算法笔记">
 <meta property="article:tag" content="双指针">
 <meta property="article:tag" content="Python">
+<meta property="article:tag" content="DP">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="czx0v0的宇宙自习室" type="application/atom+xml">
@@ -61,7 +62,9 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/panel/">主页</a></li>
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/panel/">个人面板</a></li>
 	        
 				<li><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
 	        
@@ -89,8 +92,10 @@
 		        
 			</div>
 		</nav>
-	</header>		
+	</header>
 </div>
+
+<!-- 配置有参考：https://www.cnblogs.com/aoguai/p/11781505.html -->
 
     </div>
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
@@ -117,6 +122,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -131,11 +138,13 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/panel/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
+					<li style="width: 25%"><a href="/panel/">个人面板</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a></li>
+					<li style="width: 25%"><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a></li>
 		        
 				</ul>
 			</nav>
@@ -198,7 +207,7 @@
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果=w=，也分你一块！<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
                     
                     
@@ -233,6 +242,10 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
       		
 		</ul>
 	</div>
@@ -264,6 +277,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2025/05/13/leetcode-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          算法笔记📒 | leetcode-3
+        
+      </div>
+    </a>
   
   
     <a href="/2025/05/12/leetcode-15/" id="article-nav-older" class="article-nav-link-wrap">
@@ -439,6 +461,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">DP</a>
               </li>
             
             <div class="clearfix"></div>
