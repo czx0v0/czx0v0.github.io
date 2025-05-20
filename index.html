@@ -151,6 +151,576 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode-238" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/20/leetcode-238/">算法笔记📒 | leetcode-238</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/20/leetcode-238/" class="archive-article-date">
+  	<time datetime="2025-05-20T12:52:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-238-除自身以外的数组的乘积"><a href="#leetcode-238-除自身以外的数组的乘积" class="headerlink" title="leetcode-238 除自身以外的数组的乘积"></a>leetcode-238 除自身以外的数组的乘积</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/product-of-array-except-self?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>最初解答空间复杂度O（N），除了新建的答案数组外，单独创建两个数组存储前缀乘积和后缀乘积。<ul>
+<li>对每个元素，answer等于其前缀积*后缀积，可以一个i从左到右计算前缀积<code>pre_list[i] = pre_list[i-1]*nums[i-1](i&gt;=1),pre_list[0] = 1</code>，一个j从右到左计算后缀积<code>suf_list:tpre_list[i] = suf_list[i+1]*nums[i+1](i&gt;=1),suf_list[n-1] = 1 </code>。<ul>
+<li>对<code>i,answer[i]=pre_list[i]*suf_list[i]</code>。<ul>
+<li><code>if i == n-1:pre_list[i] = pre_list[n-1]</code>。</li>
+<li><code>if i == 0:suf_list[i] = suf_list[0] </code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>参考题解复现的优化空间复杂度O（1）解法，输出数组不算在空间复杂度内。 <ul>
+<li>参考题解之后发现其实可以不用单独的数组来维护一个数字前面的乘积和后面的乘积，可以直接一边遍历一边维护L和R，将左侧或右侧的总乘积乘到当前答案中再将总乘积L&#x2F;R乘上当前元素，即<code>answer[i] *= L, L *= nums[i]</code></li>
+<li>保留L和R，第一次循环从<code>1-&gt;n-2</code>,第二次从<code>n-2-&gt;1</code>然后单独计算<code>answer[n-1] = L，answer[0] = R </code></li>
+<li>可以把两个循环合并成到1起写</li>
+</ul>
+</li>
+</ul>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>最初解答（空间复杂度O（N））<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">productExceptSelf</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 对每个元素，answer等于其前缀积*后缀积，可以一个i从左到右计算前缀积pre_list[i] = pre_list[i-1]*nums[i-1](i&gt;=1),pre_list[0] = 1，一个j从右到左计算后缀积suf_lis:tpre_list[i] = suf_list[i+1]*nums[i+1](i&gt;=1),suf_list[n-1] = 1</span></span><br><span class="line">        <span class="comment"># 对i，answer:pre_list[i]*suf_list[i]</span></span><br><span class="line">        <span class="comment"># if i == n-1:pre_list[i] = pre_list[n-1]</span></span><br><span class="line">        <span class="comment"># if i == 0:suf_list[i] = suf_list[0] </span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> nums</span><br><span class="line">        pre_list = [<span class="number">0</span>]*n</span><br><span class="line">        suf_list = [<span class="number">0</span>]*n</span><br><span class="line">        answer = [<span class="number">0</span>]*n</span><br><span class="line">        pre_list[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        suf_list[n-<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">            pre_list[i] = pre_list[i-<span class="number">1</span>]*nums[i-<span class="number">1</span>]</span><br><span class="line">            suf_list[n-i-<span class="number">1</span>] = suf_list[n-i]*nums[n-i]</span><br><span class="line">        answer[<span class="number">0</span>] = suf_list[<span class="number">0</span>]</span><br><span class="line">        answer[n-<span class="number">1</span>] = pre_list[n-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n-<span class="number">1</span>):</span><br><span class="line">            answer[i] = pre_list[i]*suf_list[i]</span><br><span class="line">        <span class="keyword">return</span> answer</span><br><span class="line">        </span><br></pre></td></tr></table></figure></li>
+<li>参考题解，空间复杂度（O（1））<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">productExceptSelf</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 输出数组不算在空间复杂度内的时间复杂度O（1）解法</span></span><br><span class="line">        <span class="comment"># 参考题解之后发现其实可以不用单独的数组来维护一个数字前面的乘积和后面的乘积，可以直接一边遍历一边维护L和R，将左侧或右侧的总乘积乘到当前答案中再将总乘积L/R乘上当前元素，即answer[i] *= L, L *= nums[i]</span></span><br><span class="line">        <span class="comment"># 保留L和R，第一次循环从1-&gt;n-2;第二次从n-2-&gt;1;然后单独计算answer[n-1] = L，answer[0] = R</span></span><br><span class="line">        <span class="comment"># 可以把两个循环合并成到1起写</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        answer = [<span class="number">1</span>]*n <span class="comment"># 初始化</span></span><br><span class="line">        L = nums[<span class="number">0</span>] <span class="comment"># i左侧的元素的乘积</span></span><br><span class="line">        R = nums[n-<span class="number">1</span>] <span class="comment"># i右侧的元素的乘积</span></span><br><span class="line">        answer[<span class="number">0</span>] = <span class="number">1</span> <span class="comment"># 初始化</span></span><br><span class="line">        answer[n-<span class="number">1</span>] = <span class="number">1</span> <span class="comment"># 初始化</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n-<span class="number">1</span>):</span><br><span class="line">            answer[i]*=L</span><br><span class="line">            L *= nums[i]</span><br><span class="line">            answer[n-i-<span class="number">1</span>] *= R</span><br><span class="line">            R *= nums[n-i-<span class="number">1</span>]</span><br><span class="line">        answer[n-<span class="number">1</span>] = L</span><br><span class="line">        answer[<span class="number">0</span>] = R</span><br><span class="line">        <span class="keyword">return</span> answer</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">前缀和</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/20/leetcode-238/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-189" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/20/leetcode-189/">算法笔记📒 | leetcode-189</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/20/leetcode-189/" class="archive-article-date">
+  	<time datetime="2025-05-20T12:52:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-189-轮转数组"><a href="#leetcode-189-轮转数组" class="headerlink" title="leetcode-189 轮转数组"></a>leetcode-189 轮转数组</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-array?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>思路1:不考虑空间复杂度，用多余数组存储原始nums。</li>
+<li>参考题解，有2种方案可以优化，分别是环状替换以及数组翻转（后续有空更新）。</li>
+</ul>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>最初解答<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">rotate</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 思路1:不考虑空间复杂度，用多余数组存储原始nums</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        k = k%n</span><br><span class="line">        nums_temp = nums.copy()</span><br><span class="line">        <span class="keyword">if</span> n &lt;=<span class="number">1</span> :</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        i =  <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n-k,n):</span><br><span class="line">            nums[i] = nums_temp[j]</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n-k):</span><br><span class="line">            nums[i] = nums_temp[j]</span><br><span class="line">            i += <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/20/leetcode-189/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-56" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/20/leetcode-56/">算法笔记📒 | leetcode-56</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/20/leetcode-56/" class="archive-article-date">
+  	<time datetime="2025-05-20T12:51:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-56-合并区间"><a href="#leetcode-56-合并区间" class="headerlink" title="leetcode-56 合并区间"></a>leetcode-56 合并区间</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-intervals?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>最初解答想到了简单的排序+新数组， <code>sorted(intervals,key =lambda x:x[0])</code>，理解为按照每个二维数组的列排序。</li>
+<li>尝试不新增intervals优化空间和时间效率。</li>
+</ul>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>最初解答（排序+新数组）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">self, intervals: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        sorted_intervals = <span class="built_in">sorted</span>(intervals,key =<span class="keyword">lambda</span> x:x[<span class="number">0</span>])</span><br><span class="line">        n = <span class="built_in">len</span>(sorted_intervals)</span><br><span class="line">        new_intervals = []</span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; n:</span><br><span class="line">            j = i</span><br><span class="line">            current_end = sorted_intervals[i][<span class="number">1</span>]</span><br><span class="line">            max_end = current_end</span><br><span class="line">            current_start = sorted_intervals[i][<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">while</span> i+<span class="number">1</span> &lt; n <span class="keyword">and</span> max_end &gt;= sorted_intervals[i+<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">                <span class="keyword">if</span> sorted_intervals[i+<span class="number">1</span>][<span class="number">1</span>] &gt;max_end:</span><br><span class="line">                    max_end = sorted_intervals[i+<span class="number">1</span>][<span class="number">1</span>] </span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            new_intervals.append([current_start,max_end])</span><br><span class="line">            i = j+<span class="number">1</span> </span><br><span class="line">        <span class="keyword">return</span> new_intervals</span><br><span class="line">        </span><br></pre></td></tr></table></figure></li>
+<li>尝试不新增intervals优化空间和时间效率。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">self, intervals: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="comment"># 排序</span></span><br><span class="line">        intervals = <span class="built_in">sorted</span>(intervals, key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>])</span><br><span class="line">        n = <span class="built_in">len</span>(intervals)</span><br><span class="line">        new_intervals = []</span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; n:</span><br><span class="line">            <span class="comment"># 记录当前start，end以及max_end</span></span><br><span class="line">            current_end = intervals[i][<span class="number">1</span>]</span><br><span class="line">            max_end = current_end</span><br><span class="line">            current_start = intervals[i][<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">while</span> i + <span class="number">1</span> &lt; n <span class="keyword">and</span> max_end &gt;= intervals[i + <span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">                <span class="comment"># 当i指向的元素的起始点比 max_end小或者相等时循环向前</span></span><br><span class="line">                <span class="keyword">if</span> intervals[i + <span class="number">1</span>][<span class="number">1</span>] &gt; max_end:</span><br><span class="line">                    <span class="comment"># 对每个元素判断更新max_end</span></span><br><span class="line">                    max_end = intervals[i + <span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            <span class="comment"># 当i指向的元素的起始点比 max_end大，退出，把元素加入新的数组</span></span><br><span class="line">            new_intervals.append([current_start, max_end])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> new_intervals</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/20/leetcode-56/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-53" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/18/leetcode-53/">算法笔记📒 | leetcode-53</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/18/leetcode-53/" class="archive-article-date">
+  	<time datetime="2025-05-18T05:15:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-53-最大子数组和"><a href="#leetcode-53-最大子数组和" class="headerlink" title="leetcode-53 最大子数组和"></a>leetcode-53 最大子数组和</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>dp的知识点：<ul>
+<li>可以不只考虑当前元素的正负号，考虑前面元素最大和的正负，如果是负号就不必相加，而是尝试另起炉灶将当前元素作为新的加和起始</li>
+<li>状态定义（对每个数都有一个子问题）：dp[i]表示以i结尾元素的最大的子数组的和</li>
+<li>状态转移方程： <ul>
+<li>如果<code>dp[i-1]&lt;=0,dp[i] = nums[i]</code></li>
+<li>如果<code>dp[i-1]&gt;0,dp[i] = dp[i-1]+nums[i]</code>,相加会变大 </li>
+<li>可以合并成<code>dp[i] = max(dp[i-1] + nums[i],nums[i])</code>在两种情况取最大值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分治法：（参考题解的分治法（递归））<ul>
+<li>中止条件<code>len(nums)== 1</code> </li>
+<li>3部分：对<code>mid = len(nums)//2</code><ul>
+<li>1 左边子数组最大和<code>[0,mid-1]</code>，递归求解 </li>
+<li>2 右边子数组最大和<code>[mid,n-1]</code>，递归求解 </li>
+<li>3 中间数组最大和，通过<code>[mid-1,mid]</code>的子数组最大值，，分别从mid-1到0求左侧最大和以及从mid到n求右侧最大和并相加 </li>
+<li>最后返回以上3部分最大值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>动态规划<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># dp[i]表示以i结尾元素的最大的子数组的和</span></span><br><span class="line">        <span class="comment"># 可以不只考虑当前元素的正负号，考虑前面元素最大和的正负，如果是负号就不必相加，而是尝试另起炉灶将当前元素作为新的加和起始</span></span><br><span class="line">        <span class="comment"># 对dp[i+1]</span></span><br><span class="line">        <span class="comment">#   如果dp[i-1]&lt;=0,dp[i] = nums[i]</span></span><br><span class="line">        <span class="comment">#   如果dp[i-1]&gt;0,dp[i] = dp[i-1]+nums[i],相加会变大</span></span><br><span class="line">        <span class="comment"># 可以合并成dp[i] = max(dp[i-1] + nums[i],nums[i])在两种情况取最大值</span></span><br><span class="line">        <span class="comment"># 最后要取max(dp)</span></span><br><span class="line">        <span class="comment"># 也可以不用数组，用pre作为滚动变量（空间优化）</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        dp = [<span class="number">0</span>]*n</span><br><span class="line">        <span class="comment"># 题目设置n&gt;=1</span></span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>] + nums[i],nums[i])</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(dp)</span><br></pre></td></tr></table></figure></li>
+<li>分治法<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 参考题解的分治法（递归）</span></span><br><span class="line">        <span class="comment"># 3部分：对mid = n//2</span></span><br><span class="line">        <span class="comment"># 1 左边子数组最大和[0,mid-1]，递归求解</span></span><br><span class="line">        <span class="comment"># 2 右边子数组最大和[mid,n-1]，递归求解</span></span><br><span class="line">        <span class="comment"># 3 中间数组最大和，通过[mid-1,mid]的子数组最大值，，分别从mid-1到0求左侧最大和以及从mid到n求右侧最大和并相加</span></span><br><span class="line">        <span class="comment"># 最后返回以上3部分最大值</span></span><br><span class="line">        <span class="comment"># 递归中止</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 递归求左边和右边的子数组最大和</span></span><br><span class="line">            max_left = <span class="variable language_">self</span>.maxSubArray(nums[<span class="number">0</span>:<span class="built_in">len</span>(nums)//<span class="number">2</span>]) <span class="comment"># [0,mid-1],mid = len(nums)//2</span></span><br><span class="line">            max_right = <span class="variable language_">self</span>.maxSubArray(nums[<span class="built_in">len</span>(nums)//<span class="number">2</span>:<span class="built_in">len</span>(nums)])<span class="comment"># [mid,n-1]</span></span><br><span class="line">        <span class="comment"># 求中间的通过[mid-1,mid]的子数组最大值，分别从mid-1到0求左侧最大和以及从mid到n求右侧最大和并相加</span></span><br><span class="line">        max_l = nums[<span class="built_in">len</span>(nums)//<span class="number">2</span>-<span class="number">1</span>]</span><br><span class="line">        t = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)//<span class="number">2</span>-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            t += nums[i]</span><br><span class="line">            max_l = <span class="built_in">max</span>(max_l,t)</span><br><span class="line">        max_r = nums[<span class="built_in">len</span>(nums)//<span class="number">2</span>]</span><br><span class="line">        t = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)//<span class="number">2</span>,<span class="built_in">len</span>(nums)):</span><br><span class="line">            t += nums[i]</span><br><span class="line">            max_r = <span class="built_in">max</span>(max_r,t)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(max_l+max_r,max_left,max_right)</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分治法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/18/leetcode-53/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-35" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/18/leetcode-35/">算法笔记📒 | leetcode-35</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/18/leetcode-35/" class="archive-article-date">
+  	<time datetime="2025-05-18T04:57:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-35-搜索插入位置"><a href="#leetcode-35-搜索插入位置" class="headerlink" title="leetcode-35 搜索插入位置"></a>leetcode-35 搜索插入位置</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>本题还需要考虑二分查找的边界条件的判断，以及计算时的取整方法，结束时的返回值等。最初的个人解法不够简洁。</li>
+<li>我比较喜欢左闭右闭模版，两种情况更新比较对称，注意循环条件是<code>l &lt; r</code>，初始是<code>r = n-1</code>。</li>
+<li>取整时尝试了一下发现int和ceil都是可以的。</li>
+</ul>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>参考题解后的套用模板<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">searchInsert</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        l = <span class="number">0</span></span><br><span class="line">        r = n-<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> l &lt;= r:</span><br><span class="line">            <span class="comment"># 小于等于，左闭右闭模版</span></span><br><span class="line">            mid = <span class="built_in">int</span>((r+l)/<span class="number">2</span>) <span class="comment"># 尝试了一下int和ceil都是可以的</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid] &gt;target:</span><br><span class="line">                r = mid-<span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> nums[mid] &lt;target:</span><br><span class="line">                l = mid+<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> mid</span><br><span class="line">        <span class="keyword">return</span> l</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">二分</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/18/leetcode-35/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode-239" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,10 +742,66 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="leetcode-239-滑动窗口最大值"><a href="#leetcode-239-滑动窗口最大值" class="headerlink" title="leetcode-239 滑动窗口最大值"></a>leetcode-239 滑动窗口最大值</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>主要的启发思想是让队列中的元素递减，（类似单调队列），做完之后感觉相比题解还是有些复杂可以继续优化</li>
+<li>主要的启发思想是让队列中的元素递减，（类似单调队列），做完之后感觉相比题解还是有些复杂。</li>
+<li>题解提供的思路主要包括：优先队列、单调队列以及分块和预处理。</li>
+<li>优先队列：<ul>
+<li>python的优先队列：<ul>
+<li><code>heapq.heapify(q)</code>:将列表原地转为<strong>小根堆</strong>（注意是小根队，如果要大根队可以入队时用负数，取出时再转换为正数）。</li>
+<li><code>heapq.heappush(q, element) </code>,<code>heapq.heappop(q) </code>:动态添加或弹出<strong>最小元素</strong>。</li>
+<li><code>heapq.nlargest(n, data)</code>, <code>heapq.nsmallest(n,data)</code>:返回前n个最大或最小元素，支持自定义键（key参数）。</li>
+</ul>
+</li>
+<li>C++的优先队列：</li>
+<li><code>priority_queue</code>STL容器:底层实现基于堆（Heap），默认大根堆，初始化<code>priority_queue&lt;pair&lt;int, int&gt;&gt; q;</code>。</li>
+<li>插入元素<code>push</code>（也可以用<code>emplace</code>）, 删除堆顶元素<code>pop</code>,时间复杂度为 O(log n)。</li>
+<li>访问堆顶元素<code>top</code>,时间复杂度O(1)。</li>
+</ul>
+</li>
+<li>单调队列：<ul>
+<li>python：<ul>
+<li>可以用<code>collections.deque()</code></li>
+<li>通过<code>append(v)</code>,<code>appendleft(v)</code>入队；<code>pop()</code>,<code>popleft()</code>出队。</li>
+</ul>
+</li>
+<li>C++：<ul>
+<li>通过<code>push_front(v)</code>,<code>push_back(v)</code>入队；<code>pop_front()</code>,<code>pop_back()</code>出队；<code>front()</code>,<code>back()</code>访问队头队尾。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分组+预处理（参考他人题解）：<ul>
+<li>分为k组<ul>
+<li><code>prefixMax</code>前缀最大值数组：从分组的开头到索引i的最大值<ul>
+<li>i是k倍数：<code>prefixMax[i] = nums[i]</code></li>
+<li>i不是k倍数：<code>prefixMax[i] = max(prefixMax[i-1], nums[i])</code>,从前往后求</li>
+</ul>
+</li>
+<li><code>suffixMax</code>后缀最大值数组：从索引i到分组结尾的最大值 <ul>
+<li>i是k倍数：<code>prefixMax[i] = nums[i]</code></li>
+<li>i不是k倍数：<code>suffixMax[i] = max(suffixMax[i+1], nums[i])</code>,从后往前求</li>
+<li>注意边界：<code>suffixMax[n−1]=nums[n−1]</code>，类似于<code>prefixMax[0]=nums[0] </code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最终结果：<ul>
+<li>如果i是k的倍数：从i开头到结尾i+k-1每个个元素落在了1个分组里，相当于从左到右和从右到左求了一遍前缀最大值和后缀最大值<ul>
+<li><code>max(prefixMax[i+k-1]，suffixMax[i]</code></li>
+</ul>
+</li>
+<li>如果i不是k的倍数：第一个分组用suffixMax[i]i到分组末尾j-1的后缀最大值，第一个分组用prefixMax[i+k-1]获得从j到i+k-1的前缀最大值。<ul>
+<li><code>max(prefixMax[i+k-1]，suffixMax[i]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
-<li>初步解答<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 仔细分析题目，发现要求输出是每个滑动窗口的最大值组成的数组，如果暴力应该会超时，需要的是进行优化。</span></span><br><span class="line">        <span class="comment"># 每次只移动一个数字，会想到双指针、队列，每次数字出队和入队的时候与当前的最大值判断，看是否需要更新最大值</span></span><br><span class="line">        <span class="comment"># 每次都更新，当k值很大时，会遇到超时问题-&gt;可以更新每个队列的倒数第二大值？(第二大元素出栈还是可能会很麻烦)-&gt;参考提示(和不小心看到了的题解思路)，可以在每次将元素加入队列中时，只加入比当前队尾大的元素，并在加入时删除队列内存在的比加入的元素更小的元素，否则不必加入。因为这样可以保证队列是从左到右下降的，从而快速找到最大值！！！</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        res = []</span><br><span class="line">        dq = collections.deque() <span class="comment">#最大值一直是dq[0]</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i &lt; k:</span><br><span class="line">                <span class="comment"># 不满足滑动窗口大小，入队</span></span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                    <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                        dq.pop()</span><br><span class="line">                    dq.append(nums[i])  </span><br><span class="line">                <span class="keyword">elif</span> <span class="built_in">len</span>(dq) == <span class="number">0</span>:</span><br><span class="line">                    dq.append(nums[i])</span><br><span class="line">            <span class="comment"># 当前窗口大小=k时，滑动窗口开始向右移动</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 出栈，如果刚好出了最大值，下一个最大值应该是新的dq[0]或者numsnums[i-k+1]</span></span><br><span class="line">                res.append(dq[<span class="number">0</span>])</span><br><span class="line">                <span class="keyword">if</span> nums[i-k] == dq[<span class="number">0</span>]:</span><br><span class="line">                    dq.popleft()</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq) == <span class="number">0</span>:</span><br><span class="line">                        dq.appendleft(nums[i-k+<span class="number">1</span>])</span><br><span class="line">                    <span class="keyword">if</span> nums[i-k+<span class="number">1</span>] &gt; dq[<span class="number">0</span>]:</span><br><span class="line">                        dq.appendleft(nums[i-k+<span class="number">1</span>])</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                        <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                            dq.pop()</span><br><span class="line">                        dq.append(nums[i])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                        <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                            dq.pop()</span><br><span class="line">                        dq.append(nums[i])</span><br><span class="line">        res.append(dq[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
+<li>初步解答<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 仔细分析题目，发现要求输出是每个滑动窗口的最大值组成的数组，如果暴力应该会超时，需要的是进行优化。</span></span><br><span class="line">        <span class="comment"># 每次只移动一个数字，会想到双指针、队列，每次数字出队和入队的时候与当前的最大值判断，看是否需要更新最大值</span></span><br><span class="line">        <span class="comment"># 每次都更新，当k值很大时，会遇到超时问题-&gt;可以更新每个队列的倒数第二大值？(第二大元素出栈还是可能会很麻烦)-&gt;参考提示(和不小心看到了的题解思路)，可以在每次将元素加入队列中时，只加入比当前队尾大的元素，并在加入时删除队列内存在的比加入的元素更小的元素，否则不必加入。因为这样可以保证队列是从左到右下降的，从而快速找到最大值！！！</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        res = []</span><br><span class="line">        dq = collections.deque() <span class="comment">#最大值一直是dq[0]</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i &lt; k:</span><br><span class="line">                <span class="comment"># 不满足滑动窗口大小，入队</span></span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                    <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                        dq.pop()</span><br><span class="line">                    dq.append(nums[i])  </span><br><span class="line">                <span class="keyword">elif</span> <span class="built_in">len</span>(dq) == <span class="number">0</span>:</span><br><span class="line">                    dq.append(nums[i])</span><br><span class="line">            <span class="comment"># 当前窗口大小=k时，滑动窗口开始向右移动</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 出队，如果刚好出了最大值，下一个最大值应该是新的dq[0]或者numsnums[i-k+1]</span></span><br><span class="line">                res.append(dq[<span class="number">0</span>])</span><br><span class="line">                <span class="keyword">if</span> nums[i-k] == dq[<span class="number">0</span>]:</span><br><span class="line">                    dq.popleft()</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq) == <span class="number">0</span>:</span><br><span class="line">                        dq.appendleft(nums[i-k+<span class="number">1</span>])</span><br><span class="line">                    <span class="keyword">if</span> nums[i-k+<span class="number">1</span>] &gt; dq[<span class="number">0</span>]:</span><br><span class="line">                        dq.appendleft(nums[i-k+<span class="number">1</span>])</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                        <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                            dq.pop()</span><br><span class="line">                        dq.append(nums[i])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                        <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                            dq.pop()</span><br><span class="line">                        dq.append(nums[i])</span><br><span class="line">        res.append(dq[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
+<li>官方题解的优先队列加注释<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 优先队列解法</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="comment"># 先入优先队列前k个元素</span></span><br><span class="line">        q  = [(-nums[i],i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k)]</span><br><span class="line">        heapq.heapify(q)</span><br><span class="line">        <span class="comment"># 加入现在的最大元素</span></span><br><span class="line">        res = [-q[<span class="number">0</span>][<span class="number">0</span>]]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k,n):</span><br><span class="line">            heapq.heappush(q, (-nums[i],i))</span><br><span class="line">            <span class="keyword">while</span> q[<span class="number">0</span>][<span class="number">1</span>] &lt;= i-k:</span><br><span class="line">                <span class="comment"># 延迟出队不在窗口内的元素</span></span><br><span class="line">                heapq.heappop(q)</span><br><span class="line">            res.append(-q[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
+<li>分组预处理，参考题解后复现<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 分组</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        preffixMax = [<span class="number">0</span>]*n</span><br><span class="line">        suffixMax = [<span class="number">0</span>]*n</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i%k == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 包括i=0</span></span><br><span class="line">                preffixMax[i] = nums[i]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                preffixMax[i] = <span class="built_in">max</span>(preffixMax[i-<span class="number">1</span>],nums[i])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> i == n-<span class="number">1</span> <span class="keyword">or</span> i%k == <span class="number">0</span>:</span><br><span class="line">                suffixMax[i] = nums[i]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                suffixMax[i] = <span class="built_in">max</span>(suffixMax[i+<span class="number">1</span>],nums[i])</span><br><span class="line">        </span><br><span class="line">        res = [<span class="built_in">max</span>(suffixMax[i],preffixMax[i+k-<span class="number">1</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-k+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -189,6 +815,10 @@
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
         		</li>
@@ -278,18 +908,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="leetcode-560-和为K的子数组"><a href="#leetcode-560-和为K的子数组" class="headerlink" title="leetcode-560 和为K的子数组"></a>leetcode-560 和为K的子数组</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>初步想法是左右指针判断，右指针向右移动，当和超过k时，左指针向左移动<ul>
-<li>问题1：可能有负数，不适合用和超过k来判断，改为两层循环</li>
-<li>问题2：两层循环求解会超时</li>
-</ul>
-</li>
-<li>优化：参考提示结合哈希表存储各个和的频率，键是和，值是次数 <ul>
+<li>两层循环求解会超时</li>
+<li>优化：sum_list存储前缀和，哈希表存储各个和的频率，键是和，值是次数。假设<code>sum_list[i]-sum_list[j]=k</code>，即表示从i到j的子数字的和为k。所以 <code>sum_dict[sum_list[i] - k]</code>判断可以判断以i结尾的子数组和为k的数目。<ul>
 <li>结合案例绘制草图，发现不需要单独处理当前数字就是k的情况，但需要单独处理 sum_list[i]&#x3D;k的1情况</li>
 </ul>
 </li>
 <li>参考题解后发现可以化简和优化： <ul>
 <li>不用真的建立pre数组，只需有上一个pre </li>
-<li>通过向sum_dict中加入0-&gt;1来应对num_list[i] &#x3D;&#x3D; k的情况！</li>
+<li>通过向sum_dict中加入0-&gt;1，可以处理num_list[i] &#x3D;&#x3D; k的情况！</li>
 </ul>
 </li>
 </ul>
@@ -706,581 +1332,6 @@
 
 
   
-    <article id="post-leetcode-15" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/12/leetcode-15/">算法笔记📒 | leetcode-167、15</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/12/leetcode-15/" class="archive-article-date">
-  	<time datetime="2025-05-12T03:59:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-167-两数之和II-输入有序数组"><a href="#leetcode-167-两数之和II-输入有序数组" class="headerlink" title="leetcode-167 两数之和II-输入有序数组"></a>leetcode-167 两数之和II-输入有序数组</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>在做15没思路的时候了解到167问题，先尝试解答相对没有那么复杂的有序数组两数之和问题。</li>
-<li>关于双指针的理解：<ul>
-<li>一次排除多个可能性，将时间复杂度从<code>O（N^2）</code>降低到<code>O（N）</code>。</li>
-<li>判断当前的两个数的和<code>numbers[i]+numbers[j]</code>：<ul>
-<li>由于数组是有序排序这一特性，当<code>numbers[i]+numbers[j]&gt;target</code>，说明j只可能在前面找到（i更大只会让sum更大不可能找到），<code>j--</code>。</li>
-<li>同理，如果<code>numbers[i]+numbers[j]&lt;target</code>,说明i只可能在现在i的后面找到（j更小时只会让sum更小），<code>i++</code>。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
-<li>一开始的解答<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; numbers, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>,j = numbers.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(numbers[i]+numbers[j]&gt;target)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(numbers[i]+numbers[j]&lt;target)&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                res.<span class="built_in">push_back</span>(i<span class="number">+1</span>);</span><br><span class="line">                res.<span class="built_in">push_back</span>(j<span class="number">+1</span>);</span><br><span class="line">                <span class="keyword">return</span> res;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="leetcode-15-三数之和"><a href="#leetcode-15-三数之和" class="headerlink" title="leetcode-15 三数之和"></a>leetcode-15 三数之和</h1><h2 id="反思-1"><a href="#反思-1" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>看到题目首先会想到的是哈希表，可以保证元素不重复（但实际上重复元素也可以加和为0，不能一开始直接用哈希表替代数组）。</li>
-<li>借助排序减少元素的重复访问，方便排除元素（之前的128似乎不适合直接排序，是因为有时间复杂度要求）。</li>
-<li>查看题解后，加深对思路的理解，题目没有规定顺序，所以三元组的顺序可以是t&lt;i&lt;j，保证不重复。</li>
-<li>思路为每次外层循环固定一个数，内层循环相当于有序两数之和II问题，target为第一个数的相反数（查看题解后发现，内层循环左指针i从t开始即可）。</li>
-<li>答案不可以包括重复三元组，一个想法是先用set存储（都是数字从小到大有序的数组），最后转换为数组。</li>
-<li>对nums大量重复的元素，需要判重减少冗余，一开始解答的哈希表方法太复杂了，参考题解，可以直接在外层循环和指针变化时通过条件判断是否是当前元素重复元素，例如<code>if(t&gt;0&amp;&amp; nums[t]==nums[t-1])&#123; continue;&#125;</code>。</li>
-<li>后来参考b站上的题解，发现除了判断target，也可以直接判断3个数加和是否为0，还可以加入如当前数和前2个数之和是否&gt;0（break）、当前数和最后两个数之和是否&lt;0（continue）的判断进行优化。</li>
-<li><h2 id="答案对比-1"><a href="#答案对比-1" class="headerlink" title="答案对比"></a>答案对比</h2></li>
-</ul>
-<ol>
-<li>最初解答（有点复杂）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="comment">// 先排序再遍历第一个数的相反数作为target按照两数之和双指针法求解（同时移动3个数会太复杂）</span></span><br><span class="line">        <span class="comment">// 答案不可以包括重复三元组，一个想法是先用set存储（都是数字从小到大有序的数组），最后转换为数组</span></span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        set&lt;vector&lt;<span class="type">int</span>&gt;&gt; res_map; <span class="comment">//保证数组唯一性</span></span><br><span class="line">        <span class="comment">// 判断数字不足三个的情况</span></span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// ranges::sort(nums);</span></span><br><span class="line">        <span class="comment">// 哈希表保留最多3个相同元素</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; nums_map;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i&lt;nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums_map.<span class="built_in">count</span>(nums[i])&gt;<span class="number">0</span> &amp;&amp; nums_map[nums[i]]&lt;<span class="number">3</span>)&#123;</span><br><span class="line">                    nums_map[nums[i]]+=<span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                nums_map.<span class="built_in">insert</span>(&#123;nums[i],<span class="number">1</span>&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = nums_map.<span class="built_in">begin</span>();it!=nums_map.<span class="built_in">end</span>();++it)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j&lt;it-&gt;second;j++)&#123;</span><br><span class="line">                new_nums.<span class="built_in">push_back</span>(it-&gt;first);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        nums = new_nums;</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        ranges::<span class="built_in">sort</span>(nums);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> t= <span class="number">0</span>;t&lt;nums.<span class="built_in">size</span>();t++)&#123;</span><br><span class="line">            <span class="type">int</span> target = -nums[t];</span><br><span class="line">            <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> j = nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i]+nums[j]&gt;target)&#123;</span><br><span class="line">                    j--;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[i]+nums[j]&lt;target)&#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">// nums[i]+nums[j] = target</span></span><br><span class="line">                    <span class="keyword">if</span>(t!=i&amp;&amp;t!=j)&#123;</span><br><span class="line">                        vector&lt;<span class="type">int</span>&gt; tmp = &#123;nums[i],nums[j],nums[t]&#125;;</span><br><span class="line">                        ranges::<span class="built_in">sort</span>(tmp);</span><br><span class="line">                        res_map.<span class="built_in">insert</span>(tmp);</span><br><span class="line">                        i++;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(t==i)&#123;</span><br><span class="line">                        i++;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        res.<span class="built_in">reserve</span>(res_map.<span class="built_in">size</span>());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = res_map.<span class="built_in">begin</span>();it!=res_map.<span class="built_in">end</span>();++it)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(*it);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-2.查看题解后修改的答案版本(i从t开始，在外层循环直接通过条件判断是否是重复元素)，效率提升了<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="comment">// 先排序再遍历第一个数作为target按照两数之和双指针法求解（同时移动3个数会太复杂）</span></span><br><span class="line">        <span class="comment">// 答案不可以包括重复三元组，一个想法是先用set存储（都是数字从小到大有序的数组），最后转换为数组</span></span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        set&lt;vector&lt;<span class="type">int</span>&gt;&gt; res_map; <span class="comment">//保证数组唯一性</span></span><br><span class="line">        <span class="comment">// 判断数字不足三个的情况</span></span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        ranges::<span class="built_in">sort</span>(nums);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> t= <span class="number">0</span>;t&lt;nums.<span class="built_in">size</span>();t++)&#123;</span><br><span class="line">            <span class="comment">//fix 对重复元素，可以不必过于麻烦哈希表去重，直接在循环中判断跳过</span></span><br><span class="line">            <span class="keyword">if</span>(t&gt;<span class="number">0</span>&amp;&amp; nums[t]==nums[t<span class="number">-1</span>])&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> target = -nums[t];</span><br><span class="line">            <span class="type">int</span> i = t; <span class="comment">//fix，i从t开始即可遍历所有情况</span></span><br><span class="line">            <span class="type">int</span> j = nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i]+nums[j]&gt;target)&#123;</span><br><span class="line">                    j--;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[i]+nums[j]&lt;target)&#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">// nums[i]+nums[j] = target</span></span><br><span class="line">                    <span class="keyword">if</span>(t!=i&amp;&amp;t!=j)&#123;</span><br><span class="line">                        vector&lt;<span class="type">int</span>&gt; tmp = &#123;nums[i],nums[j],nums[t]&#125;;</span><br><span class="line">                        ranges::<span class="built_in">sort</span>(tmp);</span><br><span class="line">                        res_map.<span class="built_in">insert</span>(tmp);</span><br><span class="line">                        i++;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(t==i)&#123;</span><br><span class="line">                        i++;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;</span><br><span class="line">                </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        res.<span class="built_in">reserve</span>(res_map.<span class="built_in">size</span>());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = res_map.<span class="built_in">begin</span>();it!=res_map.<span class="built_in">end</span>();++it)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(*it);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>再次优化（不用set而是都用当前元素和前一个元素是否相同来判断是否跳过）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="comment">// 先排序再遍历第一个数作为target按照两数之和双指针法求解（同时移动3个数会太复杂）</span></span><br><span class="line">        <span class="comment">// 答案不可以包括重复三元组，一个想法是先用set存储（都是数字从小到大有序的数组），最后转换为数组</span></span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="comment">// 判断数字不足三个的情况</span></span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        ranges::<span class="built_in">sort</span>(nums);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> t= <span class="number">0</span>;t&lt;nums.<span class="built_in">size</span>();t++)&#123;</span><br><span class="line">            <span class="comment">//fix 对重复元素，可以不必过于麻烦哈希表去重，直接在循环中判断跳过</span></span><br><span class="line">            <span class="keyword">if</span>(t&gt;<span class="number">0</span>&amp;&amp; nums[t] == nums[t<span class="number">-1</span>])&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> target = -nums[t];</span><br><span class="line">            <span class="type">int</span> i = t; <span class="comment">//fix，i从t开始即可遍历所有情况</span></span><br><span class="line">            <span class="type">int</span> j = nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i]+nums[j]&gt;target)&#123;</span><br><span class="line">                    j--;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[i]+nums[j]&lt;target)&#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">// nums[i]+nums[j] = target</span></span><br><span class="line">                    <span class="keyword">if</span>(t!=i&amp;&amp;t!=j)&#123;</span><br><span class="line">                        vector&lt;<span class="type">int</span>&gt; tmp = &#123;nums[i],nums[j],nums[t]&#125;;</span><br><span class="line">                        ranges::<span class="built_in">sort</span>(tmp);</span><br><span class="line">                        res.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">                        i++;</span><br><span class="line">                        <span class="keyword">while</span>(i&lt;j&amp;&amp; i!=<span class="number">0</span> &amp;&amp;nums[i]==nums[i<span class="number">-1</span>])&#123;</span><br><span class="line">                            i++;</span><br><span class="line">                        &#125;</span><br><span class="line">                        j--;</span><br><span class="line">                        <span class="keyword">while</span>(i&lt;j&amp;&amp; j!=nums.<span class="built_in">size</span>()<span class="number">-1</span> &amp;&amp;nums[j]==nums[j<span class="number">+1</span>])&#123;</span><br><span class="line">                            j--;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(t==i)&#123;</span><br><span class="line">                        i++;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;</span><br><span class="line">                </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/12/leetcode-15/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/12/leetcode-11/">算法笔记📒 | leetcode-11</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/12/leetcode-11/" class="archive-article-date">
-  	<time datetime="2025-05-12T03:19:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-11-盛最多水的容器"><a href="#leetcode-11-盛最多水的容器" class="headerlink" title="leetcode-11 盛最多水的容器"></a>leetcode-11 盛最多水的容器</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>直接暴力求解会超时，用双指针做法。在草稿纸上画图找答案，模拟如果一个在前面一个在后面的话要怎样移动，试了一下移动所指元素高度小的（因为能盛的水是由最矮的高度决定的，如果移动高的，无法找到更多水的了），发现成功通过，但耗时较长。</li>
-<li>看了一下官方题解，发现是用的while循环（整体思路是一致的）。</li>
-</ul>
-<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
-<li>自己一开始的解答（耗时还是有点长？）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxArea</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 思路1，一个i从前往后，一个j从后往前，height小的移动，直到相遇</span></span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> max_left = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> max_right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = height.<span class="built_in">size</span>() - <span class="number">1</span>; i &lt; j;) &#123;</span><br><span class="line">            <span class="type">int</span> v = <span class="built_in">min</span>(height[i], height[j]) * <span class="built_in">abs</span>(j - i);</span><br><span class="line">            <span class="keyword">if</span> (res &lt; v) &#123;</span><br><span class="line">                res = v;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (height[i] &lt; height[j]) &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/12/leetcode-11/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-283" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/11/leetcode-283/">算法笔记📒 | leetcode-283</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/11/leetcode-283/" class="archive-article-date">
-  	<time datetime="2025-05-11T04:00:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-283-移动零"><a href="#leetcode-283-移动零" class="headerlink" title="leetcode-283 移动零"></a>leetcode-283 移动零</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
-<li>是简单题目，解答的基本思路是正确的，有参考题目本身双指针的提示。</li>
-<li>仔细查看官方题解后发现思路是相似的但不完全一样。<ul>
-<li>自己的解法不是交换，是直接替换，多了填充的步骤。</li>
-<li>官方解法是设置左右指针，左指针指向处理好的序列尾部，右指针不断向，找到非零数和左指针的数字替换。整体更简洁。</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-答案对比"><a href="#2-答案对比" class="headerlink" title="2 答案对比"></a>2 答案对比</h2><ol>
-<li>自己解答<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 审题之后一开始以为是排序，之后发现不是排序，只需要保持相对顺序即可。</span></span><br><span class="line">    <span class="comment">// 参考提示，可以选择双指针，一个指针遍历，一个指针操作非0元素</span></span><br><span class="line">    <span class="comment">// 在草稿纸上模拟了一下流程，思路大概是i从头到尾遍历一次，用于标记当前的位置，并记录当前位置是否为0，统计0的数目count</span></span><br><span class="line">    <span class="comment">// j则从头到尾找非0元素，找到了就替换i处的元素，i向后知道到达nums.size()-count,后面都是0</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//当i没有到达nums.size()-count,即j没有找到所有的非零元素时</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt; nums.<span class="built_in">size</span>() - count) &#123;</span><br><span class="line">            <span class="comment">// 对j:当前数字不为0，替换i，为0，count+1</span></span><br><span class="line">            <span class="keyword">if</span> (nums[j] != <span class="number">0</span>) &#123;</span><br><span class="line">                nums[i] = nums[j];</span><br><span class="line">                j++;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                count++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 后面的count个填充为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= count; i++) &#123;</span><br><span class="line">            nums[nums.<span class="built_in">size</span>() - i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>查看官方思路后复现<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 复现官方思路，设置左右指针，左指针指向处理好的序列尾部，右指针不断向，找到非零数和左指针的数字替换</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = <span class="number">0</span>, r = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//当i没有到达nums.size()时循环(r从左到右1次即可)</span></span><br><span class="line">        <span class="keyword">while</span> (r &lt; nums.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="comment">// 对j:当前数字不为0，替换i，为0，count+1</span></span><br><span class="line">            <span class="keyword">if</span> (nums[r] != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">swap</span>(nums[l],nums[r]);</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">            r++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/11/leetcode-283/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-128" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/11/leetcode-128/">算法笔记📒 | leetcode-128</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/11/leetcode-128/" class="archive-article-date">
-  	<time datetime="2025-05-11T02:35:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-128-最长连续序列"><a href="#leetcode-128-最长连续序列" class="headerlink" title="leetcode-128 最长连续序列"></a>leetcode-128 最长连续序列</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
-<li>一开始提交有错误，后来加上了最后的一次检查更新以及空数组的特殊情况就都正确了。</li>
-<li>思路1感觉有受到昨天字符串排序的启发，一看到就直接想着先排序然后count最长连续序列了，没有用到哈希表，不过看了一下题解的评论区发现实际不能直接用sort！而且排序后时间复杂度无法达到o(n)</li>
-<li>看了题解后尝试理解思路和复现代码。<ul>
-<li>用哈希表看数组中是否存在一个需要的数可以将时间复杂度优化到o(1)。</li>
-<li>思路是外层循环枚举n个数，内层循环匹配序列，并在外层中加入跳过（判断哈希表中是否存在x-1），这样数组中每个数不会重复进入内层循环，时间复杂度o（n）。</li>
-</ul>
-</li>
-<li>思路2注意：<ul>
-<li>无需用unordered_map,可以直接用unoedered_set,存储数字即可</li>
-<li>也需要在前面加上对空数组的判断</li>
-<li>注意外层循环不是对nums数组循环，而是直接对unorderd_set循环即可，减少重复。<ul>
-<li>unordered_set可通过<code>for (auto it = st1.begin();it!=st1.end();++it)</code>语句迭代，*it访问迭代器指向的元素。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-答案对比"><a href="#2-答案对比" class="headerlink" title="2 答案对比"></a>2 答案对比</h2><ol>
-<li>最初的简单思路答案（发现实际面试中不可以直接用sort）（审题不够认真+排序时间复杂度记错）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 简单想法1：先排序（至少需要nlogn复杂度）,然后找出最长的数字连续的序列(全遍历一遍需要n复杂度)</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">longestConsecutive</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; sorted_nums = nums;</span><br><span class="line">        ranges::<span class="built_in">sort</span>(sorted_nums);</span><br><span class="line">        <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//注意！空数组的特殊情况</span></span><br><span class="line">        <span class="keyword">if</span>(sorted_nums.<span class="built_in">size</span>() == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; sorted_nums.<span class="built_in">size</span>() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((sorted_nums[i + <span class="number">1</span>] - sorted_nums[i]) == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 如果下一个数字和当前数字连续，count+1</span></span><br><span class="line">                count = count + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sorted_nums[i + <span class="number">1</span>] == sorted_nums[i]) &#123;</span><br><span class="line">                <span class="comment">// 如果下一个数字和当前数字相等，跳过</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 否则，检查更新res</span></span><br><span class="line">                <span class="keyword">if</span> (count &gt; res) &#123;</span><br><span class="line">                    res = count;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//重置count</span></span><br><span class="line">                count = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//注意最后再次检查更新！</span></span><br><span class="line">        <span class="keyword">if</span> (count &gt; res) &#123;</span><br><span class="line">            res = count;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-2.学习题解思路后，完成的版本，借助unordered_set<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 想法2：哈希表</span></span><br><span class="line">    <span class="comment">// 思路：外层循环枚举n个数，内层循环匹配序列，并在外层中加入跳过（判断哈希表中是否存在x-1），这样数组中每个数不会重复进入内层循环，时间复杂度o（n）</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">longestConsecutive</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 判断是否为空数组</span></span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; st1;</span><br><span class="line">        <span class="comment">// 构建哈希表</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            st<span class="number">1.</span><span class="built_in">insert</span>(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 外层循环枚举set中的数字(不是遍历nums)</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = st<span class="number">1.</span><span class="built_in">begin</span>();it!=st<span class="number">1.</span><span class="built_in">end</span>();++it) &#123;</span><br><span class="line">            count = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (st<span class="number">1.</span><span class="built_in">count</span>(*it - <span class="number">1</span>)&gt;<span class="number">0</span>) &#123;<span class="comment">//*it访问迭代器指向的元素</span></span><br><span class="line">                <span class="comment">// 判断哈希表中是否存在x-1，存在则跳过循环</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 内层循环匹配序列;</span></span><br><span class="line">            <span class="type">int</span> j = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (st<span class="number">1.</span><span class="built_in">count</span>(*it + j)&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                count++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 检查更新res</span></span><br><span class="line">            <span class="keyword">if</span> (count &gt; res) &#123;</span><br><span class="line">                res = count;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>补充Python解法<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestConsecutive</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        num_set = <span class="built_in">set</span>(nums)</span><br><span class="line">        length = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="comment"># 遍历去重后的数组防止超时</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> num_set:</span><br><span class="line">            <span class="comment"># 防止重复</span></span><br><span class="line">            <span class="keyword">if</span> num-<span class="number">1</span> <span class="keyword">not</span> <span class="keyword">in</span> num_set:</span><br><span class="line">                count = <span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span>(num+<span class="number">1</span> <span class="keyword">in</span> num_set):</span><br><span class="line">                    count += <span class="number">1</span></span><br><span class="line">                    num += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> count&gt; res:</span><br><span class="line">                    res = count</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">哈希表</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/11/leetcode-128/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-49" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/10/leetcode-49/">算法笔记📒 | leetcode-49</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/10/leetcode-49/" class="archive-article-date">
-  	<time datetime="2025-05-10T09:22:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="49-字母异位词"><a href="#49-字母异位词" class="headerlink" title="49-字母异位词"></a>49-字母异位词</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
-<li>因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。</li>
-<li>可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上<code>sorted_string =</code>）。 </li>
-<li>除了<code>mp.insert(&#123;sorted_str,&#123;str[i]&#125;&#125;)</code>之外也可以用<code>mp.emplace(sorted_str,vector&lt;string&gt;&#123;strs[i]&#125;)</code>语句实现将键值对插入到unordered_map中！(此外还有leetcode-1笔记中提到的<code>mp[key]=value</code>)。</li>
-<li>参考题解，对vector也可以用<code>.emplace_back()</code>插入最后。</li>
-<li><code>res.reserve(res_hash.size());</code>最后在将键值对的值变为res的元素时可以预留空间。</li>
-<li><code>for(auto it = mp.begin();it!=mp.end();++it)</code>可以遍历键值对，<code>it-&gt;first</code>,<code>it-second</code>分别访问键和值，也可以通过<code>for (auto&amp; [key, value] : mp) </code>或<code>for (auto&amp; pair : mp)</code>访问，第二种要通过<code>pair.first</code>,<code>pair.second</code>访问key，value。</li>
-<li>查看题解后发现，也可以通过26个字母计数的方式对比，这种方法我没有复现代码。</li>
-<li>初始化时不要忘了为0，如<code>int str_keys_length = 0;</code>。</li>
-</ul>
-<h2 id="2-答案对比"><a href="#2-答案对比" class="headerlink" title="2 答案对比"></a>2 答案对比</h2><ol>
-<li>一开始的复杂版本<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 分析：</span></span><br><span class="line">    <span class="comment">// 初步思路：每个字符串对应一个哈希表：键：字符，值：字符在字符串中的索引，如：cat，c-&gt;0,a-&gt;1,t-&gt;2</span></span><br><span class="line">    <span class="comment">// 疑问：如果同一个字符出现多次怎么办？-&gt;改为存储每个字母的出现次数而不是索引，最后加入结果时再判重</span></span><br><span class="line">    <span class="comment">// 字母异位词特点：</span></span><br><span class="line">    <span class="comment">// 1. 字符串长度相同，且中每个字母的出现次数相同 -&gt; 键总数相同，键相同且相同</span></span><br><span class="line">    <span class="comment">// 2. 根据要求，字母异位应该是需要顺序不完全相同的 -&gt;</span></span><br><span class="line">    <span class="comment">// 值数组存在不同（加入结果时判断） 整体流程：</span></span><br><span class="line">    <span class="comment">// 遍历strs中的每个元素，对已在结果数组中的每个数组取第一个元素，判断当前元素是否与结果数组中的元素为字母异位词（键相同且值数组的长度相同），是则判重并加入此数组，不是则新建数组作为第一个元素加入。</span></span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; res;</span><br><span class="line">    vector&lt;unordered_map&lt;<span class="type">char</span>,<span class="type">int</span>&gt;&gt; res_maps;</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; strs.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 遍历strs中的每个字符串</span></span><br><span class="line">            unordered_map&lt;<span class="type">char</span>,<span class="type">int</span>&gt; str_map;</span><br><span class="line">            <span class="comment">// 遍历当前字符串的每个字符，转换为哈希表，并建立键数组</span></span><br><span class="line">            <span class="type">int</span> str_keys_length = <span class="number">0</span>; <span class="comment">//不要忘了初始化为0</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; strs[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (str_map.<span class="built_in">count</span>(strs[i][j])&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="comment">// 如果当前字符strs[i][j]在哈希表中,将新索引加入到值数组</span></span><br><span class="line">                    str_map[strs[i][j]] += <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 否则，新建键为当前字符，值初始化为1</span></span><br><span class="line">                    <span class="comment">// str_map[strs[i][j]] = 1;</span></span><br><span class="line">                    str_map.<span class="built_in">insert</span>(unordered_map&lt;<span class="type">char</span>, <span class="type">int</span>&gt;::<span class="built_in">value_type</span>(strs[i][j], <span class="number">1</span>));</span><br><span class="line">                    <span class="comment">// 加入键数组</span></span><br><span class="line">                    str_keys_length++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 和res_maps（结果数组中的每个数组取第一个元素的哈希表），对比，判断是否为字母异位词</span></span><br><span class="line">            <span class="type">int</span> anagrams_index = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; res_maps.<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="type">bool</span> is_anagrams = <span class="literal">true</span>;</span><br><span class="line">                <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">// 对res_maps中的每个哈希表，建立键数组</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> it = res_maps[j].<span class="built_in">begin</span>(); it != res_maps[j].<span class="built_in">end</span>();++it) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    <span class="comment">// 遍历哈希表中的每个键,判断键是否在当前数组str_map中，并判断值是否相等</span></span><br><span class="line">                    <span class="keyword">if</span> (str_map.<span class="built_in">count</span>(it-&gt;first)&gt;<span class="number">0</span> &amp;&amp;</span><br><span class="line">                        str_map[it-&gt;first] == it-&gt;second) &#123;</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        is_anagrams = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(count != str_keys_length)&#123;</span><br><span class="line">                    is_anagrams = <span class="literal">false</span>;<span class="comment">//这里不能加break</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//判断flag是否为异位词，是则判重并加入此数组，不是则新建数组作为第一个元素加入。</span></span><br><span class="line">                <span class="keyword">if</span>(is_anagrams==<span class="literal">true</span>)&#123;</span><br><span class="line">                    anagrams_index = j;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                    <span class="comment">//这里没有判重</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//最后判断anagrams_index，有则加入对应数组，没有-1则新建数组加入res</span></span><br><span class="line">            <span class="keyword">if</span>(anagrams_index != <span class="number">-1</span>)&#123;</span><br><span class="line">                res[anagrams_index].<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                vector&lt;string&gt; str_vec;</span><br><span class="line">                str_vec.<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">                res.<span class="built_in">push_back</span>(str_vec);</span><br><span class="line">                res_maps.<span class="built_in">push_back</span>(str_map);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>看题解思路后重新完成的字符串排序版本<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 键：排序后的字符串；值：排序后的字符串对应的数组</span></span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; res;</span><br><span class="line">    unordered_map&lt;string,vector&lt;string&gt;&gt; res_hash;</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; strs.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 遍历strs中的每个字符串</span></span><br><span class="line">            <span class="comment">// 排序</span></span><br><span class="line">            string sorted_str = strs[i];</span><br><span class="line">            ranges::<span class="built_in">sort</span>(sorted_str);</span><br><span class="line">            <span class="keyword">if</span>(res_hash.<span class="built_in">count</span>(sorted_str)&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="comment">//已经有键</span></span><br><span class="line">                res_hash[sorted_str].<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//没有，新建字符串键值对并加入</span></span><br><span class="line">                res_hash.<span class="built_in">emplace</span>(sorted_str,vector&lt;string&gt;&#123;strs[i]&#125;);</span><br><span class="line">            &#125;       </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//预留空间</span></span><br><span class="line">        res.<span class="built_in">reserve</span>(res_hash.<span class="built_in">size</span>());</span><br><span class="line">        <span class="comment">//遍历加入结果中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = res_hash.<span class="built_in">begin</span>();it!=res_hash.<span class="built_in">end</span>();++it)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(it-&gt;second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>补充Python解法<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">groupAnagrams</span>(<span class="params">self, strs: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]:</span><br><span class="line">        mp = collections.defaultdict(<span class="built_in">list</span>)</span><br><span class="line">        <span class="keyword">for</span> st <span class="keyword">in</span> strs:</span><br><span class="line">            k = <span class="string">&quot;&quot;</span>.join(<span class="built_in">sorted</span>(st)) <span class="comment"># key保证为字符串而不是list</span></span><br><span class="line">            mp[k].append(st) <span class="comment"># 直接将字符串加入值数组</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(mp.values())  <span class="comment"># 转换为list，直接返回效率高</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">哈希表</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/10/leetcode-49/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1440,6 +1491,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">双端队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">二分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分治法</a>
               </li>
             
             <div class="clearfix"></div>
