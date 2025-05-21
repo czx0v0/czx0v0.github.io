@@ -6,22 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://czx0v0.github.io">
-  <title>算法笔记📒 | leetcode-49 | czx0v0的宇宙自习室</title>
+  <title>算法笔记📒 | leetcode-49 字母异位词分组 | czx0v0的宇宙自习室</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="49-字母异位词1 反思 因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。 可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上sorted_string &#x3D;）。  除了mp.insert(&amp;#123;sorted_str,&amp;#123;st">
+  <meta name="description" content="leetcode-49 字母异位词分组1 反思 因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。 可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上sorted_string &#x3D;）。  除了mp.insert(&amp;#123;sorted_s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法笔记📒 | leetcode-49">
+<meta property="og:title" content="算法笔记📒 | leetcode-49 字母异位词分组">
 <meta property="og:url" content="https://czx0v0.github.io/2025/05/10/leetcode-49/index.html">
 <meta property="og:site_name" content="czx0v0的宇宙自习室">
-<meta property="og:description" content="49-字母异位词1 反思 因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。 可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上sorted_string &#x3D;）。  除了mp.insert(&amp;#123;sorted_str,&amp;#123;st">
+<meta property="og:description" content="leetcode-49 字母异位词分组1 反思 因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。 可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上sorted_string &#x3D;）。  除了mp.insert(&amp;#123;sorted_s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-10T09:22:45.000Z">
-<meta property="article:modified_time" content="2025-05-13T04:45:50.955Z">
+<meta property="article:modified_time" content="2025-05-21T04:55:52.304Z">
 <meta property="article:author" content="czx0v0">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="算法笔记">
 <meta property="article:tag" content="哈希表">
 <meta property="article:tag" content="Python">
+<meta property="article:tag" content="Medium">
+<meta property="article:tag" content="Hot100">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="czx0v0的宇宙自习室" type="application/atom+xml">
@@ -68,6 +70,20 @@
 				<li><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
 	        
 				<li><a href="/tags/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a></li>
+	        
+				<li><a href="/tags/%E6%80%9D%E8%B7%AF%E7%AC%94%E8%AE%B0/">思路笔记</a></li>
+	        
+				<li><a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">1-哈希表</a></li>
+	        
+				<li><a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">2-双指针</a></li>
+	        
+				<li><a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">3-滑动窗口</a></li>
+	        
+				<li><a href="/tags/%E5%AD%90%E4%B8%B2/">4-子串</a></li>
+	        
+				<li><a href="/tags/%E6%95%B0%E7%BB%84/">5-普通数组</a></li>
+	        
+				<li><a href="/tags/%E7%9F%A9%E9%98%B5/">6-矩阵（进行中）</a></li>
 	        
 			</ul>
 		</nav>
@@ -121,6 +137,20 @@
 			
 				
 			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -135,13 +165,27 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 9.090909090909092%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/panel/">个人面板</a></li>
+					<li style="width: 9.090909090909092%"><a href="/panel/">个人面板</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
+					<li style="width: 9.090909090909092%"><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
 		        
-					<li style="width: 25%"><a href="/tags/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a></li>
+					<li style="width: 9.090909090909092%"><a href="/tags/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a></li>
+		        
+					<li style="width: 9.090909090909092%"><a href="/tags/%E6%80%9D%E8%B7%AF%E7%AC%94%E8%AE%B0/">思路笔记</a></li>
+		        
+					<li style="width: 9.090909090909092%"><a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">1-哈希表</a></li>
+		        
+					<li style="width: 9.090909090909092%"><a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">2-双指针</a></li>
+		        
+					<li style="width: 9.090909090909092%"><a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">3-滑动窗口</a></li>
+		        
+					<li style="width: 9.090909090909092%"><a href="/tags/%E5%AD%90%E4%B8%B2/">4-子串</a></li>
+		        
+					<li style="width: 9.090909090909092%"><a href="/tags/%E6%95%B0%E7%BB%84/">5-普通数组</a></li>
+		        
+					<li style="width: 9.090909090909092%"><a href="/tags/%E7%9F%A9%E9%98%B5/">6-矩阵（进行中）</a></li>
 		        
 				</ul>
 			</nav>
@@ -163,7 +207,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      算法笔记📒 | leetcode-49
+      算法笔记📒 | leetcode-49 字母异位词分组
     </h1>
   
 
@@ -176,7 +220,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="49-字母异位词"><a href="#49-字母异位词" class="headerlink" title="49-字母异位词"></a>49-字母异位词</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
+        <h1 id="leetcode-49-字母异位词分组"><a href="#leetcode-49-字母异位词分组" class="headerlink" title="leetcode-49 字母异位词分组"></a>leetcode-49 字母异位词分组</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
 <li>因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。</li>
 <li>可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上<code>sorted_string =</code>）。 </li>
 <li>除了<code>mp.insert(&#123;sorted_str,&#123;str[i]&#125;&#125;)</code>之外也可以用<code>mp.emplace(sorted_str,vector&lt;string&gt;&#123;strs[i]&#125;)</code>语句实现将键值对插入到unordered_map中！(此外还有leetcode-1笔记中提到的<code>mp[key]=value</code>)。</li>
@@ -239,6 +283,14 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
       		
 		</ul>
 	</div>
@@ -254,6 +306,10 @@
       		 
         		<li class="article-tag-list-item">
         			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/C/Medium//" class="article-tag-list-link color2">Medium</a>
         		</li>
       		
 		</ul>
@@ -275,14 +331,14 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          算法笔记📒 | leetcode-128
+          算法笔记📒 | leetcode-128 最长连续序列
         
       </div>
     </a>
   
   
     <a href="/2025/05/09/leetcode-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">算法笔记📒 | leetcode-1</div>
+      <div class="article-nav-title">算法笔记📒 | leetcode-1 两数之和</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -465,23 +521,67 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">双端队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">二分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">分治法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Easy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Medium</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hard</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Hot100</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">子串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">二分查找</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">单调队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">矩阵</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">思路笔记</a>
               </li>
             
             <div class="clearfix"></div>
