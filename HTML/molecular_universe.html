@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>分子宇宙可视化</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Orbitron:700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
+  <!-- Three.js, SmilesDrawer, D3.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/smiles-drawer@1.0.10/dist/smiles-drawer.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+  <!-- 添加Vega和Vega-Lite CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0/build/vega.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3/build/vega-lite.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.24.0/build/vega-embed.min.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', Arial, sans-serif;
+      background: radial-gradient(ellipse at 60% 40%, #0a0e24 0%, #000 100%);
+      color: #eaf6ff;
+      overflow: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+    body.light {
+      background: radial-gradient(ellipse at 60% 40%, #f7f7fa 0%, #eaf6ff 100%);
+      color: #222;
+    }
+    body {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      width: 100vw;
+    }
+    .panel {
+      background: rgba(10,14,36,0.92);
+      box-shadow: 0 0 32px #1a1a2a44;
+      padding: 2rem 1.2rem 1.2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      min-width: 320px;
+      max-width: 370px;
+      z-index: 2;
+      height: 100vh;
+      overflow-y: auto;
+      transition: background 0.4s, color 0.4s;
+    }
+    body.light .panel {
+      background: rgba(255,255,255,0.92);
+      color: #222;
+    }
+    .panel.left {
+      border-right: 1.5px solid rgba(227,159,246,0.18);
+      align-items: flex-end;
+    }
+    .panel.right {
+      border-left: 1.5px solid rgba(227,159,246,0.18);
+      align-items: flex-start;
+    }
+    .main-3d {
+      flex: 1 1 0;
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+      background: transparent;
+    }
+    /* 标签层样式 */
+    #label-layer {
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .point-label {
+      position: absolute;
+      font-size: 1.05rem;
+      color: #6c4bdb;
+      background: rgba(255,255,255,0.92);
+      border-radius: 8px;
+      padding: 2px 10px;
+      white-space: nowrap;
+      text-shadow: none;
+      transform: translate(-50%, -50%);
+      opacity: 0.98;
+      pointer-events: none;
+      border: 1px solid #eaeaea;
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      z-index: 11;
+      transition: background 0.2s, color 0.2s;
+    }
+    body.dark .point-label {
+      color: #eaf6ff;
+      background: rgba(10,14,36,0.85);
+      text-shadow: 0 0 6px #000;
+      border: none;
+    }
+    .point-hover-info {
+      position: absolute;
+      font-size: 0.98rem;
+      color: #fff;
+      background: rgba(30,34,56,0.85);
+      border-radius: 10px;
+      padding: 0.7em 1.2em;
+      pointer-events: none;
+      z-index: 20;
+      min-width: 180px;
+      max-width: 320px;
+      box-shadow: 0 0 16px #e39ff6aa;
+      font-family: 'Lato', Arial, sans-serif;
+      opacity: 0.96;
+      border: 1px solid #eaeaea;
+    }
+    body.light .point-hover-info {
+      color: #6c4bdb;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid #eaeaea;
+      box-shadow: 0 0 12px #6c4bdb33;
+    }
+    /* 滚动条美化 */
+    ::-webkit-scrollbar {
+      width: 8px;
+      background: #18182a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #6c4bdb88;
+      border-radius: 8px;
+    }
+    #overview-modal {
+    position: fixed; left: 0; top: 0; width: 100vw; height: 100vh;
+    z-index: 1000; display: none; align-items: center; justify-content: center;
+    background: rgba(10,14,36,0.55);
+    backdrop-filter: blur(6px);
+    transition: background 0.3s;
+  }
+  body.light #overview-modal {
+    background: rgba(255,255,255,0.75);
+  }
+  .overview-card {
+    position: relative;
+    z-index: 2;
+    min-width: 600px;
+    max-width: 98vw;
+    min-height: 420px;
+    max-height: 96vh;
+    background: rgba(30,34,56,0.85);
+    border-radius: 24px;
+    box-shadow: 0 0 32px #1a1a2a66;
+    padding: 2.2rem 2.2rem 1.2rem 2.2rem;
+    overflow-y: auto;
+    backdrop-filter: blur(12px);
+    color: #eaf6ff;
+  }
+  body.light .overview-card {
+    background: rgba(255,255,255,0.98);
+    color: #222;
+  }
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      .panel.left, .panel.right {
+        min-width: 100vw;
+        max-width: 100vw;
+        border: none;
+        height: auto;
+        box-shadow: none;
+      }
+      .main-3d {
+        height: 60vw;
+        min-height: 320px;
+      }
+    }
+    .section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.08rem;
+      color: #6c4bdb;
+      margin: 1.1rem 0 0.4rem 0;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+      text-align: left;
+    }
+    label, .label {
+      font-size: 1rem;
+      color: #6c4bdb;
+      margin-bottom: 0.2rem;
+      font-weight: 700;
+    }
+    select, input[type="range"], .multi-select {
+      font-size: 1rem;
+      font-family: 'Lato', Arial, sans-serif;
+    }
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin: 0.5rem 0 0.7rem 0;
+      align-items: center; /* 保证垂直居中 */
+      justify-content: flex-start; /* 可改为center实现整体水平居中 */
+    }
+    .tag {
+      background: linear-gradient(135deg, #e39ff6 30%, #6c4bdb 100%);
+      color: #fff;
+      border-radius: 12px;
+      padding: 0.18rem 0.65rem;
+      font-size: 1rem;
+      font-family: 'Lato', Arial, sans-serif;
+      opacity: 0.85;
+      margin-bottom: 0.2rem;
+      transition: background 0.2s;
+      cursor: pointer;
+      font-weight: 500;
+      display: flex;
+      align-items: center;   /* 让文字在tag内垂直居中 */
+      justify-content: center; /* 让文字在tag内水平居中 */
+      text-align: center;      /* 让多行文字居中（如有） */
+    }
+    .tag.selected {
+      background: #ff5e7e;
+      color: #fff;
+      opacity: 1;
+    }
+    .smiles-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.08rem;
+      color: #6c4bdb;
+      background: rgba(0,0,0,0.03);
+      border-radius: 8px;
+      padding: 0.2rem 0.5rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .iupac-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.02rem;
+      color: #e39ff6;
+      margin-bottom: 0.7rem;
+      display: block;
+      font-weight: 500;
+    }
+    .mol2d-canvas {
+      background: #fff;
+      border-radius: 16px;
+      margin-bottom: 0.7rem;
+      box-shadow: 0 0 12px #e39ff633;
+      display: block;
+      border: 1px solid #eaeaea;
+    }
+    .sim-list {
+      margin: 0.7rem 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.98rem;
+    }
+    .sim-list li {
+      margin-bottom: 0.3rem;
+      color: #6c4bdb;
+      cursor: pointer;
+      transition: color 0.18s;
+      font-family: 'Lato', Arial, sans-serif;
+      font-size: 0.98rem;
+    }
+    .sim-list li:hover {
+      color: #ff5e7e;
+      text-decoration: underline;
+    }
+    .sim-score {
+      color: #ff5e7e;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.98rem;
+      margin-left: 0.5rem;
+    }
+    .vega-vis {
+      margin: 0.5em 0 1.2em 0;
+      min-height: 120px;
+      background: transparent;
+    }
+    #legend-bar {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    z-index: 20;
+    background: rgba(255,255,255,0.96);
+    border-radius: 12px;
+    padding: 0.5em 1.2em;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 1rem;
+    color: #6c4bdb;
+    box-shadow: 0 0 8px #e39ff633;
+    display: flex;
+    align-items: center;
+    gap: 1.2em;
+    border: 1px solid #eaeaea;
+    pointer-events: none;
+    min-width: 220px;
+    justify-content: center;
+  }
+  body.dark #legend-bar {
+    background: rgba(10,14,36,0.96);
+    color: #eaf6ff;
+    border: none;
+  }
+  .legend-dot {
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    border: 1.5px solid #eaeaea;
+  }
+  .legend-gradient {
+    display: inline-block;
+    width: 80px;
+    height: 16px;
+    background: linear-gradient(90deg, #6c4bdb 0%, #e39ff6 100%);
+    border-radius: 8px;
+    margin: 0 0.5em;
+    vertical-align: middle;
+    border: 1px solid #eaeaea;
+  }
+  body.dark .legend-gradient {
+    background: linear-gradient(90deg, #e39ff6 0%, #6c4bdb 100%);
+    border: none;
+  }
+  /* 3D canvas美化 */
+  .main-3d canvas {
+    border-radius: 18px;
+    box-shadow: 0 0 32px #e39ff622, 0 2px 16px #0002;
+    border: 1px solid #eaeaea;
+    background: transparent;
+    margin-top: 12px;
+  }
+  </style>
+</head>
+<body class="light">
+  <!-- 左侧控制面板 -->
+  <div class="panel left">
+    <button class="toggle-theme" id="theme-btn">切换主题</button>
+    <h1>分子宇宙</h1>
+    <div class="section-title">位置编码</div>
+    <select id="embedding-type">
+      <option value="fp_embeddings">指纹降维</option>
+      <option value="lb_embeddings">标签降维</option>
+    </select>
+    <div class="section-title">降维方式</div>
+    <select id="embedding-select">
+      <option value="pca">PCA</option>
+      <option value="tsne">t-SNE</option>
+      <option value="umap">UMAP</option>
+    </select>
+    <div class="section-title">颜色编码</div>
+    <select id="color-encode">
+      <option value="label_count">标签数量</option>
+      <option value="aromatic">芳香性</option>
+    </select>
+    <div class="section-title">气味标签筛选</div>
+    <div id="label-filter" class="tag-cloud"></div>
+    <div class="section-title">分子量范围</div>
+    <div class="slider-label" style="justify-content:space-between;">
+      <span id="mw-min">0</span>
+      <span id="mw-max">1000</span>
+    </div>
+    <input type="range" id="mw-range" min="0" max="1000" value="1000" step="1">
+    <div class="section-title">分子数目上限</div>
+    <input type="range" id="mol-limit" min="100" max="2000" value="1000" step="10">
+    <div class="slider-label">
+      <span>100</span>
+      <span id="mol-limit-val">1000</span>
+    </div>
+    <div class="section-title">特征筛选</div>
+    <div id="feature-filter" class="tag-cloud">
+      <span class="tag" data-feature="aromatic">芳香性</span>
+      <span class="tag" data-feature="nonaromatic">非芳香性</span>
+    </div>
+    <div class="section-title">数据概览</div>
+    <button id="overview-btn" class="copy-btn" style="width:100%;margin-bottom:1.2rem;">切换数据概览</button>
+    <div id="overview-panel" style="display:none;">
+      <div id="overview-content"></div>
+      <button id="back-btn" class="copy-btn" style="width:100%;margin-top:1.2rem;">返回主视图</button>
+    </div>
+  </div>
+  <!-- 主3D可视化区 -->
+  <div class="main-3d" id="main-3d" style="position:relative;">
+    <div id="label-layer"></div>
+    <div id="hover-info" class="point-hover-info" style="display:none;"></div>
+    <div id="legend-bar"></div>
+  </div>
+  <div class="tooltip" id="tooltip"></div>
+  <!-- 右侧信息面板 -->
+  <div class="panel right">
+    <div class="section-title">分子详情</div>
+    <div id="mol-info">
+      <div class="smiles-label" id="smiles-label"></div>
+      <button class="copy-btn" id="copy-smiles">复制</button>
+      <div class="iupac-label" id="iupac-label"></div>
+      <canvas id="mol2d" class="mol2d-canvas" width="220" height="160"></canvas>
+      <div class="section-title">气味标签云</div>
+      <div id="tag-cloud" class="tag-cloud"></div>
+      <div class="section-title">分子描述符</div>
+      <div id="desc-label" style="color:#e39ff6;font-size:1rem;margin-bottom:1rem;"></div>
+    </div>
+    <div class="section-title">筛选气味标签</div>
+    <div id="label-filter-right" class="tag-cloud"></div>
+    <div class="section-title">结构相似推荐</div>
+    <ul class="sim-list" id="structural-sim"></ul>
+    <div class="section-title">标签相似推荐</div>
+    <ul class="sim-list" id="label-sim"></ul>
+  </div>
+  <div id="zoom-indicator" style="position:absolute;top:10px;left:50%;transform:translateX(-50%);color:#e39ff6;font-family:'Orbitron',monospace;font-size:1.1rem;z-index:10;pointer-events:none;">缩放: 100%</div>
+  <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#e39ff6;font-family:'Lato';font-size:1rem;z-index:10;pointer-events:none;">
+  鼠标滚轮缩放，右键旋转，点击粒子查看详情
+</div>
+  <div id="overview-modal">
+    <div class="overview-card">
+      <button class="overview-close" id="overview-close-btn">&times;</button>
+      <div id="overview-content">
+        <div id="vega-label-bar" class="vega-vis"></div>
+        <div id="vega-tagnum-bar" class="vega-vis"></div>
+        <div id="vega-co-mat" class="vega-vis"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // ========== 数据加载 ==========
+    let data = null;
+    let molecules = [];
+    let labelNames = [];
+    let similarity = {};
+    let currentEmbeddingType = "fp_embeddings";
+    let currentEmbedding = "pca";
+    let colorMode = "label_count";
+    let selectedMol = 0;
+    let mwMax = 1000;
+    let molLimit = 1000;
+    let labelFilter = [];
+    let featureFilter = [];
+    let filteredIdx = [];
+    let theme = "light";
+    let labelColors = [];
+
+    let renderer, scene, camera, controls, raycaster, mouse, particles, particleData;
+
+    // ===== 标签专属颜色生成 =====
+    function generateLabelColors(n) {
+      const colors = [];
+      for (let i = 0; i < n; ++i) {
+        // 色相均匀分布，饱和度和亮度适中
+        const h = (i * 360 / n + 20) % 360;
+        colors.push(`hsl(${h},68%,58%)`);
+      }
+      return colors;
+    }
+
+    // 你可以替换为实际数据文件路径
+    fetch('gs_lf_100.json')
+      .then(res => res.json())
+      .then(json => {
+        data = json;
+        molecules = data.molecules;
+        labelNames = data.metadata.label_names;
+        similarity = data.similarity_matrix;
+        labelColors = generateLabelColors(labelNames.length);
+        initUI();
+        render3D();
+        updateMolInfo(0);
+        // 这里加上初始化调用
+      });
+
+    // data = {
+    //     metadata: {
+    //         label_names: ['fruity', 'woody', 'sweet', 'floral', 'citrus']
+    //     },
+    //     molecules: [
+    //         {
+    //             smiles: "CCO",
+    //             labels: [1, 0, 1, 0, 0],
+    //             label_nums: 2,
+    //             descriptors: "alcoholic",
+    //             properties: {
+    //                 molecular_weight: 46.07,
+    //                 logP: 0.35,
+    //                 is_aromatic: false,
+    //                 elements: ["C", "H", "O"],
+    //                 iupac_name: "ethanol"
+    //             },
+    //             fp_embeddings: {
+    //                 pca: [1.2, -0.3, 0.8],
+    //                 tsne: [0.5, 1.1, -0.2],
+    //                 umap: [-0.7, 0.4, 1.0]
+    //             },
+    //             lb_embeddings: {
+    //                 pca: [0.8, -0.5, 0.3],
+    //                 tsne: [0.3, 0.9, -0.4],
+    //                 umap: [-0.3, 0.2, 0.7]
+    //             }
+    //         },
+    //         {
+    //             smiles: "CC(O)CN",
+    //             labels: [0, 1, 0, 0, 0],
+    //             label_nums: 1,
+    //             descriptors: "aromatic",
+    //             properties: {
+    //                 molecular_weight: 78.11,
+    //                 logP: 2.13,
+    //                 is_aromatic: true,
+    //                 elements: ["C", "H"],
+    //                 iupac_name: "benzene"
+    //             },
+    //             fp_embeddings: {
+    //                 pca: [-0.5, 0.7, -0.2],
+    //                 tsne: [0.2, -0.8, 0.5],
+    //                 umap: [0.4, -0.3, -0.6]
+    //             },
+    //             lb_embeddings: {
+    //                 pca: [-0.3, 0.5, -0.1],
+    //                 tsne: [0.1, -0.6, 0.3],
+    //                 umap: [0.2, -0.2, -0.4]
+    //             }
+    //         }
+    //     ],
+    //     similarity_matrix: {
+    //         structural: [[1.0, 0.2], [0.2, 1.0]],
+    //         label: [[1.0, 0.1], [0.1, 1.0]]
+    //     }
+    // };
+
+    
+   
+
+    // // 这里加上初始化调用
+    // molecules = data.molecules;
+    // labelNames = data.metadata.label_names;
+    // similarity = data.similarity_matrix;
+    // labelColors = generateLabelColors(labelNames.length);
+    // initUI();
+    // render3D();
+    // updateMolInfo(0);
+
+    // 主题切换：只切换整体背景和字体，不切换分子画板样式
+    function setThemeClass() {
+      if (theme === "dark") {
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
+        document.getElementById('overview-modal').classList.remove('light');
+        document.getElementById('overview-modal').classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+        document.getElementById('overview-modal').classList.remove('dark');
+        document.getElementById('overview-modal').classList.add('light');
+      }
+    }
+
+    // 简单实现图例：直接在render3D后调用renderLegend
+    function renderLegend(labelColors, labelNames, mwMin, mwMax) {
+      const legendBar = document.getElementById('legend-bar');
+      if (!legendBar) return;
+      legendBar.style.display = "flex";
+      // 简单图例：只显示前6个标签颜色
+      let html = `<span>标签颜色</span>`;
+      for (let i = 0; i < Math.min(6, labelNames.length); ++i) {
+        html += `<span class="legend-dot" style="width:18px;height:18px;background:${labelColors[i]};"></span>
+                 <span style="font-size:0.95em;margin-right:0.7em;">${labelNames[i]}</span>`;
+      }
+      if (labelNames.length > 6) html += `<span style="font-size:0.95em;">...</span>`;
+      legendBar.innerHTML = html;
+    }
+
+    // ========== 控制面板UI ==========
+    function initUI() {
+      // 主题切换
+      document.getElementById('theme-btn').onclick = () => {
+        theme = theme === "dark" ? "light" : "dark";
+        setThemeClass();
+        render3D();
+        updateMolInfo(selectedMol);
+      };
+      setThemeClass();
+      // 位置编码
+      document.getElementById('embedding-type').onchange = e => {
+        currentEmbeddingType = e.target.value;
+        render3D();
+      };
+      // 降维方式
+      document.getElementById('embedding-select').onchange = e => {
+        currentEmbedding = e.target.value;
+        render3D();
+      };
+      // 颜色编码
+      document.getElementById('color-encode').onchange = e => {
+        colorMode = e.target.value;
+        render3D();
+      };
+      // 分子量范围
+      document.getElementById('mw-range').oninput = e => {
+        mwMax = +e.target.value;
+        document.getElementById('mw-max').textContent = mwMax;
+        render3D();
+      };
+      // 分子数目
+      document.getElementById('mol-limit').oninput = e => {
+        molLimit = +e.target.value;
+        document.getElementById('mol-limit-val').textContent = molLimit;
+        render3D();
+      };
+      // 标签筛选（左侧）
+      const labelFilterDiv = document.getElementById('label-filter');
+      labelFilterDiv.innerHTML = '';
+      labelNames.forEach((name, i) => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = name;
+        tag.onclick = () => {
+          if (labelFilter.includes(i)) {
+            labelFilter = labelFilter.filter(x => x !== i);
+            tag.classList.remove('selected');
+          } else {
+            labelFilter.push(i);
+            tag.classList.add('selected');
+          }
+          syncLabelFilterUI();
+          render3D();
+        };
+        labelFilterDiv.appendChild(tag);
+      });
+      // 标签筛选（右侧）
+      const labelFilterDivRight = document.getElementById('label-filter-right');
+      labelFilterDivRight.innerHTML = '';
+      labelNames.forEach((name, i) => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = name;
+        tag.onclick = () => {
+          if (labelFilter.includes(i)) {
+            labelFilter = labelFilter.filter(x => x !== i);
+            tag.classList.remove('selected');
+          } else {
+            labelFilter.push(i);
+            tag.classList.add('selected');
+          }
+          syncLabelFilterUI();
+          render3D();
+        };
+        labelFilterDivRight.appendChild(tag);
+      });
+      syncLabelFilterUI();
+      // 特征筛选
+      document.querySelectorAll('#feature-filter .tag').forEach(tag => {
+        tag.onclick = () => {
+          const feat = tag.dataset.feature;
+          if (featureFilter.includes(feat)) {
+            featureFilter = featureFilter.filter(x => x !== feat);
+            tag.classList.remove('selected');
+          } else {
+            featureFilter.push(feat);
+            tag.classList.add('selected');
+          }
+          render3D();
+        };
+      });
+      // 数据概览
+      document.getElementById('overview-btn').onclick = () => {
+        document.getElementById('overview-modal').style.display = 'flex';
+        renderOverview();
+      };
+      document.getElementById('overview-close-btn').onclick = () => {
+        document.getElementById('overview-modal').style.display = 'none';
+      };
+      // 复制SMILES
+      document.getElementById('copy-smiles').onclick = () => {
+        const smiles = document.getElementById('smiles-label').textContent;
+        navigator.clipboard.writeText(smiles);
+      };
+    }
+    // 同步左右标签筛选UI
+    function syncLabelFilterUI() {
+      [document.getElementById('label-filter'), document.getElementById('label-filter-right')].forEach(div => {
+        if (!div) return;
+        Array.from(div.children).forEach((tag, i) => {
+          if (labelFilter.includes(i)) tag.classList.add('selected');
+          else tag.classList.remove('selected');
+        });
+      });
+    }
+    // ========== 3D可视化 ==========
+    function render3D() {
+      // 清理旧场景
+      if (renderer && renderer.domElement && renderer.domElement.parentNode) {
+        renderer.domElement.parentNode.removeChild(renderer.domElement);
+        renderer.forceContextLoss && renderer.forceContextLoss();
+      }
+      // 清理label-layer和hover-info
+      const labelLayer = document.getElementById('label-layer');
+      labelLayer.innerHTML = '';
+      const hoverInfoDiv = document.getElementById('hover-info');
+      hoverInfoDiv.style.display = 'none';
+
+      // 过滤分子
+      filteredIdx = molecules.map((mol, i) => i)
+        .filter(i => {
+          const mol = molecules[i];
+          if (mol.properties.molecular_weight > mwMax) return false;
+          if (featureFilter.includes('aromatic') && !mol.properties.is_aromatic) return false;
+          if (featureFilter.includes('nonaromatic') && mol.properties.is_aromatic) return false;
+          if (labelFilter.length > 0 && !labelFilter.every(idx => mol.labels[idx] === 1)) return false;
+          return true;
+        })
+        .slice(0, molLimit);
+
+      // Three.js初始化
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setClearColor(theme === "dark" ? 0x000000 : 0xeaf6ff, 1);
+      renderer.setSize(document.getElementById('main-3d').clientWidth, document.getElementById('main-3d').clientHeight);
+      document.getElementById('main-3d').appendChild(renderer.domElement);
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(60, renderer.domElement.width / renderer.domElement.height, 0.1, 1000);
+      camera.position.set(0, 0, 60);
+
+      // Controls
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.08;
+      controls.enablePan = false;
+      controls.minDistance = 10;
+      controls.maxDistance = 300;
+
+      // 坐标轴辅助器
+      const axesHelper = new THREE.AxesHelper(80);
+axesHelper.material.transparent = true;
+axesHelper.material.opacity = 0.25;
+scene.add(axesHelper);
+
+      // 粒子
+      particleData = [];
+      const geometry = new THREE.BufferGeometry();
+      const positions = [];
+      const colors = [];
+      const sizes = [];
+      const alphas = [];
+      // 计算分子量范围
+      const mwArr = filteredIdx.map(idx => molecules[idx].properties.molecular_weight);
+      const mwMin = Math.min(...mwArr), mwMaxVal = Math.max(...mwArr);
+      // 计算label_nums范围
+      const labelNumArr = filteredIdx.map(idx => molecules[idx].label_nums || molecules[idx].labels.reduce((a,b)=>a+b,0));
+      const labelNumMin = Math.min(...labelNumArr), labelNumMax = Math.max(...labelNumArr);
+
+      filteredIdx.forEach((idx, i) => {
+        const mol = molecules[idx];
+        const emb = mol[currentEmbeddingType][currentEmbedding];
+        positions.push(emb[0] * 50, emb[1] * 50, emb[2] * 50);
+
+        // 颜色编码
+        let color = new THREE.Color();
+        if (colorMode === "aromatic") {
+          color.set(mol.properties.is_aromatic ? "#ff5e7e" : "#6c4bdb");
+        } else {
+          // 按标签颜色编码：取第一个标签的颜色
+          const firstLabel = mol.labels.findIndex(v => v === 1);
+          color.setStyle(labelColors[firstLabel >= 0 ? firstLabel : 0]);
+        }
+        colors.push(color.r, color.g, color.b);
+
+        // 大小编码（分子量，Vega风格）
+        let mw = mol.properties.molecular_weight;
+        let size = 12 + 28 * ((mw - mwMin) / (mwMaxVal - mwMin + 0.01)); // 12~40
+        sizes.push(size);
+
+        // 透明度编码（label_nums，越多越不透明）
+        const n = mol.label_nums || mol.labels.reduce((a, b) => a + b, 0);
+        let alpha = 0.35 + 0.55 * ((n-labelNumMin)/(labelNumMax-labelNumMin+0.01)); // 0.35~0.9
+        alphas.push(alpha);
+
+        particleData.push({ idx, emb, color, size, alpha, labelNum: n });
+        // 创建label div（始终显示SMILES）
+        const labelDiv = document.createElement('div');
+        labelDiv.className = 'point-label';
+        labelDiv.textContent = mol.smiles;
+        labelLayer.appendChild(labelDiv);
+        particleData[i].labelDiv = labelDiv;
+      });
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+      geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+      geometry.setAttribute('alpha', new THREE.Float32BufferAttribute(alphas, 1));
+
+      // 自定义ShaderMaterial实现颜色/大小/透明度
+      const vertexShader = `
+        attribute float size;
+        attribute float alpha;
+        varying float vAlpha;
+        varying vec3 vColor;
+        void main() {
+          vColor = color;
+          vAlpha = alpha;
+          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = size * (300.0 / length(mvPosition.xyz));
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `;
+      const fragmentShader = `
+        varying float vAlpha;
+        varying vec3 vColor;
+        void main() {
+          float dist = length(gl_PointCoord - vec2(0.5,0.5));
+          if(dist > 0.5) discard;
+          gl_FragColor = vec4(vColor, vAlpha * (1.0-dist*1.2));
+        }
+      `;
+      const material = new THREE.ShaderMaterial({
+        uniforms: {},
+        vertexColors: true,
+        transparent: true,
+        vertexShader,
+        fragmentShader
+      });
+
+      particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+
+      // 光点脉动动画
+      let pulse = 0;
+      let baseDistance = 60; // 初始相机z
+      function animate() {
+        pulse += 0.02;
+        // 鼠标悬停脉动
+        if (hoveredIdx !== null) {
+          const arr = geometry.attributes.size.array;
+          arr[hoveredIdx] = particleData[hoveredIdx].size * 1.5;
+          geometry.attributes.size.needsUpdate = true;
+        }
+        // 更新缩放百分比
+        let percent = Math.round(100 * baseDistance / camera.position.length());
+        document.getElementById('zoom-indicator').textContent = `缩放: ${percent}%`;
+        // 更新label位置（全部显示）
+        if (particleData.length) {
+          for (let i = 0; i < particleData.length; ++i) {
+            const emb = particleData[i].emb;
+            const vector = new THREE.Vector3(emb[0]*50, emb[1]*50, emb[2]*50);
+            vector.project(camera);
+            const x = (vector.x * 0.5 + 0.5) * renderer.domElement.clientWidth;
+            const y = (1 - (vector.y * 0.5 + 0.5)) * renderer.domElement.clientHeight;
+            const labelDiv = particleData[i].labelDiv;
+            if (labelDiv) {
+              labelDiv.style.left = `${x}px`;
+              labelDiv.style.top = `${y}px`;
+              labelDiv.style.display = 'block';
+            }
+          }
+        }
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+
+      // 交互
+      raycaster = new THREE.Raycaster();
+      mouse = new THREE.Vector2();
+      let tooltip = document.getElementById('tooltip');
+      let hoveredIdx = null;
+      renderer.domElement.onmousemove = function (event) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObject(particles);
+        if (intersects.length > 0) {
+          hoveredIdx = intersects[0].index;
+          // 悬浮信息显示在粒子旁边
+          const mol = molecules[filteredIdx[hoveredIdx]];
+          const emb = particleData[hoveredIdx].emb;
+          const vector = new THREE.Vector3(emb[0]*50, emb[1]*50, emb[2]*50);
+          vector.project(camera);
+          const x = (vector.x * 0.5 + 0.5) * renderer.domElement.clientWidth;
+          const y = (1 - (vector.y * 0.5 + 0.5)) * renderer.domElement.clientHeight;
+          hoverInfoDiv.style.display = 'block';
+          hoverInfoDiv.style.left = (x + 18) + 'px';
+          hoverInfoDiv.style.top = (y - 10) + 'px';
+          hoverInfoDiv.innerHTML = `<div><b>SMILES:</b> ${mol.smiles}</div>
+            <div><b>IUPAC:</b> ${mol.properties.iupac_name}</div>
+            <div><b>Descriptors:</b> ${mol.descriptors || ''}</div>`;
+        } else {
+          hoveredIdx = null;
+          hoverInfoDiv.style.display = 'none';
+        }
+      };
+      renderer.domElement.onclick = function (event) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObject(particles);
+        if (intersects.length > 0) {
+          const idx = filteredIdx[intersects[0].index];
+          updateMolInfo(idx);
+        }
+      };
+      // 计算所有点的中心
+      let center = [0,0,0];
+      if (positions.length >= 3) {
+        for (let i = 0; i < positions.length; i += 3) {
+          center[0] += positions[i];
+          center[1] += positions[i+1];
+          center[2] += positions[i+2];
+        }
+        center = center.map(x => x / (positions.length/3));
+        camera.position.set(center[0], center[1], center[2] + 100); // 拉远点
+        controls.target.set(center[0], center[1], center[2]);
+        controls.update();
+      }
+      animate();
+    }
+
+    // ========== 分子详情面板 ==========
+    function updateMolInfo(idx) {
+      selectedMol = idx;
+      const mol = molecules[idx];
+      document.getElementById('smiles-label').textContent = mol.smiles;
+      document.getElementById('iupac-label').textContent = mol.properties.iupac_name || 'N/A';
+      document.getElementById('desc-label').textContent = mol.descriptors || '';
+      // 清空canvas
+      const ctx = document.getElementById('mol2d').getContext('2d');
+      ctx.clearRect(0, 0, 220, 160);
+      // SmilesDrawer渲染
+      const drawer = new SmilesDrawer.Drawer({
+        width: 220,
+        height: 160,
+        theme: 'light', // 始终白底黑线
+        padding: 10
+      });
+      SmilesDrawer.parse(mol.smiles, function(tree) {
+        drawer.draw(tree, 'mol2d', 'light', false);
+      }, function() {
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0,0,220,160);
+        ctx.fillStyle = "#222";
+        ctx.font = "16px Lato, Arial";
+        ctx.fillText("无法解析", 80, 80);
+      });
+      // 标签云
+      const tagCloud = document.getElementById('tag-cloud');
+      tagCloud.innerHTML = '';
+      mol.labels.forEach((v, i) => {
+        if (v) {
+          const span = document.createElement('span');
+          span.className = 'tag';
+          span.textContent = labelNames[i];
+          span.style.fontSize = (1.1 + Math.random()*0.6) + 'rem';
+          span.style.background = labelColors[i];
+          tagCloud.appendChild(span);
+        }
+      });
+      // 推荐
+      renderSimList('structural-sim', similarity.structural[idx], 'Tanimoto');
+      renderSimList('label-sim', similarity.label[idx], 'Jaccard');
+    }
+    function renderSimList(id, simArr, type) {
+      const ul = document.getElementById(id);
+      ul.innerHTML = '';
+      let arr = simArr.map((v, i) => ({i, v}))
+        .filter(x => x.i !== selectedMol)
+        .sort((a, b) => b.v - a.v)
+        .slice(0, 5);
+      arr.forEach(obj => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${molecules[obj.i].smiles}</span>
+          <span class="sim-score">${obj.v.toFixed(2)}</span>`;
+        li.onclick = () => updateMolInfo(obj.i);
+        ul.appendChild(li);
+      });
+    }
+
+    // ========== 数据概览 ==========
+    function renderOverview() {
+      // 统计数据
+      const labelCounts = labelNames.map((name, i) =>
+        molecules.reduce((acc, m) => acc + (m.labels[i] ? 1 : 0), 0)
+      );
+      const tagNumDist = Array(20).fill(0);
+      molecules.forEach(m => tagNumDist[m.label_nums || m.labels.reduce((a,b)=>a+b,0)]++);
+      const coMat = Array(labelNames.length).fill(0).map(()=>Array(labelNames.length).fill(0));
+      molecules.forEach(m => {
+        m.labels.forEach((v,i) => {
+          if (v) m.labels.forEach((w,j) => { if (w) coMat[i][j]++; });
+        });
+      });
+
+      // 标签分布条形图 Vega-Lite 规范
+      const labelBarSpec = {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        description: '标签分布',
+        background: theme === "dark" ? "#1e2238" : "#fff",
+        width: 320,
+        height: 120,
+        data: {
+          values: labelNames.map((name, i) => ({label: name, count: labelCounts[i]}))
+        },
+        mark: {type: "bar", cornerRadiusEnd: 6, tooltip: true},
+        encoding: {
+          x: {field: "label", type: "ordinal", axis: {labelColor: theme === "dark" ? "#eaf6ff" : "#222", title: null}},
+          y: {field: "count", type: "quantitative", axis: {labelColor: theme === "dark" ? "#eaf6ff" : "#222", title: "数量"}},
+          color: {value: theme === "dark" ? "#e39ff6" : "#6c4bdb"}
+        },
+        config: {
+          background: theme === "dark" ? "#1e2238" : "#fff",
+          axis: {labelFont: "Lato", titleFont: "Orbitron"}
+        }
+      };
+
+      // 标签数分布 Vega-Lite 规范
+      const tagNumBarSpec = {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        description: '分子标签数分布',
+        background: theme === "dark" ? "#1e2238" : "#fff",
+        width: 320,
+        height: 80,
+        data: {
+          values: tagNumDist.map((count, i) => ({num: i, count}))
+        },
+        mark: {type: "bar", cornerRadiusEnd: 6, tooltip: true},
+        encoding: {
+          x: {field: "num", type: "ordinal", axis: {labelColor: theme === "dark" ? "#eaf6ff" : "#222", title: "标签数"}},
+          y: {field: "count", type: "quantitative", axis: {labelColor: theme === "dark" ? "#eaf6ff" : "#222", title: "数量"}},
+          color: {value: theme === "dark" ? "#6c4bdb" : "#e39ff6"}
+        },
+        config: {
+          background: theme === "dark" ? "#1e2238" : "#fff",
+          axis: {labelFont: "Lato", titleFont: "Orbitron"}
+        }
+      };
+
+      // 共现矩阵 Vega-Lite 规范
+      const coMatData = [];
+      for (let i = 0; i < labelNames.length; ++i) {
+        for (let j = 0; j < labelNames.length; ++j) {
+          coMatData.push({x: labelNames[i], y: labelNames[j], value: coMat[i][j]});
+        }
+      }
+      const coMatSpec = {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        description: '标签共现矩阵',
+        background: theme === "dark" ? "#1e2238" : "#fff",
+        width: 320,
+        height: 320,
+        data: {values: coMatData},
+        mark: "rect",
+        encoding: {
+          x: {field: "x", type: "ordinal", axis: {labelAngle: -45, labelColor: theme === "dark" ? "#eaf6ff" : "#222", title: null}},
+          y: {field: "y", type: "ordinal", axis: {labelColor: theme === "dark" ? "#eaf6ff" : "#222", title: null}},
+          color: {
+            field: "value", type: "quantitative",
+            scale: {scheme: theme === "dark" ? "magma" : "blues"},
+            legend: {title: "共现数"}
+          },
+          tooltip: [
+            {field: "x", title: "标签1"},
+            {field: "y", title: "标签2"},
+            {field: "value", title: "共现数"}
+          ]
+        },
+        config: {
+          background: theme === "dark" ? "#1e2238" : "#fff",
+          axis: {labelFont: "Lato", titleFont: "Orbitron"}
+        }
+      };
+
+      // 渲染Vega-Lite图表
+      vegaEmbed('#vega-label-bar', labelBarSpec, {actions: false, renderer: 'canvas'});
+      vegaEmbed('#vega-tagnum-bar', tagNumBarSpec, {actions: false, renderer: 'canvas'});
+      vegaEmbed('#vega-co-mat', coMatSpec, {actions: false, renderer: 'canvas'});
+    }
+
+    window.addEventListener('resize', () => {
+  if (renderer && camera) {
+    const w = document.getElementById('main-3d').clientWidth;
+    const h = document.getElementById('main-3d').clientHeight;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+});
+  </script>
+</body>
+</html>
