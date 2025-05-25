@@ -1150,7 +1150,7 @@
     let currentPage = "home";
     let compareList = []; // 用于存储对比分子
     let renderer, scene, camera, controls, raycaster, mouse, particles, particleData;
-    let currentDataset = 'gs_lf_1024.json';
+    let currentDataset = 'gs_lf_250.json';
 
     // 标签专属颜色生成(旧)
     // function generateLabelColors(n) {
@@ -1175,7 +1175,7 @@
     let labelColors = [];
 
     // 你可以替换为实际数据文件路径
-    fetch('gs_lf_1024.json')
+    fetch('gs_lf_250.json')
       .then(res => res.json())
       .then(json => {
         data = json;
