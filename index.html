@@ -205,6 +205,68 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-test-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/25/test-1/">test-1</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/25/test-1/" class="archive-article-date">
+  	<time datetime="2025-05-25T12:24:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/25/test-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode-200" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1302,192 +1364,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2025/05/18/leetcode-35/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-239" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/15/leetcode-239/">算法笔记📒 | leetcode-239 滑动窗口最大值</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/15/leetcode-239/" class="archive-article-date">
-  	<time datetime="2025-05-15T10:44:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-239-滑动窗口最大值"><a href="#leetcode-239-滑动窗口最大值" class="headerlink" title="leetcode-239 滑动窗口最大值"></a>leetcode-239 滑动窗口最大值</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>主要的启发思想是让队列中的元素递减，（类似单调队列），做完之后感觉相比题解还是有些复杂。</li>
-<li>题解提供的思路主要包括：优先队列、单调队列以及分块和预处理。</li>
-<li>优先队列：<ul>
-<li>python的优先队列：<ul>
-<li><code>heapq.heapify(q)</code>:将列表原地转为<strong>小根堆</strong>（注意是小根队，如果要大根队可以入队时用负数，取出时再转换为正数）。</li>
-<li><code>heapq.heappush(q, element) </code>,<code>heapq.heappop(q) </code>:动态添加或弹出<strong>最小元素</strong>。</li>
-<li><code>heapq.nlargest(n, data)</code>, <code>heapq.nsmallest(n,data)</code>:返回前n个最大或最小元素，支持自定义键（key参数）。</li>
-</ul>
-</li>
-<li>C++的优先队列：</li>
-<li><code>priority_queue</code>STL容器:底层实现基于堆（Heap），默认大根堆，初始化<code>priority_queue&lt;pair&lt;int, int&gt;&gt; q;</code>。</li>
-<li>插入元素<code>push</code>（也可以用<code>emplace</code>）, 删除堆顶元素<code>pop</code>,时间复杂度为 O(log n)。</li>
-<li>访问堆顶元素<code>top</code>,时间复杂度O(1)。</li>
-</ul>
-</li>
-<li>单调队列：<ul>
-<li>python：<ul>
-<li>可以用<code>collections.deque()</code></li>
-<li>通过<code>append(v)</code>,<code>appendleft(v)</code>入队；<code>pop()</code>,<code>popleft()</code>出队。</li>
-</ul>
-</li>
-<li>C++：<ul>
-<li>通过<code>push_front(v)</code>,<code>push_back(v)</code>入队；<code>pop_front()</code>,<code>pop_back()</code>出队；<code>front()</code>,<code>back()</code>访问队头队尾。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>分组+预处理（参考他人题解）：<ul>
-<li>分为k组<ul>
-<li><code>prefixMax</code>前缀最大值数组：从分组的开头到索引i的最大值<ul>
-<li>i是k倍数：<code>prefixMax[i] = nums[i]</code></li>
-<li>i不是k倍数：<code>prefixMax[i] = max(prefixMax[i-1], nums[i])</code>,从前往后求</li>
-</ul>
-</li>
-<li><code>suffixMax</code>后缀最大值数组：从索引i到分组结尾的最大值 <ul>
-<li>i是k倍数：<code>prefixMax[i] = nums[i]</code></li>
-<li>i不是k倍数：<code>suffixMax[i] = max(suffixMax[i+1], nums[i])</code>,从后往前求</li>
-<li>注意边界：<code>suffixMax[n−1]=nums[n−1]</code>，类似于<code>prefixMax[0]=nums[0] </code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>最终结果：<ul>
-<li>如果i是k的倍数：从i开头到结尾i+k-1每个个元素落在了1个分组里，相当于从左到右和从右到左求了一遍前缀最大值和后缀最大值<ul>
-<li><code>max(prefixMax[i+k-1]，suffixMax[i]</code></li>
-</ul>
-</li>
-<li>如果i不是k的倍数：第一个分组用suffixMax[i]i到分组末尾j-1的后缀最大值，第一个分组用prefixMax[i+k-1]获得从j到i+k-1的前缀最大值。<ul>
-<li><code>max(prefixMax[i+k-1]，suffixMax[i]</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
-<li>初步解答<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 仔细分析题目，发现要求输出是每个滑动窗口的最大值组成的数组，如果暴力应该会超时，需要的是进行优化。</span></span><br><span class="line">        <span class="comment"># 每次只移动一个数字，会想到双指针、队列，每次数字出队和入队的时候与当前的最大值判断，看是否需要更新最大值</span></span><br><span class="line">        <span class="comment"># 每次都更新，当k值很大时，会遇到超时问题-&gt;可以更新每个队列的倒数第二大值？(第二大元素出栈还是可能会很麻烦)-&gt;参考提示(和不小心看到了的题解思路)，可以在每次将元素加入队列中时，只加入比当前队尾大的元素，并在加入时删除队列内存在的比加入的元素更小的元素，否则不必加入。因为这样可以保证队列是从左到右下降的，从而快速找到最大值！！！</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        res = []</span><br><span class="line">        dq = collections.deque() <span class="comment">#最大值一直是dq[0]</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i &lt; k:</span><br><span class="line">                <span class="comment"># 不满足滑动窗口大小，入队</span></span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                    <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                        dq.pop()</span><br><span class="line">                    dq.append(nums[i])  </span><br><span class="line">                <span class="keyword">elif</span> <span class="built_in">len</span>(dq) == <span class="number">0</span>:</span><br><span class="line">                    dq.append(nums[i])</span><br><span class="line">            <span class="comment"># 当前窗口大小=k时，滑动窗口开始向右移动</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 出队，如果刚好出了最大值，下一个最大值应该是新的dq[0]或者numsnums[i-k+1]</span></span><br><span class="line">                res.append(dq[<span class="number">0</span>])</span><br><span class="line">                <span class="keyword">if</span> nums[i-k] == dq[<span class="number">0</span>]:</span><br><span class="line">                    dq.popleft()</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq) == <span class="number">0</span>:</span><br><span class="line">                        dq.appendleft(nums[i-k+<span class="number">1</span>])</span><br><span class="line">                    <span class="keyword">if</span> nums[i-k+<span class="number">1</span>] &gt; dq[<span class="number">0</span>]:</span><br><span class="line">                        dq.appendleft(nums[i-k+<span class="number">1</span>])</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                        <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                            dq.pop()</span><br><span class="line">                        dq.append(nums[i])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                        <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                            dq.pop()</span><br><span class="line">                        dq.append(nums[i])</span><br><span class="line">        res.append(dq[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
-<li>官方题解的优先队列加注释<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 优先队列解法</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="comment"># 先入优先队列前k个元素</span></span><br><span class="line">        q  = [(-nums[i],i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k)]</span><br><span class="line">        heapq.heapify(q)</span><br><span class="line">        <span class="comment"># 加入现在的最大元素</span></span><br><span class="line">        res = [-q[<span class="number">0</span>][<span class="number">0</span>]]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k,n):</span><br><span class="line">            heapq.heappush(q, (-nums[i],i))</span><br><span class="line">            <span class="keyword">while</span> q[<span class="number">0</span>][<span class="number">1</span>] &lt;= i-k:</span><br><span class="line">                <span class="comment"># 延迟出队不在窗口内的元素</span></span><br><span class="line">                heapq.heappop(q)</span><br><span class="line">            res.append(-q[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
-<li>分组预处理，参考题解后复现<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 分组</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        preffixMax = [<span class="number">0</span>]*n</span><br><span class="line">        suffixMax = [<span class="number">0</span>]*n</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i%k == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 包括i=0</span></span><br><span class="line">                preffixMax[i] = nums[i]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                preffixMax[i] = <span class="built_in">max</span>(preffixMax[i-<span class="number">1</span>],nums[i])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> i == n-<span class="number">1</span> <span class="keyword">or</span> i%k == <span class="number">0</span>:</span><br><span class="line">                suffixMax[i] = nums[i]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                suffixMax[i] = <span class="built_in">max</span>(suffixMax[i+<span class="number">1</span>],nums[i])</span><br><span class="line">        </span><br><span class="line">        res = [<span class="built_in">max</span>(suffixMax[i],preffixMax[i+k-<span class="number">1</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-k+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">单调队列</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">滑动窗口</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">子串</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Python/Hard//" class="article-tag-list-link color5">Hard</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/15/leetcode-239/">展开全文 >></a>
         </p>
       
 
