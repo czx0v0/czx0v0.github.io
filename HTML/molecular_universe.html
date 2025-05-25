@@ -974,9 +974,10 @@
       <div style="margin-bottom:0.2em;">
         <label for="dataset-select" style="font-size:0.97em;">数据集选择</label>
         <select id="dataset-select" style="margin-left:0.5em;">
-          <option value="gs_lf_250.json" selected>250</option>
-          <option value="gs_lf_512.json">512</option>
-          <option value="gs_lf_1024.json">1024</option>
+          <option value="./gs_lf_100.json" selected>100</option>
+          <option value="./gs_lf_250.json">250</option>
+          <option value="./gs_lf_512.json">512</option>
+          <option value="./gs_lf_1024.json">1024</option>
 <!--          <option value="gs_lf_2048.json">2048</option>-->
 <!--          <option value="gs_lf_4096.json">4096</option>-->
         </select>
@@ -1150,7 +1151,7 @@
     let currentPage = "home";
     let compareList = []; // 用于存储对比分子
     let renderer, scene, camera, controls, raycaster, mouse, particles, particleData;
-    let currentDataset = 'gs_lf_250.json';
+    let currentDataset = './gs_lf_100.json';
 
     // 标签专属颜色生成(旧)
     // function generateLabelColors(n) {
@@ -1175,7 +1176,7 @@
     let labelColors = [];
 
     // 你可以替换为实际数据文件路径
-    fetch('gs_lf_250.json')
+    fetch('./gs_lf_100.json')
       .then(res => res.json())
       .then(json => {
         data = json;
