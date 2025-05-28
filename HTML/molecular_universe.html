@@ -2761,7 +2761,7 @@
           .text('...');
       }
     }
-    function renderViolinPlot(container, groups, groupNames) {
+    function renderViolinPlot(container, groups, groupNames, labelColors) {
       // 分子量按标签分组小提琴图
       container.innerHTML = '';
       const width = 600, height = 390, margin = { top: 50, right: 100, bottom: 100, left: 40 };
@@ -3162,7 +3162,8 @@
       );
       const groups = topNLabelIdx.map(i => molecules.filter(m => m.labels[i]).map(m => m.properties.molecular_weight));
       const groupNames = topNLabelIdx.map(i => labelNames[i]);
-      renderViolinPlot(document.getElementById('d3-violin'), groups, groupNames);
+      const groupColors = topNLabelIdx.map(i => labelColors[i]);
+      renderViolinPlot(document.getElementById('d3-violin'), groups, groupNames, groupColors);
     }
 
     // 放大图表
