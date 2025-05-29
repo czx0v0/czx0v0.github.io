@@ -205,6 +205,192 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode-239" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/15/leetcode-239/">算法笔记📒 | leetcode-239 滑动窗口最大值</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/15/leetcode-239/" class="archive-article-date">
+  	<time datetime="2025-05-15T10:44:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-239-滑动窗口最大值"><a href="#leetcode-239-滑动窗口最大值" class="headerlink" title="leetcode-239 滑动窗口最大值"></a>leetcode-239 滑动窗口最大值</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>主要的启发思想是让队列中的元素递减，（类似单调队列），做完之后感觉相比题解还是有些复杂。</li>
+<li>题解提供的思路主要包括：优先队列、单调队列以及分块和预处理。</li>
+<li>优先队列：<ul>
+<li>python的优先队列：<ul>
+<li><code>heapq.heapify(q)</code>:将列表原地转为<strong>小根堆</strong>（注意是小根队，如果要大根队可以入队时用负数，取出时再转换为正数）。</li>
+<li><code>heapq.heappush(q, element) </code>,<code>heapq.heappop(q) </code>:动态添加或弹出<strong>最小元素</strong>。</li>
+<li><code>heapq.nlargest(n, data)</code>, <code>heapq.nsmallest(n,data)</code>:返回前n个最大或最小元素，支持自定义键（key参数）。</li>
+</ul>
+</li>
+<li>C++的优先队列：</li>
+<li><code>priority_queue</code>STL容器:底层实现基于堆（Heap），默认大根堆，初始化<code>priority_queue&lt;pair&lt;int, int&gt;&gt; q;</code>。</li>
+<li>插入元素<code>push</code>（也可以用<code>emplace</code>）, 删除堆顶元素<code>pop</code>,时间复杂度为 O(log n)。</li>
+<li>访问堆顶元素<code>top</code>,时间复杂度O(1)。</li>
+</ul>
+</li>
+<li>单调队列：<ul>
+<li>python：<ul>
+<li>可以用<code>collections.deque()</code></li>
+<li>通过<code>append(v)</code>,<code>appendleft(v)</code>入队；<code>pop()</code>,<code>popleft()</code>出队。</li>
+</ul>
+</li>
+<li>C++：<ul>
+<li>通过<code>push_front(v)</code>,<code>push_back(v)</code>入队；<code>pop_front()</code>,<code>pop_back()</code>出队；<code>front()</code>,<code>back()</code>访问队头队尾。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分组+预处理（参考他人题解）：<ul>
+<li>分为k组<ul>
+<li><code>prefixMax</code>前缀最大值数组：从分组的开头到索引i的最大值<ul>
+<li>i是k倍数：<code>prefixMax[i] = nums[i]</code></li>
+<li>i不是k倍数：<code>prefixMax[i] = max(prefixMax[i-1], nums[i])</code>,从前往后求</li>
+</ul>
+</li>
+<li><code>suffixMax</code>后缀最大值数组：从索引i到分组结尾的最大值 <ul>
+<li>i是k倍数：<code>prefixMax[i] = nums[i]</code></li>
+<li>i不是k倍数：<code>suffixMax[i] = max(suffixMax[i+1], nums[i])</code>,从后往前求</li>
+<li>注意边界：<code>suffixMax[n−1]=nums[n−1]</code>，类似于<code>prefixMax[0]=nums[0] </code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最终结果：<ul>
+<li>如果i是k的倍数：从i开头到结尾i+k-1每个个元素落在了1个分组里，相当于从左到右和从右到左求了一遍前缀最大值和后缀最大值<ul>
+<li><code>max(prefixMax[i+k-1]，suffixMax[i]</code></li>
+</ul>
+</li>
+<li>如果i不是k的倍数：第一个分组用suffixMax[i]i到分组末尾j-1的后缀最大值，第一个分组用prefixMax[i+k-1]获得从j到i+k-1的前缀最大值。<ul>
+<li><code>max(prefixMax[i+k-1]，suffixMax[i]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>初步解答<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 仔细分析题目，发现要求输出是每个滑动窗口的最大值组成的数组，如果暴力应该会超时，需要的是进行优化。</span></span><br><span class="line">        <span class="comment"># 每次只移动一个数字，会想到双指针、队列，每次数字出队和入队的时候与当前的最大值判断，看是否需要更新最大值</span></span><br><span class="line">        <span class="comment"># 每次都更新，当k值很大时，会遇到超时问题-&gt;可以更新每个队列的倒数第二大值？(第二大元素出栈还是可能会很麻烦)-&gt;参考提示(和不小心看到了的题解思路)，可以在每次将元素加入队列中时，只加入比当前队尾大的元素，并在加入时删除队列内存在的比加入的元素更小的元素，否则不必加入。因为这样可以保证队列是从左到右下降的，从而快速找到最大值！！！</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        res = []</span><br><span class="line">        dq = collections.deque() <span class="comment">#最大值一直是dq[0]</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i &lt; k:</span><br><span class="line">                <span class="comment"># 不满足滑动窗口大小，入队</span></span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                    <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                        dq.pop()</span><br><span class="line">                    dq.append(nums[i])  </span><br><span class="line">                <span class="keyword">elif</span> <span class="built_in">len</span>(dq) == <span class="number">0</span>:</span><br><span class="line">                    dq.append(nums[i])</span><br><span class="line">            <span class="comment"># 当前窗口大小=k时，滑动窗口开始向右移动</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 出队，如果刚好出了最大值，下一个最大值应该是新的dq[0]或者numsnums[i-k+1]</span></span><br><span class="line">                res.append(dq[<span class="number">0</span>])</span><br><span class="line">                <span class="keyword">if</span> nums[i-k] == dq[<span class="number">0</span>]:</span><br><span class="line">                    dq.popleft()</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq) == <span class="number">0</span>:</span><br><span class="line">                        dq.appendleft(nums[i-k+<span class="number">1</span>])</span><br><span class="line">                    <span class="keyword">if</span> nums[i-k+<span class="number">1</span>] &gt; dq[<span class="number">0</span>]:</span><br><span class="line">                        dq.appendleft(nums[i-k+<span class="number">1</span>])</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                        <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                            dq.pop()</span><br><span class="line">                        dq.append(nums[i])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt;= nums[i-<span class="number">1</span>]:</span><br><span class="line">                        <span class="keyword">while</span> <span class="built_in">len</span>(dq)&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; dq[-<span class="number">1</span>]:</span><br><span class="line">                            dq.pop()</span><br><span class="line">                        dq.append(nums[i])</span><br><span class="line">        res.append(dq[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
+<li>官方题解的优先队列加注释<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 优先队列解法</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="comment"># 先入优先队列前k个元素</span></span><br><span class="line">        q  = [(-nums[i],i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k)]</span><br><span class="line">        heapq.heapify(q)</span><br><span class="line">        <span class="comment"># 加入现在的最大元素</span></span><br><span class="line">        res = [-q[<span class="number">0</span>][<span class="number">0</span>]]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k,n):</span><br><span class="line">            heapq.heappush(q, (-nums[i],i))</span><br><span class="line">            <span class="keyword">while</span> q[<span class="number">0</span>][<span class="number">1</span>] &lt;= i-k:</span><br><span class="line">                <span class="comment"># 延迟出队不在窗口内的元素</span></span><br><span class="line">                heapq.heappop(q)</span><br><span class="line">            res.append(-q[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
+<li>分组预处理，参考题解后复现<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 分组</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        preffixMax = [<span class="number">0</span>]*n</span><br><span class="line">        suffixMax = [<span class="number">0</span>]*n</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> i%k == <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 包括i=0</span></span><br><span class="line">                preffixMax[i] = nums[i]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                preffixMax[i] = <span class="built_in">max</span>(preffixMax[i-<span class="number">1</span>],nums[i])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> i == n-<span class="number">1</span> <span class="keyword">or</span> i%k == <span class="number">0</span>:</span><br><span class="line">                suffixMax[i] = nums[i]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                suffixMax[i] = <span class="built_in">max</span>(suffixMax[i+<span class="number">1</span>],nums[i])</span><br><span class="line">        </span><br><span class="line">        res = [<span class="built_in">max</span>(suffixMax[i],preffixMax[i+k-<span class="number">1</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-k+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">滑动窗口</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">单调队列</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">子串</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python/Hard//" class="article-tag-list-link color5">Hard</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/15/leetcode-239/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode-560" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1349,151 +1535,6 @@
 
 
   
-    <article id="post-leetcode-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/09/leetcode-1/">算法笔记📒 | leetcode-1 两数之和</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/09/leetcode-1/" class="archive-article-date">
-  	<time datetime="2025-05-09T06:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-两数之和"><a href="#1-两数之和" class="headerlink" title="1 两数之和"></a>1 两数之和</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
-<li>关于C++中vetcor数组的初始化方式以及基础函数的复习（不要混淆） <ul>
-<li>通过 .size() 访问长度（不是length） </li>
-<li>通过 .push_back 加入数组（不是append）</li>
-</ul>
-</li>
-<li>刷题：注意特殊值的判断，最后如果没有找到需要直接返回空数组。</li>
-</ul>
-<h2 id="2-语法复习"><a href="#2-语法复习" class="headerlink" title="2 语法复习"></a>2 语法复习</h2><h3 id="vector复习"><a href="#vector复习" class="headerlink" title="vector复习"></a>vector复习</h3><h4 id="初始化方式"><a href="#初始化方式" class="headerlink" title="初始化方式:"></a>初始化方式:</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;T&gt; v1;：默认初始化空向量。</span><br><span class="line">vector&lt;T&gt; v2(n, val);：创建含n个val值的向量。</span><br><span class="line">vector&lt;T&gt; v3(v2.begin(), v2.end());：通过迭代器范围拷贝构造。</span><br><span class="line">vector&lt;T&gt; v4 = &#123;a, b, c&#125;;：列表初始化（C++11）。</span><br><span class="line">vector&lt;T&gt; v5(v4);：拷贝构造函数。</span><br><span class="line">vector&lt;T&gt; v6(arr, arr + size);：从数组构造（arr为数组指针）</span><br></pre></td></tr></table></figure>
-<h4 id="基础函数："><a href="#基础函数：" class="headerlink" title="基础函数："></a>基础函数：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">元素访问：v[i]（下标访问）、v.front()/v.back()（首尾元素）、迭代器（begin()/end()）。</span><br><span class="line">增删操作：</span><br><span class="line">push_back(val)：尾部插入元素。</span><br><span class="line">insert(pos, val)：在迭代器pos前插入元素。</span><br><span class="line">erase(pos)或erase(begin, end)：删除元素。</span><br><span class="line">容量查询：size()、empty()、capacity()（实际分配内存大小）。</span><br><span class="line">调整容量：resize(n)（调整元素数量）、reserve(n)（预分配内存避免扩容开销）。</span><br></pre></td></tr></table></figure>
-<h3 id="哈希表复习"><a href="#哈希表复习" class="headerlink" title="哈希表复习"></a>哈希表复习</h3><p>哈希函数：将键映射到数组索引（如取模运算hash(key) % capacity）<br>方法：</p>
-<ul>
-<li>链地址法：每个槽位维护链表存储冲突键值对（C++ std::unordered_map的默认实现）。</li>
-<li>开放定址法：线性探测&#x2F;二次探测寻找空槽位。</li>
-<li>再哈希法：使用多个哈希函数减少冲突概率。</li>
-</ul>
-<h3 id="3-答案对比"><a href="#3-答案对比" class="headerlink" title="3 答案对比"></a>3 答案对比</h3><ol>
-<li>2层for循环（自己的初始解法），时间复杂度<code>O(N^2)</code>。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> temp = <span class="number">0</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>(); <span class="comment">// size,not length</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j == i) &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="type">int</span> temp = nums[i] + nums[j];</span><br><span class="line">                    <span class="keyword">if</span> (temp == target) &#123;</span><br><span class="line">                        res.<span class="built_in">push_back</span>(i); <span class="comment">// push_back,not append</span></span><br><span class="line">                        res.<span class="built_in">push_back</span>(j);</span><br><span class="line">                        <span class="keyword">return</span> res;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res; <span class="comment">// 保证都有返回值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>借助哈希表（参考其他答案后复现的解法），时间复杂度<code>O(N)</code>。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 新建从数字到索引的键值对哈希表</span></span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; number_idx;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 遍历nums中的元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 将数字-索引键值对加入哈希表</span></span><br><span class="line">            number_idx.<span class="built_in">insert</span>(unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt;::<span class="built_in">value_type</span>(nums[i], i));</span><br><span class="line">            <span class="comment">// 如果当前哈希表中存在target-num[i](需要的数字)，且这个数字不是当前的索引，找到res</span></span><br><span class="line">            <span class="keyword">if</span> (number_idx.<span class="built_in">count</span>(target - nums[i])&gt;<span class="number">0</span> &amp;&amp; number_idx[target - nums[i]] != i) &#123;</span><br><span class="line">                res.<span class="built_in">push_back</span>(number_idx[target - nums[i]]);</span><br><span class="line">                res.<span class="built_in">push_back</span>(i);</span><br><span class="line">                <span class="keyword">return</span> res;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>说明：</p>
-<ul>
-<li><code>unordered_map&lt;int, int&gt; number_idx;</code>:键为nums数组中的数字，值为数字对应的索引</li>
-<li><code>number_idx.insert(unordered_map&lt;int, int&gt;::value_type(nums[i], i));</code>：unordered_map的insert()要求参数为键值对对象，显式使用value_type</li>
-<li><code>if (number_idx.count(target - nums[i])&gt;0 &amp;&amp; number_idx[target - nums[i]] != i)</code>:包括2个判断条件：<ul>
-<li>当前哈希表中存在target-num[i]</li>
-<li>target-num[i]不是当前索引的数字</li>
-</ul>
-</li>
-</ul>
-<h2 id="4-疑问解答"><a href="#4-疑问解答" class="headerlink" title="4 疑问解答"></a>4 疑问解答</h2><h3 id="1-C-中数组不同的初始化方式的区别"><a href="#1-C-中数组不同的初始化方式的区别" class="headerlink" title="1 C++中数组不同的初始化方式的区别"></a>1 C++中数组不同的初始化方式的区别</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. int*</span><br><span class="line">//需要手动管理内存 </span><br><span class="line">int *res=NULL;</span><br><span class="line">res=(int*)malloc(sizeof(int)*2);</span><br><span class="line">delete[] res;</span><br><span class="line">2. vector&lt;int&gt;</span><br><span class="line">//自动管理内存,适合频繁插入或删除元素</span><br><span class="line">vector&lt;int&gt; res;</span><br></pre></td></tr></table></figure>
-<h3 id="2-C-中向unordered-map加入键值对的不同方式区别"><a href="#2-C-中向unordered-map加入键值对的不同方式区别" class="headerlink" title="2 C++中向unordered_map加入键值对的不同方式区别"></a>2 C++中向unordered_map加入键值对的不同方式区别</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. u_map[key] = value;</span><br><span class="line">若键nums[i]已存在，会直接覆盖对应的旧值.</span><br><span class="line">若键不存在，会自动插入key → default_value（默认值），再通过赋值操作更新为i。对于int类型，默认值为0。</span><br><span class="line">2. u_map.insert()</span><br><span class="line">若键已存在，插入操作会失败，不会修改原有键值对.</span><br><span class="line">直接插入完整的键值对nums[i] → i，无需中间赋值步骤.</span><br><span class="line">返回pair&lt;iterator, bool&gt;，其中：</span><br><span class="line">    bool表示插入是否成功；</span><br><span class="line">    iterator指向插入后的元素或已存在的元素.</span><br></pre></td></tr></table></figure>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>注：在语法复习、疑问解答中，有参考AI工具。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">哈希表</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C/Easy//" class="article-tag-list-link color5">Easy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/09/leetcode-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1725,6 +1766,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">记忆化搜索</a>
               </li>
             
             <div class="clearfix"></div>

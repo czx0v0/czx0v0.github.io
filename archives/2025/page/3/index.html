@@ -6,24 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://czx0v0.github.io">
-  <title>算法笔记📒 | leetcode-49 字母异位词分组 | czx0v0的宇宙自习室</title>
+  <title>Archives: 2025 | czx0v0的宇宙自习室</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="leetcode-49 字母异位词分组1 反思 因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。 可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上sorted_string &#x3D;）。  除了mp.insert(&amp;#123;sorted_s">
-<meta property="og:type" content="article">
-<meta property="og:title" content="算法笔记📒 | leetcode-49 字母异位词分组">
-<meta property="og:url" content="https://czx0v0.github.io/2025/05/10/leetcode-49/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="czx0v0的宇宙自习室">
+<meta property="og:url" content="https://czx0v0.github.io/archives/2025/page/3/index.html">
 <meta property="og:site_name" content="czx0v0的宇宙自习室">
-<meta property="og:description" content="leetcode-49 字母异位词分组1 反思 因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。 可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上sorted_string &#x3D;）。  除了mp.insert(&amp;#123;sorted_s">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-05-10T09:22:45.000Z">
-<meta property="article:modified_time" content="2025-05-21T04:55:52.304Z">
 <meta property="article:author" content="czx0v0">
-<meta property="article:tag" content="C++">
-<meta property="article:tag" content="算法笔记">
-<meta property="article:tag" content="哈希表">
-<meta property="article:tag" content="Hot100">
-<meta property="article:tag" content="Medium">
-<meta property="article:tag" content="Python">
+<meta property="article:tag" content="study">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="czx0v0的宇宙自习室" type="application/atom+xml">
@@ -212,70 +203,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-leetcode-49" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      算法笔记📒 | leetcode-49 字母异位词分组
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2025" class="archive-year">2025</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2025/05/09/leetcode-1/" class="archive-article-date">
+  	<time datetime="2025-05-09T06:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-09</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2025/05/09/leetcode-1/">算法笔记📒 | leetcode-1 两数之和</a>
     </h1>
   
 
-        
-        <a href="/2025/05/10/leetcode-49/" class="archive-article-date">
-  	<time datetime="2025-05-10T09:22:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-49-字母异位词分组"><a href="#leetcode-49-字母异位词分组" class="headerlink" title="leetcode-49 字母异位词分组"></a>leetcode-49 字母异位词分组</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
-<li>因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。</li>
-<li>可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上<code>sorted_string =</code>）。 </li>
-<li>除了<code>mp.insert(&#123;sorted_str,&#123;str[i]&#125;&#125;)</code>之外也可以用<code>mp.emplace(sorted_str,vector&lt;string&gt;&#123;strs[i]&#125;)</code>语句实现将键值对插入到unordered_map中！(此外还有leetcode-1笔记中提到的<code>mp[key]=value</code>)。</li>
-<li>参考题解，对vector也可以用<code>.emplace_back()</code>插入最后。</li>
-<li><code>res.reserve(res_hash.size());</code>最后在将键值对的值变为res的元素时可以预留空间。</li>
-<li><code>for(auto it = mp.begin();it!=mp.end();++it)</code>可以遍历键值对，<code>it-&gt;first</code>,<code>it-second</code>分别访问键和值，也可以通过<code>for (auto&amp; [key, value] : mp) </code>或<code>for (auto&amp; pair : mp)</code>访问，第二种要通过<code>pair.first</code>,<code>pair.second</code>访问key，value。</li>
-<li>查看题解后发现，也可以通过26个字母计数的方式对比，这种方法我没有复现代码。</li>
-<li>初始化时不要忘了为0，如<code>int str_keys_length = 0;</code>。</li>
-</ul>
-<h2 id="2-答案对比"><a href="#2-答案对比" class="headerlink" title="2 答案对比"></a>2 答案对比</h2><ol>
-<li>一开始的复杂版本<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 分析：</span></span><br><span class="line">    <span class="comment">// 初步思路：每个字符串对应一个哈希表：键：字符，值：字符在字符串中的索引，如：cat，c-&gt;0,a-&gt;1,t-&gt;2</span></span><br><span class="line">    <span class="comment">// 疑问：如果同一个字符出现多次怎么办？-&gt;改为存储每个字母的出现次数而不是索引，最后加入结果时再判重</span></span><br><span class="line">    <span class="comment">// 字母异位词特点：</span></span><br><span class="line">    <span class="comment">// 1. 字符串长度相同，且中每个字母的出现次数相同 -&gt; 键总数相同，键相同且相同</span></span><br><span class="line">    <span class="comment">// 2. 根据要求，字母异位应该是需要顺序不完全相同的 -&gt;</span></span><br><span class="line">    <span class="comment">// 值数组存在不同（加入结果时判断） 整体流程：</span></span><br><span class="line">    <span class="comment">// 遍历strs中的每个元素，对已在结果数组中的每个数组取第一个元素，判断当前元素是否与结果数组中的元素为字母异位词（键相同且值数组的长度相同），是则判重并加入此数组，不是则新建数组作为第一个元素加入。</span></span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; res;</span><br><span class="line">    vector&lt;unordered_map&lt;<span class="type">char</span>,<span class="type">int</span>&gt;&gt; res_maps;</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; strs.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 遍历strs中的每个字符串</span></span><br><span class="line">            unordered_map&lt;<span class="type">char</span>,<span class="type">int</span>&gt; str_map;</span><br><span class="line">            <span class="comment">// 遍历当前字符串的每个字符，转换为哈希表，并建立键数组</span></span><br><span class="line">            <span class="type">int</span> str_keys_length = <span class="number">0</span>; <span class="comment">//不要忘了初始化为0</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; strs[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (str_map.<span class="built_in">count</span>(strs[i][j])&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="comment">// 如果当前字符strs[i][j]在哈希表中,将新索引加入到值数组</span></span><br><span class="line">                    str_map[strs[i][j]] += <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 否则，新建键为当前字符，值初始化为1</span></span><br><span class="line">                    <span class="comment">// str_map[strs[i][j]] = 1;</span></span><br><span class="line">                    str_map.<span class="built_in">insert</span>(unordered_map&lt;<span class="type">char</span>, <span class="type">int</span>&gt;::<span class="built_in">value_type</span>(strs[i][j], <span class="number">1</span>));</span><br><span class="line">                    <span class="comment">// 加入键数组</span></span><br><span class="line">                    str_keys_length++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 和res_maps（结果数组中的每个数组取第一个元素的哈希表），对比，判断是否为字母异位词</span></span><br><span class="line">            <span class="type">int</span> anagrams_index = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; res_maps.<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="type">bool</span> is_anagrams = <span class="literal">true</span>;</span><br><span class="line">                <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">// 对res_maps中的每个哈希表，建立键数组</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> it = res_maps[j].<span class="built_in">begin</span>(); it != res_maps[j].<span class="built_in">end</span>();++it) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    <span class="comment">// 遍历哈希表中的每个键,判断键是否在当前数组str_map中，并判断值是否相等</span></span><br><span class="line">                    <span class="keyword">if</span> (str_map.<span class="built_in">count</span>(it-&gt;first)&gt;<span class="number">0</span> &amp;&amp;</span><br><span class="line">                        str_map[it-&gt;first] == it-&gt;second) &#123;</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        is_anagrams = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(count != str_keys_length)&#123;</span><br><span class="line">                    is_anagrams = <span class="literal">false</span>;<span class="comment">//这里不能加break</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//判断flag是否为异位词，是则判重并加入此数组，不是则新建数组作为第一个元素加入。</span></span><br><span class="line">                <span class="keyword">if</span>(is_anagrams==<span class="literal">true</span>)&#123;</span><br><span class="line">                    anagrams_index = j;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                    <span class="comment">//这里没有判重</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//最后判断anagrams_index，有则加入对应数组，没有-1则新建数组加入res</span></span><br><span class="line">            <span class="keyword">if</span>(anagrams_index != <span class="number">-1</span>)&#123;</span><br><span class="line">                res[anagrams_index].<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                vector&lt;string&gt; str_vec;</span><br><span class="line">                str_vec.<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">                res.<span class="built_in">push_back</span>(str_vec);</span><br><span class="line">                res_maps.<span class="built_in">push_back</span>(str_map);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>看题解思路后重新完成的字符串排序版本<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 键：排序后的字符串；值：排序后的字符串对应的数组</span></span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; res;</span><br><span class="line">    unordered_map&lt;string,vector&lt;string&gt;&gt; res_hash;</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; strs.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 遍历strs中的每个字符串</span></span><br><span class="line">            <span class="comment">// 排序</span></span><br><span class="line">            string sorted_str = strs[i];</span><br><span class="line">            ranges::<span class="built_in">sort</span>(sorted_str);</span><br><span class="line">            <span class="keyword">if</span>(res_hash.<span class="built_in">count</span>(sorted_str)&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="comment">//已经有键</span></span><br><span class="line">                res_hash[sorted_str].<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//没有，新建字符串键值对并加入</span></span><br><span class="line">                res_hash.<span class="built_in">emplace</span>(sorted_str,vector&lt;string&gt;&#123;strs[i]&#125;);</span><br><span class="line">            &#125;       </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//预留空间</span></span><br><span class="line">        res.<span class="built_in">reserve</span>(res_hash.<span class="built_in">size</span>());</span><br><span class="line">        <span class="comment">//遍历加入结果中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = res_hash.<span class="built_in">begin</span>();it!=res_hash.<span class="built_in">end</span>();++it)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(it-&gt;second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>补充Python解法<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">groupAnagrams</span>(<span class="params">self, strs: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]:</span><br><span class="line">        mp = collections.defaultdict(<span class="built_in">list</span>)</span><br><span class="line">        <span class="keyword">for</span> st <span class="keyword">in</span> strs:</span><br><span class="line">            k = <span class="string">&quot;&quot;</span>.join(<span class="built_in">sorted</span>(st)) <span class="comment"># key保证为字符串而不是list</span></span><br><span class="line">            mp[k].append(st) <span class="comment"># 直接将字符串加入值数组</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(mp.values())  <span class="comment"># 转换为list，直接返回效率高</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果=w=，也分你一块！<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -293,21 +250,21 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -321,68 +278,27 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C/Medium//" class="article-tag-list-link color2">Medium</a>
+        			<a href="/categories/自习室/C/Easy//" class="article-tag-list-link color5">Easy</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2025/05/11/leetcode-128/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          算法笔记📒 | leetcode-128 最长连续序列
-        
-      </div>
-    </a>
   
   
-    <a href="/2025/05/09/leetcode-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">算法笔记📒 | leetcode-1 两数之和</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2025/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2025/">1</a><a class="page-number" href="/archives/2025/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
   
 
 
@@ -406,8 +322,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
