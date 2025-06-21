@@ -205,19 +205,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-leetcode-160" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-leetcode-189" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/20/leetcode-160/">算法笔记📒 | leetcode-160 相交链表</a>
+      <a class="article-title" href="/2025/05/20/leetcode-189/">算法笔记📒 | leetcode-189 轮转数组</a>
     </h1>
   
 
         
-        <a href="/2025/05/20/leetcode-160/" class="archive-article-date">
+        <a href="/2025/05/20/leetcode-189/" class="archive-article-date">
   	<time datetime="2025-05-20T12:52:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-20</time>
 </a>
         
@@ -225,12 +225,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="leetcode-189-轮转数组"><a href="#leetcode-189-轮转数组" class="headerlink" title="leetcode-189 轮转数组"></a>leetcode-189 轮转数组</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+        <h1 id="leetcode-189-轮转数组"><a href="#leetcode-189-轮转数组" class="headerlink" title="leetcode-189 轮转数组"></a>leetcode-189 轮转数组</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-array?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
 <h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>注意list&#x3D;&#x3D;NULL和listA-&gt;next&#x3D;&#x3D;NULL的区别，推演。最终二者都为null也是相等的条件。</li>
-<li>nullptr解决NULL的遗留问题，更推荐。</li>
+<li>思路1:不考虑空间复杂度，用多余数组存储原始nums。</li>
+<li>参考题解，有2种方案可以优化，分别是环状替换以及数组翻转（后续有空更新）。</li>
 </ul>
-<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">getIntersectionNode</span><span class="params">(ListNode* headA, ListNode* headB)</span> </span>&#123;</span><br><span class="line">        ListNode* listA = headA;</span><br><span class="line">        ListNode* listB = headB;</span><br><span class="line">        <span class="keyword">while</span>(listA!=listB)&#123;</span><br><span class="line">            listA = listA==<span class="literal">nullptr</span>?headB:listA-&gt;next;</span><br><span class="line">            listB = listB==<span class="literal">nullptr</span>?headA:listB-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> listA;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>最初解答<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">rotate</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 思路1:不考虑空间复杂度，用多余数组存储原始nums</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        k = k%n</span><br><span class="line">        nums_temp = nums.copy()</span><br><span class="line">        <span class="keyword">if</span> n &lt;=<span class="number">1</span> :</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        i =  <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n-k,n):</span><br><span class="line">            nums[i] = nums_temp[j]</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n-k):</span><br><span class="line">            nums[i] = nums_temp[j]</span><br><span class="line">            i += <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
 
@@ -248,7 +250,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -256,11 +258,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Cpp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
         		</li>
       		
 		</ul>
@@ -276,11 +278,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Cpp//" class="article-tag-list-link color4">Cpp</a>
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Cpp/Easy//" class="article-tag-list-link color5">Easy</a>
+        			<a href="/categories/自习室/Python/Medium//" class="article-tag-list-link color2">Medium</a>
         		</li>
       		
 		</ul>
@@ -289,7 +291,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/20/leetcode-160/">展开全文 >></a>
+          <a class="article-more-a" href="/2025/05/20/leetcode-189/">展开全文 >></a>
         </p>
       
 
@@ -373,11 +375,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
         		</li>
       		
 		</ul>
@@ -510,11 +512,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -812,15 +814,15 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">滑动窗口</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">单调队列</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">堆</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">滑动窗口</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -948,11 +950,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1070,15 +1072,15 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
@@ -1186,11 +1188,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1317,19 +1319,19 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hard</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1672,6 +1674,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">记忆化搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">双指针</a>
               </li>
              
@@ -1680,11 +1694,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+                <a href="javascript:void(0)" class="js-tag color4">Cpp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1704,23 +1726,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">二分查找</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">单调队列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">堆</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1732,15 +1746,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
+                <a href="javascript:void(0)" class="js-tag color5">二分查找</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">DP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分治法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1749,6 +1763,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">模拟</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分治法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1765,22 +1783,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">记忆化搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Cpp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
             
             <div class="clearfix"></div>
