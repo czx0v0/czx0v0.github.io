@@ -205,6 +205,502 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode-160" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/20/leetcode-160/">算法笔记📒 | leetcode-160 相交链表</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/20/leetcode-160/" class="archive-article-date">
+  	<time datetime="2025-05-20T12:52:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-189-轮转数组"><a href="#leetcode-189-轮转数组" class="headerlink" title="leetcode-189 轮转数组"></a>leetcode-189 轮转数组</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>注意list&#x3D;&#x3D;NULL和listA-&gt;next&#x3D;&#x3D;NULL的区别，推演。最终二者都为null也是相等的条件。</li>
+<li>nullptr解决NULL的遗留问题，更推荐。</li>
+</ul>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">getIntersectionNode</span><span class="params">(ListNode* headA, ListNode* headB)</span> </span>&#123;</span><br><span class="line">        ListNode* listA = headA;</span><br><span class="line">        ListNode* listB = headB;</span><br><span class="line">        <span class="keyword">while</span>(listA!=listB)&#123;</span><br><span class="line">            listA = listA==<span class="literal">nullptr</span>?headB:listA-&gt;next;</span><br><span class="line">            listB = listB==<span class="literal">nullptr</span>?headA:listB-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> listA;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Cpp//" class="article-tag-list-link color4">Cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Cpp/Easy//" class="article-tag-list-link color5">Easy</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/20/leetcode-160/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-56" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/20/leetcode-56/">算法笔记📒 | leetcode-56 合并区间</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/20/leetcode-56/" class="archive-article-date">
+  	<time datetime="2025-05-20T12:51:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-56-合并区间"><a href="#leetcode-56-合并区间" class="headerlink" title="leetcode-56 合并区间"></a>leetcode-56 合并区间</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-intervals?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>最初解答想到了简单的排序+新数组， <code>sorted(intervals,key =lambda x:x[0])</code>，理解为按照每个二维数组的列排序。</li>
+<li>尝试不新增intervals优化空间和时间效率。</li>
+</ul>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>最初解答（排序+新数组）<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">self, intervals: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        sorted_intervals = <span class="built_in">sorted</span>(intervals,key =<span class="keyword">lambda</span> x:x[<span class="number">0</span>])</span><br><span class="line">        n = <span class="built_in">len</span>(sorted_intervals)</span><br><span class="line">        new_intervals = []</span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; n:</span><br><span class="line">            j = i</span><br><span class="line">            current_end = sorted_intervals[i][<span class="number">1</span>]</span><br><span class="line">            max_end = current_end</span><br><span class="line">            current_start = sorted_intervals[i][<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">while</span> i+<span class="number">1</span> &lt; n <span class="keyword">and</span> max_end &gt;= sorted_intervals[i+<span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">                <span class="keyword">if</span> sorted_intervals[i+<span class="number">1</span>][<span class="number">1</span>] &gt;max_end:</span><br><span class="line">                    max_end = sorted_intervals[i+<span class="number">1</span>][<span class="number">1</span>] </span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            new_intervals.append([current_start,max_end])</span><br><span class="line">            i = j+<span class="number">1</span> </span><br><span class="line">        <span class="keyword">return</span> new_intervals</span><br><span class="line">        </span><br></pre></td></tr></table></figure></li>
+<li>尝试不新增intervals优化空间和时间效率。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">self, intervals: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="comment"># 排序</span></span><br><span class="line">        intervals = <span class="built_in">sorted</span>(intervals, key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>])</span><br><span class="line">        n = <span class="built_in">len</span>(intervals)</span><br><span class="line">        new_intervals = []</span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; n:</span><br><span class="line">            <span class="comment"># 记录当前start，end以及max_end</span></span><br><span class="line">            current_end = intervals[i][<span class="number">1</span>]</span><br><span class="line">            max_end = current_end</span><br><span class="line">            current_start = intervals[i][<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">while</span> i + <span class="number">1</span> &lt; n <span class="keyword">and</span> max_end &gt;= intervals[i + <span class="number">1</span>][<span class="number">0</span>]:</span><br><span class="line">                <span class="comment"># 当i指向的元素的起始点比 max_end小或者相等时循环向前</span></span><br><span class="line">                <span class="keyword">if</span> intervals[i + <span class="number">1</span>][<span class="number">1</span>] &gt; max_end:</span><br><span class="line">                    <span class="comment"># 对每个元素判断更新max_end</span></span><br><span class="line">                    max_end = intervals[i + <span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            <span class="comment"># 当i指向的元素的起始点比 max_end大，退出，把元素加入新的数组</span></span><br><span class="line">            new_intervals.append([current_start, max_end])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> new_intervals</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python/Medium//" class="article-tag-list-link color2">Medium</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/20/leetcode-56/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-53" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/18/leetcode-53/">算法笔记📒 | leetcode-53 最大子数组和</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/18/leetcode-53/" class="archive-article-date">
+  	<time datetime="2025-05-18T05:15:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-53-最大子数组和"><a href="#leetcode-53-最大子数组和" class="headerlink" title="leetcode-53 最大子数组和"></a>leetcode-53 最大子数组和</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>dp的知识点：<ul>
+<li>可以不只考虑当前元素的正负号，考虑前面元素最大和的正负，如果是负号就不必相加，而是尝试另起炉灶将当前元素作为新的加和起始</li>
+<li>状态定义（对每个数都有一个子问题）：dp[i]表示以i结尾元素的最大的子数组的和</li>
+<li>状态转移方程： <ul>
+<li>如果<code>dp[i-1]&lt;=0,dp[i] = nums[i]</code></li>
+<li>如果<code>dp[i-1]&gt;0,dp[i] = dp[i-1]+nums[i]</code>,相加会变大 </li>
+<li>可以合并成<code>dp[i] = max(dp[i-1] + nums[i],nums[i])</code>在两种情况取最大值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分治法：（参考题解的分治法（递归））<ul>
+<li>中止条件<code>len(nums)== 1</code> </li>
+<li>3部分：对<code>mid = len(nums)//2</code><ul>
+<li>1 左边子数组最大和<code>[0,mid-1]</code>，递归求解 </li>
+<li>2 右边子数组最大和<code>[mid,n-1]</code>，递归求解 </li>
+<li>3 中间数组最大和，通过<code>[mid-1,mid]</code>的子数组最大值，，分别从mid-1到0求左侧最大和以及从mid到n求右侧最大和并相加 </li>
+<li>最后返回以上3部分最大值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>动态规划<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># dp[i]表示以i结尾元素的最大的子数组的和</span></span><br><span class="line">        <span class="comment"># 可以不只考虑当前元素的正负号，考虑前面元素最大和的正负，如果是负号就不必相加，而是尝试另起炉灶将当前元素作为新的加和起始</span></span><br><span class="line">        <span class="comment"># 对dp[i+1]</span></span><br><span class="line">        <span class="comment">#   如果dp[i-1]&lt;=0,dp[i] = nums[i]</span></span><br><span class="line">        <span class="comment">#   如果dp[i-1]&gt;0,dp[i] = dp[i-1]+nums[i],相加会变大</span></span><br><span class="line">        <span class="comment"># 可以合并成dp[i] = max(dp[i-1] + nums[i],nums[i])在两种情况取最大值</span></span><br><span class="line">        <span class="comment"># 最后要取max(dp)</span></span><br><span class="line">        <span class="comment"># 也可以不用数组，用pre作为滚动变量（空间优化）</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        dp = [<span class="number">0</span>]*n</span><br><span class="line">        <span class="comment"># 题目设置n&gt;=1</span></span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>] + nums[i],nums[i])</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(dp)</span><br></pre></td></tr></table></figure></li>
+<li>分治法<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 参考题解的分治法（递归）</span></span><br><span class="line">        <span class="comment"># 3部分：对mid = n//2</span></span><br><span class="line">        <span class="comment"># 1 左边子数组最大和[0,mid-1]，递归求解</span></span><br><span class="line">        <span class="comment"># 2 右边子数组最大和[mid,n-1]，递归求解</span></span><br><span class="line">        <span class="comment"># 3 中间数组最大和，通过[mid-1,mid]的子数组最大值，，分别从mid-1到0求左侧最大和以及从mid到n求右侧最大和并相加</span></span><br><span class="line">        <span class="comment"># 最后返回以上3部分最大值</span></span><br><span class="line">        <span class="comment"># 递归中止</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 递归求左边和右边的子数组最大和</span></span><br><span class="line">            max_left = <span class="variable language_">self</span>.maxSubArray(nums[<span class="number">0</span>:<span class="built_in">len</span>(nums)//<span class="number">2</span>]) <span class="comment"># [0,mid-1],mid = len(nums)//2</span></span><br><span class="line">            max_right = <span class="variable language_">self</span>.maxSubArray(nums[<span class="built_in">len</span>(nums)//<span class="number">2</span>:<span class="built_in">len</span>(nums)])<span class="comment"># [mid,n-1]</span></span><br><span class="line">        <span class="comment"># 求中间的通过[mid-1,mid]的子数组最大值，分别从mid-1到0求左侧最大和以及从mid到n求右侧最大和并相加</span></span><br><span class="line">        max_l = nums[<span class="built_in">len</span>(nums)//<span class="number">2</span>-<span class="number">1</span>]</span><br><span class="line">        t = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)//<span class="number">2</span>-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            t += nums[i]</span><br><span class="line">            max_l = <span class="built_in">max</span>(max_l,t)</span><br><span class="line">        max_r = nums[<span class="built_in">len</span>(nums)//<span class="number">2</span>]</span><br><span class="line">        t = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)//<span class="number">2</span>,<span class="built_in">len</span>(nums)):</span><br><span class="line">            t += nums[i]</span><br><span class="line">            max_r = <span class="built_in">max</span>(max_r,t)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(max_l+max_r,max_left,max_right)</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">DP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">分治法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python/Medium//" class="article-tag-list-link color2">Medium</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/18/leetcode-53/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-35" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/18/leetcode-35/">算法笔记📒 | leetcode-35 搜索插入位置</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/18/leetcode-35/" class="archive-article-date">
+  	<time datetime="2025-05-18T04:57:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-35-搜索插入位置"><a href="#leetcode-35-搜索插入位置" class="headerlink" title="leetcode-35 搜索插入位置"></a>leetcode-35 搜索插入位置</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>本题还需要考虑二分查找的边界条件的判断，以及计算时的取整方法，结束时的返回值等。最初的个人解法不够简洁。</li>
+<li>我比较喜欢左闭右闭模版，两种情况更新比较对称，注意循环条件是<code>l &lt; r</code>，初始是<code>r = n-1</code>。</li>
+<li>取整时尝试了一下发现int和ceil都是可以的。</li>
+</ul>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>参考题解后的套用模板<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">searchInsert</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        l = <span class="number">0</span></span><br><span class="line">        r = n-<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> l &lt;= r:</span><br><span class="line">            <span class="comment"># 小于等于，左闭右闭模版</span></span><br><span class="line">            mid = <span class="built_in">int</span>((r+l)/<span class="number">2</span>) <span class="comment"># 尝试了一下int和ceil都是可以的</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid] &gt;target:</span><br><span class="line">                r = mid-<span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> nums[mid] &lt;target:</span><br><span class="line">                l = mid+<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> mid</span><br><span class="line">        <span class="keyword">return</span> l</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">二分查找</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python/Easy//" class="article-tag-list-link color5">Easy</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/18/leetcode-35/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode-239" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1038,503 +1534,6 @@
 
 
   
-    <article id="post-leetcode-11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/12/leetcode-11/">算法笔记📒 | leetcode-11  盛最多水的容器</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/12/leetcode-11/" class="archive-article-date">
-  	<time datetime="2025-05-12T03:19:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-11-盛最多水的容器"><a href="#leetcode-11-盛最多水的容器" class="headerlink" title="leetcode-11 盛最多水的容器"></a>leetcode-11 盛最多水的容器</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>直接暴力求解会超时，用双指针做法。在草稿纸上画图找答案，模拟如果一个在前面一个在后面的话要怎样移动，试了一下移动所指元素高度小的（因为能盛的水是由最矮的高度决定的，如果移动高的，无法找到更多水的了），发现成功通过，但耗时较长。</li>
-<li>看了一下官方题解，发现是用的while循环（整体思路是一致的）。</li>
-</ul>
-<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
-<li>自己一开始的解答（耗时还是有点长？）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxArea</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; height)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 思路1，一个i从前往后，一个j从后往前，height小的移动，直到相遇</span></span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> max_left = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> max_right = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = height.<span class="built_in">size</span>() - <span class="number">1</span>; i &lt; j;) &#123;</span><br><span class="line">            <span class="type">int</span> v = <span class="built_in">min</span>(height[i], height[j]) * <span class="built_in">abs</span>(j - i);</span><br><span class="line">            <span class="keyword">if</span> (res &lt; v) &#123;</span><br><span class="line">                res = v;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (height[i] &lt; height[j]) &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C/Medium//" class="article-tag-list-link color2">Medium</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/12/leetcode-11/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-283" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/11/leetcode-283/">算法笔记📒 | leetcode-283 移动零</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/11/leetcode-283/" class="archive-article-date">
-  	<time datetime="2025-05-11T04:00:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-283-移动零"><a href="#leetcode-283-移动零" class="headerlink" title="leetcode-283 移动零"></a>leetcode-283 移动零</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
-<li>是简单题目，解答的基本思路是正确的，有参考题目本身双指针的提示。</li>
-<li>仔细查看官方题解后发现思路是相似的但不完全一样。<ul>
-<li>自己的解法不是交换，是直接替换，多了填充的步骤。</li>
-<li>官方解法是设置左右指针，左指针指向处理好的序列尾部，右指针不断向，找到非零数和左指针的数字替换。整体更简洁。</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-答案对比"><a href="#2-答案对比" class="headerlink" title="2 答案对比"></a>2 答案对比</h2><ol>
-<li>自己解答<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 审题之后一开始以为是排序，之后发现不是排序，只需要保持相对顺序即可。</span></span><br><span class="line">    <span class="comment">// 参考提示，可以选择双指针，一个指针遍历，一个指针操作非0元素</span></span><br><span class="line">    <span class="comment">// 在草稿纸上模拟了一下流程，思路大概是i从头到尾遍历一次，用于标记当前的位置，并记录当前位置是否为0，统计0的数目count</span></span><br><span class="line">    <span class="comment">// j则从头到尾找非0元素，找到了就替换i处的元素，i向后知道到达nums.size()-count,后面都是0</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//当i没有到达nums.size()-count,即j没有找到所有的非零元素时</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt; nums.<span class="built_in">size</span>() - count) &#123;</span><br><span class="line">            <span class="comment">// 对j:当前数字不为0，替换i，为0，count+1</span></span><br><span class="line">            <span class="keyword">if</span> (nums[j] != <span class="number">0</span>) &#123;</span><br><span class="line">                nums[i] = nums[j];</span><br><span class="line">                j++;</span><br><span class="line">                i++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                count++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 后面的count个填充为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= count; i++) &#123;</span><br><span class="line">            nums[nums.<span class="built_in">size</span>() - i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>查看官方思路后复现<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 复现官方思路，设置左右指针，左指针指向处理好的序列尾部，右指针不断向，找到非零数和左指针的数字替换</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">moveZeroes</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = <span class="number">0</span>, r = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//当i没有到达nums.size()时循环(r从左到右1次即可)</span></span><br><span class="line">        <span class="keyword">while</span> (r &lt; nums.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            <span class="comment">// 对j:当前数字不为0，替换i，为0，count+1</span></span><br><span class="line">            <span class="keyword">if</span> (nums[r] != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">swap</span>(nums[l],nums[r]);</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">            r++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C/Easy//" class="article-tag-list-link color5">Easy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/11/leetcode-283/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-128" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/11/leetcode-128/">算法笔记📒 | leetcode-128 最长连续序列</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/11/leetcode-128/" class="archive-article-date">
-  	<time datetime="2025-05-11T02:35:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-128-最长连续序列"><a href="#leetcode-128-最长连续序列" class="headerlink" title="leetcode-128 最长连续序列"></a>leetcode-128 最长连续序列</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
-<li>一开始提交有错误，后来加上了最后的一次检查更新以及空数组的特殊情况就都正确了。</li>
-<li>思路1感觉有受到昨天字符串排序的启发，一看到就直接想着先排序然后count最长连续序列了，没有用到哈希表，不过看了一下题解的评论区发现实际不能直接用sort！而且排序后时间复杂度无法达到o(n)</li>
-<li>看了题解后尝试理解思路和复现代码。<ul>
-<li>用哈希表看数组中是否存在一个需要的数可以将时间复杂度优化到o(1)。</li>
-<li>思路是外层循环枚举n个数，内层循环匹配序列，并在外层中加入跳过（判断哈希表中是否存在x-1），这样数组中每个数不会重复进入内层循环，时间复杂度o（n）。</li>
-</ul>
-</li>
-<li>思路2注意：<ul>
-<li>无需用unordered_map,可以直接用unoedered_set,存储数字即可</li>
-<li>也需要在前面加上对空数组的判断</li>
-<li>注意外层循环不是对nums数组循环，而是直接对unorderd_set循环即可，减少重复。<ul>
-<li>unordered_set可通过<code>for (auto it = st1.begin();it!=st1.end();++it)</code>语句迭代，*it访问迭代器指向的元素。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-答案对比"><a href="#2-答案对比" class="headerlink" title="2 答案对比"></a>2 答案对比</h2><ol>
-<li>最初的简单思路答案（发现实际面试中不可以直接用sort）（审题不够认真+排序时间复杂度记错）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 简单想法1：先排序（至少需要nlogn复杂度）,然后找出最长的数字连续的序列(全遍历一遍需要n复杂度)</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">longestConsecutive</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; sorted_nums = nums;</span><br><span class="line">        ranges::<span class="built_in">sort</span>(sorted_nums);</span><br><span class="line">        <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//注意！空数组的特殊情况</span></span><br><span class="line">        <span class="keyword">if</span>(sorted_nums.<span class="built_in">size</span>() == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; sorted_nums.<span class="built_in">size</span>() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((sorted_nums[i + <span class="number">1</span>] - sorted_nums[i]) == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 如果下一个数字和当前数字连续，count+1</span></span><br><span class="line">                count = count + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sorted_nums[i + <span class="number">1</span>] == sorted_nums[i]) &#123;</span><br><span class="line">                <span class="comment">// 如果下一个数字和当前数字相等，跳过</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 否则，检查更新res</span></span><br><span class="line">                <span class="keyword">if</span> (count &gt; res) &#123;</span><br><span class="line">                    res = count;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//重置count</span></span><br><span class="line">                count = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//注意最后再次检查更新！</span></span><br><span class="line">        <span class="keyword">if</span> (count &gt; res) &#123;</span><br><span class="line">            res = count;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-2.学习题解思路后，完成的版本，借助unordered_set<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 想法2：哈希表</span></span><br><span class="line">    <span class="comment">// 思路：外层循环枚举n个数，内层循环匹配序列，并在外层中加入跳过（判断哈希表中是否存在x-1），这样数组中每个数不会重复进入内层循环，时间复杂度o（n）</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">longestConsecutive</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 判断是否为空数组</span></span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; st1;</span><br><span class="line">        <span class="comment">// 构建哈希表</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            st<span class="number">1.</span><span class="built_in">insert</span>(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 外层循环枚举set中的数字(不是遍历nums)</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = st<span class="number">1.</span><span class="built_in">begin</span>();it!=st<span class="number">1.</span><span class="built_in">end</span>();++it) &#123;</span><br><span class="line">            count = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (st<span class="number">1.</span><span class="built_in">count</span>(*it - <span class="number">1</span>)&gt;<span class="number">0</span>) &#123;<span class="comment">//*it访问迭代器指向的元素</span></span><br><span class="line">                <span class="comment">// 判断哈希表中是否存在x-1，存在则跳过循环</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 内层循环匹配序列;</span></span><br><span class="line">            <span class="type">int</span> j = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (st<span class="number">1.</span><span class="built_in">count</span>(*it + j)&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                count++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 检查更新res</span></span><br><span class="line">            <span class="keyword">if</span> (count &gt; res) &#123;</span><br><span class="line">                res = count;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>补充Python解法<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestConsecutive</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        num_set = <span class="built_in">set</span>(nums)</span><br><span class="line">        length = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="comment"># 遍历去重后的数组防止超时</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> num_set:</span><br><span class="line">            <span class="comment"># 防止重复</span></span><br><span class="line">            <span class="keyword">if</span> num-<span class="number">1</span> <span class="keyword">not</span> <span class="keyword">in</span> num_set:</span><br><span class="line">                count = <span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span>(num+<span class="number">1</span> <span class="keyword">in</span> num_set):</span><br><span class="line">                    count += <span class="number">1</span></span><br><span class="line">                    num += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> count&gt; res:</span><br><span class="line">                    res = count</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">哈希表</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C/Medium//" class="article-tag-list-link color2">Medium</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/11/leetcode-128/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-49" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/10/leetcode-49/">算法笔记📒 | leetcode-49 字母异位词分组</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/10/leetcode-49/" class="archive-article-date">
-  	<time datetime="2025-05-10T09:22:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-49-字母异位词分组"><a href="#leetcode-49-字母异位词分组" class="headerlink" title="leetcode-49 字母异位词分组"></a>leetcode-49 字母异位词分组</h1><h2 id="1-反思"><a href="#1-反思" class="headerlink" title="1 反思"></a>1 反思</h2><ul>
-<li>因为题目在热题的哈希分类下，自然想到了用昨天复习过的哈希表求解，不过其实自己一开始写出来的题解还是太复杂了，需要多多熟悉常用的方法！也增加对哈希的理解。</li>
-<li>可以通过ranges::sort(string)函数实现对字符串的排序，从而快速找到异位词（使用时不需要加上<code>sorted_string =</code>）。 </li>
-<li>除了<code>mp.insert(&#123;sorted_str,&#123;str[i]&#125;&#125;)</code>之外也可以用<code>mp.emplace(sorted_str,vector&lt;string&gt;&#123;strs[i]&#125;)</code>语句实现将键值对插入到unordered_map中！(此外还有leetcode-1笔记中提到的<code>mp[key]=value</code>)。</li>
-<li>参考题解，对vector也可以用<code>.emplace_back()</code>插入最后。</li>
-<li><code>res.reserve(res_hash.size());</code>最后在将键值对的值变为res的元素时可以预留空间。</li>
-<li><code>for(auto it = mp.begin();it!=mp.end();++it)</code>可以遍历键值对，<code>it-&gt;first</code>,<code>it-second</code>分别访问键和值，也可以通过<code>for (auto&amp; [key, value] : mp) </code>或<code>for (auto&amp; pair : mp)</code>访问，第二种要通过<code>pair.first</code>,<code>pair.second</code>访问key，value。</li>
-<li>查看题解后发现，也可以通过26个字母计数的方式对比，这种方法我没有复现代码。</li>
-<li>初始化时不要忘了为0，如<code>int str_keys_length = 0;</code>。</li>
-</ul>
-<h2 id="2-答案对比"><a href="#2-答案对比" class="headerlink" title="2 答案对比"></a>2 答案对比</h2><ol>
-<li>一开始的复杂版本<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 分析：</span></span><br><span class="line">    <span class="comment">// 初步思路：每个字符串对应一个哈希表：键：字符，值：字符在字符串中的索引，如：cat，c-&gt;0,a-&gt;1,t-&gt;2</span></span><br><span class="line">    <span class="comment">// 疑问：如果同一个字符出现多次怎么办？-&gt;改为存储每个字母的出现次数而不是索引，最后加入结果时再判重</span></span><br><span class="line">    <span class="comment">// 字母异位词特点：</span></span><br><span class="line">    <span class="comment">// 1. 字符串长度相同，且中每个字母的出现次数相同 -&gt; 键总数相同，键相同且相同</span></span><br><span class="line">    <span class="comment">// 2. 根据要求，字母异位应该是需要顺序不完全相同的 -&gt;</span></span><br><span class="line">    <span class="comment">// 值数组存在不同（加入结果时判断） 整体流程：</span></span><br><span class="line">    <span class="comment">// 遍历strs中的每个元素，对已在结果数组中的每个数组取第一个元素，判断当前元素是否与结果数组中的元素为字母异位词（键相同且值数组的长度相同），是则判重并加入此数组，不是则新建数组作为第一个元素加入。</span></span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; res;</span><br><span class="line">    vector&lt;unordered_map&lt;<span class="type">char</span>,<span class="type">int</span>&gt;&gt; res_maps;</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; strs.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 遍历strs中的每个字符串</span></span><br><span class="line">            unordered_map&lt;<span class="type">char</span>,<span class="type">int</span>&gt; str_map;</span><br><span class="line">            <span class="comment">// 遍历当前字符串的每个字符，转换为哈希表，并建立键数组</span></span><br><span class="line">            <span class="type">int</span> str_keys_length = <span class="number">0</span>; <span class="comment">//不要忘了初始化为0</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; strs[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (str_map.<span class="built_in">count</span>(strs[i][j])&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="comment">// 如果当前字符strs[i][j]在哈希表中,将新索引加入到值数组</span></span><br><span class="line">                    str_map[strs[i][j]] += <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 否则，新建键为当前字符，值初始化为1</span></span><br><span class="line">                    <span class="comment">// str_map[strs[i][j]] = 1;</span></span><br><span class="line">                    str_map.<span class="built_in">insert</span>(unordered_map&lt;<span class="type">char</span>, <span class="type">int</span>&gt;::<span class="built_in">value_type</span>(strs[i][j], <span class="number">1</span>));</span><br><span class="line">                    <span class="comment">// 加入键数组</span></span><br><span class="line">                    str_keys_length++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 和res_maps（结果数组中的每个数组取第一个元素的哈希表），对比，判断是否为字母异位词</span></span><br><span class="line">            <span class="type">int</span> anagrams_index = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; res_maps.<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="type">bool</span> is_anagrams = <span class="literal">true</span>;</span><br><span class="line">                <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">// 对res_maps中的每个哈希表，建立键数组</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">auto</span> it = res_maps[j].<span class="built_in">begin</span>(); it != res_maps[j].<span class="built_in">end</span>();++it) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    <span class="comment">// 遍历哈希表中的每个键,判断键是否在当前数组str_map中，并判断值是否相等</span></span><br><span class="line">                    <span class="keyword">if</span> (str_map.<span class="built_in">count</span>(it-&gt;first)&gt;<span class="number">0</span> &amp;&amp;</span><br><span class="line">                        str_map[it-&gt;first] == it-&gt;second) &#123;</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        is_anagrams = <span class="literal">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(count != str_keys_length)&#123;</span><br><span class="line">                    is_anagrams = <span class="literal">false</span>;<span class="comment">//这里不能加break</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//判断flag是否为异位词，是则判重并加入此数组，不是则新建数组作为第一个元素加入。</span></span><br><span class="line">                <span class="keyword">if</span>(is_anagrams==<span class="literal">true</span>)&#123;</span><br><span class="line">                    anagrams_index = j;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                    <span class="comment">//这里没有判重</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//最后判断anagrams_index，有则加入对应数组，没有-1则新建数组加入res</span></span><br><span class="line">            <span class="keyword">if</span>(anagrams_index != <span class="number">-1</span>)&#123;</span><br><span class="line">                res[anagrams_index].<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                vector&lt;string&gt; str_vec;</span><br><span class="line">                str_vec.<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">                res.<span class="built_in">push_back</span>(str_vec);</span><br><span class="line">                res_maps.<span class="built_in">push_back</span>(str_map);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>看题解思路后重新完成的字符串排序版本<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 键：排序后的字符串；值：排序后的字符串对应的数组</span></span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; res;</span><br><span class="line">    unordered_map&lt;string,vector&lt;string&gt;&gt; res_hash;</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; <span class="built_in">groupAnagrams</span>(vector&lt;string&gt;&amp; strs) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; strs.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 遍历strs中的每个字符串</span></span><br><span class="line">            <span class="comment">// 排序</span></span><br><span class="line">            string sorted_str = strs[i];</span><br><span class="line">            ranges::<span class="built_in">sort</span>(sorted_str);</span><br><span class="line">            <span class="keyword">if</span>(res_hash.<span class="built_in">count</span>(sorted_str)&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="comment">//已经有键</span></span><br><span class="line">                res_hash[sorted_str].<span class="built_in">push_back</span>(strs[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//没有，新建字符串键值对并加入</span></span><br><span class="line">                res_hash.<span class="built_in">emplace</span>(sorted_str,vector&lt;string&gt;&#123;strs[i]&#125;);</span><br><span class="line">            &#125;       </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//预留空间</span></span><br><span class="line">        res.<span class="built_in">reserve</span>(res_hash.<span class="built_in">size</span>());</span><br><span class="line">        <span class="comment">//遍历加入结果中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = res_hash.<span class="built_in">begin</span>();it!=res_hash.<span class="built_in">end</span>();++it)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(it-&gt;second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>补充Python解法<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">groupAnagrams</span>(<span class="params">self, strs: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]:</span><br><span class="line">        mp = collections.defaultdict(<span class="built_in">list</span>)</span><br><span class="line">        <span class="keyword">for</span> st <span class="keyword">in</span> strs:</span><br><span class="line">            k = <span class="string">&quot;&quot;</span>.join(<span class="built_in">sorted</span>(st)) <span class="comment"># key保证为字符串而不是list</span></span><br><span class="line">            mp[k].append(st) <span class="comment"># 直接将字符串加入值数组</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(mp.values())  <span class="comment"># 转换为list，直接返回效率高</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">哈希表</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/C/Medium//" class="article-tag-list-link color2">Medium</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/10/leetcode-49/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1774,6 +1773,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">记忆化搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Cpp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
             
             <div class="clearfix"></div>
