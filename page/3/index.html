@@ -205,6 +205,148 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode-15" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/05/12/leetcode-15/">算法笔记📒 | leetcode-167 两数之和II-输入有序数组、15 三数之和</a>
+    </h1>
+  
+
+        
+        <a href="/2025/05/12/leetcode-15/" class="archive-article-date">
+  	<time datetime="2025-05-12T03:59:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-167-两数之和II-输入有序数组"><a href="#leetcode-167-两数之和II-输入有序数组" class="headerlink" title="leetcode-167 两数之和II-输入有序数组"></a>leetcode-167 两数之和II-输入有序数组</h1><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>在做15没思路的时候了解到167问题，先尝试解答相对没有那么复杂的有序数组两数之和问题。</li>
+<li>关于双指针的理解：<ul>
+<li>一次排除多个可能性，将时间复杂度从<code>O（N^2）</code>降低到<code>O（N）</code>。</li>
+<li>判断当前的两个数的和<code>numbers[i]+numbers[j]</code>：<ul>
+<li>由于数组是有序排序这一特性，当<code>numbers[i]+numbers[j]&gt;target</code>，说明j只可能在前面找到（i更大只会让sum更大不可能找到），<code>j--</code>。</li>
+<li>同理，如果<code>numbers[i]+numbers[j]&lt;target</code>,说明i只可能在现在i的后面找到（j更小时只会让sum更小），<code>i++</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="答案对比"><a href="#答案对比" class="headerlink" title="答案对比"></a>答案对比</h2><ol>
+<li>一开始的解答<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; numbers, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>,j = numbers.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(numbers[i]+numbers[j]&gt;target)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(numbers[i]+numbers[j]&lt;target)&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                res.<span class="built_in">push_back</span>(i<span class="number">+1</span>);</span><br><span class="line">                res.<span class="built_in">push_back</span>(j<span class="number">+1</span>);</span><br><span class="line">                <span class="keyword">return</span> res;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="leetcode-15-三数之和"><a href="#leetcode-15-三数之和" class="headerlink" title="leetcode-15 三数之和"></a>leetcode-15 三数之和</h1><h2 id="反思-1"><a href="#反思-1" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>看到题目首先会想到的是哈希表，可以保证元素不重复（但实际上重复元素也可以加和为0，不能一开始直接用哈希表替代数组）。</li>
+<li>借助排序减少元素的重复访问，方便排除元素（之前的128似乎不适合直接排序，是因为有时间复杂度要求）。</li>
+<li>查看题解后，加深对思路的理解，题目没有规定顺序，所以三元组的顺序可以是t&lt;i&lt;j，保证不重复。</li>
+<li>思路为每次外层循环固定一个数，内层循环相当于有序两数之和II问题，target为第一个数的相反数（查看题解后发现，内层循环左指针i从t开始即可）。</li>
+<li>答案不可以包括重复三元组，一个想法是先用set存储（都是数字从小到大有序的数组），最后转换为数组。</li>
+<li>对nums大量重复的元素，需要判重减少冗余，一开始解答的哈希表方法太复杂了，参考题解，可以直接在外层循环和指针变化时通过条件判断是否是当前元素重复元素，例如<code>if(t&gt;0&amp;&amp; nums[t]==nums[t-1])&#123; continue;&#125;</code>。</li>
+<li>后来参考b站上的题解，发现除了判断target，也可以直接判断3个数加和是否为0，还可以加入如当前数和前2个数之和是否&gt;0（break）、当前数和最后两个数之和是否&lt;0（continue）的判断进行优化。</li>
+<li><h2 id="答案对比-1"><a href="#答案对比-1" class="headerlink" title="答案对比"></a>答案对比</h2></li>
+</ul>
+<ol>
+<li>最初解答（有点复杂）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="comment">// 先排序再遍历第一个数的相反数作为target按照两数之和双指针法求解（同时移动3个数会太复杂）</span></span><br><span class="line">        <span class="comment">// 答案不可以包括重复三元组，一个想法是先用set存储（都是数字从小到大有序的数组），最后转换为数组</span></span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        set&lt;vector&lt;<span class="type">int</span>&gt;&gt; res_map; <span class="comment">//保证数组唯一性</span></span><br><span class="line">        <span class="comment">// 判断数字不足三个的情况</span></span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// ranges::sort(nums);</span></span><br><span class="line">        <span class="comment">// 哈希表保留最多3个相同元素</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>,<span class="type">int</span>&gt; nums_map;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i&lt;nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums_map.<span class="built_in">count</span>(nums[i])&gt;<span class="number">0</span> &amp;&amp; nums_map[nums[i]]&lt;<span class="number">3</span>)&#123;</span><br><span class="line">                    nums_map[nums[i]]+=<span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                nums_map.<span class="built_in">insert</span>(&#123;nums[i],<span class="number">1</span>&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = nums_map.<span class="built_in">begin</span>();it!=nums_map.<span class="built_in">end</span>();++it)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j&lt;it-&gt;second;j++)&#123;</span><br><span class="line">                new_nums.<span class="built_in">push_back</span>(it-&gt;first);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        nums = new_nums;</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        ranges::<span class="built_in">sort</span>(nums);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> t= <span class="number">0</span>;t&lt;nums.<span class="built_in">size</span>();t++)&#123;</span><br><span class="line">            <span class="type">int</span> target = -nums[t];</span><br><span class="line">            <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> j = nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i]+nums[j]&gt;target)&#123;</span><br><span class="line">                    j--;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[i]+nums[j]&lt;target)&#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">// nums[i]+nums[j] = target</span></span><br><span class="line">                    <span class="keyword">if</span>(t!=i&amp;&amp;t!=j)&#123;</span><br><span class="line">                        vector&lt;<span class="type">int</span>&gt; tmp = &#123;nums[i],nums[j],nums[t]&#125;;</span><br><span class="line">                        ranges::<span class="built_in">sort</span>(tmp);</span><br><span class="line">                        res_map.<span class="built_in">insert</span>(tmp);</span><br><span class="line">                        i++;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(t==i)&#123;</span><br><span class="line">                        i++;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        res.<span class="built_in">reserve</span>(res_map.<span class="built_in">size</span>());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = res_map.<span class="built_in">begin</span>();it!=res_map.<span class="built_in">end</span>();++it)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(*it);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+2.查看题解后修改的答案版本(i从t开始，在外层循环直接通过条件判断是否是重复元素)，效率提升了<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="comment">// 先排序再遍历第一个数作为target按照两数之和双指针法求解（同时移动3个数会太复杂）</span></span><br><span class="line">        <span class="comment">// 答案不可以包括重复三元组，一个想法是先用set存储（都是数字从小到大有序的数组），最后转换为数组</span></span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        set&lt;vector&lt;<span class="type">int</span>&gt;&gt; res_map; <span class="comment">//保证数组唯一性</span></span><br><span class="line">        <span class="comment">// 判断数字不足三个的情况</span></span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        ranges::<span class="built_in">sort</span>(nums);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> t= <span class="number">0</span>;t&lt;nums.<span class="built_in">size</span>();t++)&#123;</span><br><span class="line">            <span class="comment">//fix 对重复元素，可以不必过于麻烦哈希表去重，直接在循环中判断跳过</span></span><br><span class="line">            <span class="keyword">if</span>(t&gt;<span class="number">0</span>&amp;&amp; nums[t]==nums[t<span class="number">-1</span>])&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> target = -nums[t];</span><br><span class="line">            <span class="type">int</span> i = t; <span class="comment">//fix，i从t开始即可遍历所有情况</span></span><br><span class="line">            <span class="type">int</span> j = nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i]+nums[j]&gt;target)&#123;</span><br><span class="line">                    j--;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[i]+nums[j]&lt;target)&#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">// nums[i]+nums[j] = target</span></span><br><span class="line">                    <span class="keyword">if</span>(t!=i&amp;&amp;t!=j)&#123;</span><br><span class="line">                        vector&lt;<span class="type">int</span>&gt; tmp = &#123;nums[i],nums[j],nums[t]&#125;;</span><br><span class="line">                        ranges::<span class="built_in">sort</span>(tmp);</span><br><span class="line">                        res_map.<span class="built_in">insert</span>(tmp);</span><br><span class="line">                        i++;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(t==i)&#123;</span><br><span class="line">                        i++;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;</span><br><span class="line">                </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        res.<span class="built_in">reserve</span>(res_map.<span class="built_in">size</span>());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it = res_map.<span class="built_in">begin</span>();it!=res_map.<span class="built_in">end</span>();++it)&#123;</span><br><span class="line">            res.<span class="built_in">push_back</span>(*it);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>再次优化（不用set而是都用当前元素和前一个元素是否相同来判断是否跳过）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">threeSum</span>(vector&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="comment">// 先排序再遍历第一个数作为target按照两数之和双指针法求解（同时移动3个数会太复杂）</span></span><br><span class="line">        <span class="comment">// 答案不可以包括重复三元组，一个想法是先用set存储（都是数字从小到大有序的数组），最后转换为数组</span></span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; res;</span><br><span class="line">        <span class="comment">// 判断数字不足三个的情况</span></span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() &lt; <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 排序</span></span><br><span class="line">        ranges::<span class="built_in">sort</span>(nums);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> t= <span class="number">0</span>;t&lt;nums.<span class="built_in">size</span>();t++)&#123;</span><br><span class="line">            <span class="comment">//fix 对重复元素，可以不必过于麻烦哈希表去重，直接在循环中判断跳过</span></span><br><span class="line">            <span class="keyword">if</span>(t&gt;<span class="number">0</span>&amp;&amp; nums[t] == nums[t<span class="number">-1</span>])&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> target = -nums[t];</span><br><span class="line">            <span class="type">int</span> i = t; <span class="comment">//fix，i从t开始即可遍历所有情况</span></span><br><span class="line">            <span class="type">int</span> j = nums.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[i]+nums[j]&gt;target)&#123;</span><br><span class="line">                    j--;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nums[i]+nums[j]&lt;target)&#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">// nums[i]+nums[j] = target</span></span><br><span class="line">                    <span class="keyword">if</span>(t!=i&amp;&amp;t!=j)&#123;</span><br><span class="line">                        vector&lt;<span class="type">int</span>&gt; tmp = &#123;nums[i],nums[j],nums[t]&#125;;</span><br><span class="line">                        ranges::<span class="built_in">sort</span>(tmp);</span><br><span class="line">                        res.<span class="built_in">push_back</span>(tmp);</span><br><span class="line">                        i++;</span><br><span class="line">                        <span class="keyword">while</span>(i&lt;j&amp;&amp; i!=<span class="number">0</span> &amp;&amp;nums[i]==nums[i<span class="number">-1</span>])&#123;</span><br><span class="line">                            i++;</span><br><span class="line">                        &#125;</span><br><span class="line">                        j--;</span><br><span class="line">                        <span class="keyword">while</span>(i&lt;j&amp;&amp; j!=nums.<span class="built_in">size</span>()<span class="number">-1</span> &amp;&amp;nums[j]==nums[j<span class="number">+1</span>])&#123;</span><br><span class="line">                            j--;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(t==i)&#123;</span><br><span class="line">                        i++;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;</span><br><span class="line">                </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/C//" class="article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/C/Medium//" class="article-tag-list-link color2">Medium</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/05/12/leetcode-15/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode-11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
