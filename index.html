@@ -205,6 +205,250 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode-160" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/06/21/leetcode-160/">算法笔记📒 | leetcode-160 相交链表</a>
+    </h1>
+  
+
+        
+        <a href="/2025/06/21/leetcode-160/" class="archive-article-date">
+  	<time datetime="2025-06-21T03:52:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-189-轮转数组"><a href="#leetcode-189-轮转数组" class="headerlink" title="leetcode-189 轮转数组"></a>leetcode-189 轮转数组</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>注意<code>list==NULL</code>和<code>listA-&gt;next==NUL</code>L的区别，推演。最终二者都为null也是相等的条件。</li>
+<li>nullptr解决NULL的遗留问题，更推荐。</li>
+</ul>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">getIntersectionNode</span><span class="params">(ListNode* headA, ListNode* headB)</span> </span>&#123;</span><br><span class="line">        ListNode* listA = headA;</span><br><span class="line">        ListNode* listB = headB;</span><br><span class="line">        <span class="keyword">while</span>(listA!=listB)&#123;</span><br><span class="line">            listA = listA==<span class="literal">nullptr</span>?headB:listA-&gt;next;</span><br><span class="line">            listB = listB==<span class="literal">nullptr</span>?headA:listB-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> listA;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Cpp//" class="article-tag-list-link color4">Cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Cpp/Easy//" class="article-tag-list-link color5">Easy</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/06/21/leetcode-160/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-200" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/06/05/leetcode-200/">算法笔记📒 | leetcode-200</a>
+    </h1>
+  
+
+        
+        <a href="/2025/06/05/leetcode-200/" class="archive-article-date">
+  	<time datetime="2025-06-05T15:40:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-200-岛屿数量"><a href="#leetcode-200-岛屿数量" class="headerlink" title="leetcode-200 岛屿数量"></a>leetcode-200 岛屿数量</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-islands?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>是字符串！”0“和”1“，不要混淆！ </li>
+<li>是存储的idx在队列中。</li>
+<li>grid_flag &#x3D; [[0] * n] * m创建方式会导致所有行实际上是同一个列表的引用，不可以</li>
+<li>注意标记先更改，防止被break。while覆盖掉</li>
+<li>新的笔记：<ul>
+<li>防止重复遍历的一个方式：把遍历过的陆地格子记录为1。</li>
+</ul>
+</li>
+</ul>
+<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2><ol>
+<li>BFS尝试<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numIslands</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 模拟BFS，用一个deque队列。</span></span><br><span class="line">        <span class="comment"># 从左上角出发开始遍历。第一个点的坐标（0，0）加入队列。</span></span><br><span class="line">        <span class="comment"># 1 如何遍历</span></span><br><span class="line">        <span class="comment"># 如果队列头坐标对应的元素grid[0][0]是0，则出队，并按从左到右（j++）、从上到下（i++）的顺序查找下一个没遍历过的元素入队（如果遇到n-1就到下一行的第一列，并检查是否已经被遍历过）。</span></span><br><span class="line">        <span class="comment"># 如果队列头元素是1，则向周围4个点（范围不超出边界）查找且没有遍历过的节点加入队列，然后这个遍历过的点出队，直到队列为空。</span></span><br><span class="line">        <span class="comment"># 2 如何确定陆地？</span></span><br><span class="line">        <span class="comment"># 暴力的想法是再设置一个队列记录陆地元素，如果如果队列变为不空又变回空是一次陆地。</span></span><br><span class="line">        <span class="comment"># 或干脆一开始这个队列就只存储陆地元素，另一个队列存储0元素！或者其实对0也可以想成找“完整海域”数目，只是我们不计数。还有可能是联通的海域里两个小岛，那好像还是要中断0的统计，即遇到了1就break0的循环。</span></span><br><span class="line">        <span class="comment"># 是字符串！”0“和”1“，不要混淆！</span></span><br><span class="line">        <span class="comment"># 是存储的idx在队列中。</span></span><br><span class="line">        m = <span class="built_in">len</span>(grid)</span><br><span class="line">        n = <span class="built_in">len</span>(grid[<span class="number">0</span>])  <span class="comment"># (n,m&gt;=1)</span></span><br><span class="line">        grid_flag = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]<span class="comment">#grid_flag = [[0] * n] * m创建方式会导致所有行实际上是同一个列表的引用，不可以</span></span><br><span class="line"></span><br><span class="line">        dq_1 = collections.deque()</span><br><span class="line">        dq_0 = collections.deque()</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="comment"># 第一个元素</span></span><br><span class="line">        <span class="keyword">if</span> grid[<span class="number">0</span>][<span class="number">0</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">            dq_1.append([<span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dq_0.append([<span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">        grid_flag[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        <span class="comment"># 开始循环直到所有元素都被遍历</span></span><br><span class="line">        <span class="keyword">while</span> dq_1 <span class="keyword">or</span> dq_0:</span><br><span class="line">            <span class="comment"># 优先dq_1</span></span><br><span class="line">            <span class="keyword">if</span> dq_1:</span><br><span class="line">                res += <span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span> dq_1:</span><br><span class="line">                    current_idx = dq_1.popleft()  <span class="comment"># pop</span></span><br><span class="line">                    <span class="comment"># 4个方向:</span></span><br><span class="line">                    <span class="comment"># 注意！等于0也可以</span></span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                       </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] + <span class="number">1</span> &lt; m</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                       </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] + <span class="number">1</span> &lt; n</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                        </span><br><span class="line">            <span class="keyword">if</span> dq_0:</span><br><span class="line">                <span class="keyword">while</span> dq_0 <span class="keyword">and</span> <span class="built_in">len</span>(dq_1) == <span class="number">0</span>:</span><br><span class="line">                    current_idx = dq_0.popleft()  <span class="comment"># pop</span></span><br><span class="line">                    <span class="comment"># 4个方向:</span></span><br><span class="line">                    <span class="comment"># dq_0的访问不记录1的</span></span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            </span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] + <span class="number">1</span> &lt; m</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            </span><br><span class="line">                            </span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                            </span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] + <span class="number">1</span> &lt; n</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                                                </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">并查集</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Python/Medium//" class="article-tag-list-link color2">Medium</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/06/05/leetcode-200/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode-118" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -633,132 +877,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2025/05/29/leetcode-70/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-200" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/24/leetcode-200/">算法笔记📒 | leetcode-200</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/24/leetcode-200/" class="archive-article-date">
-  	<time datetime="2025-05-24T15:40:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-200-岛屿数量"><a href="#leetcode-200-岛屿数量" class="headerlink" title="leetcode-200 岛屿数量"></a>leetcode-200 岛屿数量</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-islands?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
-<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>是字符串！”0“和”1“，不要混淆！ </li>
-<li>是存储的idx在队列中。</li>
-<li>grid_flag &#x3D; [[0] * n] * m创建方式会导致所有行实际上是同一个列表的引用，不可以</li>
-<li>注意标记先更改，防止被break。while覆盖掉</li>
-</ul>
-<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2><ol>
-<li>BFS尝试<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numIslands</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 模拟BFS，用一个deque队列。</span></span><br><span class="line">        <span class="comment"># 从左上角出发开始遍历。第一个点的坐标（0，0）加入队列。</span></span><br><span class="line">        <span class="comment"># 1 如何遍历</span></span><br><span class="line">        <span class="comment"># 如果队列头坐标对应的元素grid[0][0]是0，则出队，并按从左到右（j++）、从上到下（i++）的顺序查找下一个没遍历过的元素入队（如果遇到n-1就到下一行的第一列，并检查是否已经被遍历过）。</span></span><br><span class="line">        <span class="comment"># 如果队列头元素是1，则向周围4个点（范围不超出边界）查找且没有遍历过的节点加入队列，然后这个遍历过的点出队，直到队列为空。</span></span><br><span class="line">        <span class="comment"># 2 如何确定陆地？</span></span><br><span class="line">        <span class="comment"># 暴力的想法是再设置一个队列记录陆地元素，如果如果队列变为不空又变回空是一次陆地。</span></span><br><span class="line">        <span class="comment"># 或干脆一开始这个队列就只存储陆地元素，另一个队列存储0元素！或者其实对0也可以想成找“完整海域”数目，只是我们不计数。还有可能是联通的海域里两个小岛，那好像还是要中断0的统计，即遇到了1就break0的循环。</span></span><br><span class="line">        <span class="comment"># 是字符串！”0“和”1“，不要混淆！</span></span><br><span class="line">        <span class="comment"># 是存储的idx在队列中。</span></span><br><span class="line">        m = <span class="built_in">len</span>(grid)</span><br><span class="line">        n = <span class="built_in">len</span>(grid[<span class="number">0</span>])  <span class="comment"># (n,m&gt;=1)</span></span><br><span class="line">        grid_flag = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]<span class="comment">#grid_flag = [[0] * n] * m创建方式会导致所有行实际上是同一个列表的引用，不可以</span></span><br><span class="line"></span><br><span class="line">        dq_1 = collections.deque()</span><br><span class="line">        dq_0 = collections.deque()</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="comment"># 第一个元素</span></span><br><span class="line">        <span class="keyword">if</span> grid[<span class="number">0</span>][<span class="number">0</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">            dq_1.append([<span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dq_0.append([<span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">        grid_flag[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        <span class="comment"># 开始循环直到所有元素都被遍历</span></span><br><span class="line">        <span class="keyword">while</span> dq_1 <span class="keyword">or</span> dq_0:</span><br><span class="line">            <span class="comment"># 优先dq_1</span></span><br><span class="line">            <span class="keyword">if</span> dq_1:</span><br><span class="line">                res += <span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span> dq_1:</span><br><span class="line">                    current_idx = dq_1.popleft()  <span class="comment"># pop</span></span><br><span class="line">                    <span class="comment"># 4个方向:</span></span><br><span class="line">                    <span class="comment"># 注意！等于0也可以</span></span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                       </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] + <span class="number">1</span> &lt; m</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                       </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] + <span class="number">1</span> &lt; n</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                        </span><br><span class="line">            <span class="keyword">if</span> dq_0:</span><br><span class="line">                <span class="keyword">while</span> dq_0 <span class="keyword">and</span> <span class="built_in">len</span>(dq_1) == <span class="number">0</span>:</span><br><span class="line">                    current_idx = dq_0.popleft()  <span class="comment"># pop</span></span><br><span class="line">                    <span class="comment"># 4个方向:</span></span><br><span class="line">                    <span class="comment"># dq_0的访问不记录1的</span></span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            </span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] + <span class="number">1</span> &lt; m</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            </span><br><span class="line">                            </span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                            </span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] + <span class="number">1</span> &lt; n</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                                                </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DFS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">并查集</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Python/Medium//" class="article-tag-list-link color2">Medium</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/24/leetcode-200/">展开全文 >></a>
         </p>
       
 
@@ -1269,120 +1387,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2025/05/20/leetcode-238/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-160" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/20/leetcode-160/">算法笔记📒 | leetcode-160 相交链表</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/20/leetcode-160/" class="archive-article-date">
-  	<time datetime="2025-05-20T12:52:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-189-轮转数组"><a href="#leetcode-189-轮转数组" class="headerlink" title="leetcode-189 轮转数组"></a>leetcode-189 轮转数组</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
-<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>注意list&#x3D;&#x3D;NULL和listA-&gt;next&#x3D;&#x3D;NULL的区别，推演。最终二者都为null也是相等的条件。</li>
-<li>nullptr解决NULL的遗留问题，更推荐。</li>
-</ul>
-<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">getIntersectionNode</span><span class="params">(ListNode* headA, ListNode* headB)</span> </span>&#123;</span><br><span class="line">        ListNode* listA = headA;</span><br><span class="line">        ListNode* listB = headB;</span><br><span class="line">        <span class="keyword">while</span>(listA!=listB)&#123;</span><br><span class="line">            listA = listA==<span class="literal">nullptr</span>?headB:listA-&gt;next;</span><br><span class="line">            listB = listB==<span class="literal">nullptr</span>?headA:listB-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> listA;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Cpp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Cpp//" class="article-tag-list-link color4">Cpp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Cpp/Easy//" class="article-tag-list-link color5">Easy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/20/leetcode-160/">展开全文 >></a>
         </p>
       
 
