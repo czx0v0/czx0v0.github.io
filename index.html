@@ -205,6 +205,333 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/08/03/leetcode-2/">算法笔记📒 | leetcode-2 两数相加</a>
+    </h1>
+  
+
+        
+        <a href="/2025/08/03/leetcode-2/" class="archive-article-date">
+  	<time datetime="2025-08-03T09:33:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-08-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-2-两数相加"><a href="#leetcode-2-两数相加" class="headerlink" title="leetcode-2 两数相加"></a>leetcode-2 两数相加</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/add-two-numbers/description/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>记得最后要处理进位值可能仍然为1的情况。</li>
+<li>时间复杂度O(m+n)，空间复杂度O(1)。</li>
+</ul>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode() &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> &#123;</span><br><span class="line">        <span class="comment">//数字相加时可能会产生的进位问题</span></span><br><span class="line">        <span class="comment">//由于是逆序，所以可以从前往后计算</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">l3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">dummy</span> <span class="operator">=</span> l3;</span><br><span class="line">        <span class="type">int</span> <span class="variable">jinwei</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">null</span> &amp;&amp; l2 != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">total_sum</span> <span class="operator">=</span> l1.val + l2.val + jinwei;</span><br><span class="line">            <span class="keyword">if</span> (total_sum &gt;= <span class="number">10</span>) &#123;</span><br><span class="line">                jinwei = <span class="number">1</span>;</span><br><span class="line">                total_sum -= <span class="number">10</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                jinwei = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            l3.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(total_sum);</span><br><span class="line">            l3 = l3.next;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">total_sum</span> <span class="operator">=</span> l1.val + jinwei;</span><br><span class="line">            <span class="keyword">if</span> (total_sum &gt;= <span class="number">10</span>) &#123;</span><br><span class="line">                jinwei = <span class="number">1</span>;</span><br><span class="line">                total_sum -= <span class="number">10</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                jinwei = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            l3.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(total_sum);</span><br><span class="line">            l3 = l3.next;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l2 != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">total_sum</span> <span class="operator">=</span> l2.val + jinwei;</span><br><span class="line">            <span class="keyword">if</span> (total_sum &gt;= <span class="number">10</span>) &#123;</span><br><span class="line">                jinwei = <span class="number">1</span>;</span><br><span class="line">                total_sum -= <span class="number">10</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                jinwei = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            l3.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(total_sum);</span><br><span class="line">            l3 = l3.next;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (jinwei &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            l3.next = <span class="keyword">new</span> <span class="title class_">ListNode</span>(jinwei);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">-Java - 算法笔记 - 链表 - Medium - Hot100</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Java//" class="article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Java/Medium//" class="article-tag-list-link color2">Medium</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/08/03/leetcode-2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-21" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/06/22/leetcode-21/">算法笔记📒 | leetcode-142 合并两个有序链表</a>
+    </h1>
+  
+
+        
+        <a href="/2025/06/22/leetcode-21/" class="archive-article-date">
+  	<time datetime="2025-06-22T04:28:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-142-合并两个有序链表"><a href="#leetcode-142-合并两个有序链表" class="headerlink" title="leetcode-142 合并两个有序链表"></a>leetcode-142 合并两个有序链表</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-image/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>不是返回newp,因为newp一直在移动，用一个head存储初始的哨兵节点，不移动。</li>
+<li>注意比较关系不要反，是小于等于。</li>
+<li>最后的合并语句其实可以继续化简为<code>newp-&gt;next = pa == nullptr ? pb : pa;</code>。</li>
+<li>时间复杂度O(m+n)，空间复杂度O(1)。</li>
+</ul>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">mergeTwoLists</span><span class="params">(ListNode* list1, ListNode* list2)</span> </span>&#123;</span><br><span class="line">        ListNode* pa = list1;</span><br><span class="line">        ListNode* pb = list2;</span><br><span class="line">        ListNode* newp = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        ListNode* head =</span><br><span class="line">            newp; <span class="comment">// 不是返回newp因为newp在移动，head存储哨兵节点不移动</span></span><br><span class="line">        <span class="keyword">while</span> (pa != <span class="literal">nullptr</span> <span class="keyword">and</span> pb != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="comment">// 是小于等于</span></span><br><span class="line">            <span class="keyword">if</span> (pa-&gt;val &lt;= pb-&gt;val) &#123;</span><br><span class="line">                newp-&gt;next = pa;</span><br><span class="line">                newp = newp-&gt;next;</span><br><span class="line">                pa = pa-&gt;next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                newp-&gt;next = pb;</span><br><span class="line">                newp = newp-&gt;next;</span><br><span class="line">                pb = pb-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (pa != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            newp-&gt;next = pa;</span><br><span class="line">            newp = newp-&gt;next;</span><br><span class="line">            pa = pa-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (pb != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            newp-&gt;next = pb;</span><br><span class="line">            newp = newp-&gt;next;</span><br><span class="line">            pb = pb-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> head-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Cpp//" class="article-tag-list-link color4">Cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Cpp/Medium//" class="article-tag-list-link color2">Medium</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/06/22/leetcode-21/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode-142" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/06/22/leetcode-142/">算法笔记📒 | leetcode-142 环形链表 II</a>
+    </h1>
+  
+
+        
+        <a href="/2025/06/22/leetcode-142/" class="archive-article-date">
+  	<time datetime="2025-06-22T04:04:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="leetcode-142-环形链表-II"><a href="#leetcode-142-环形链表-II" class="headerlink" title="leetcode-142 环形链表 II"></a>leetcode-142 环形链表 II</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/description/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>和环形链表1不同，需要一个新的p指针，在fast和slow相遇后从头和slow一起向前走，当p和slow再相遇时是环的入口，不过这个算法需要推数学公式。</li>
+<li>也可以使用哈希表<code>unordered_set&lt;*ListNode&gt; vis</code>实现。（Java中用<code>Set&lt;ListNode&gt; vis = new HashSet&lt;ListNode&gt;();</code>）,如果集合count到重复节点就返回head，否则就insert并且继续向前。</li>
+<li>时间复杂度O(N),空间复杂度O(1)。</li>
+</ul>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">detectCycle</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        ListNode* fast = head;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span> <span class="keyword">or</span> head-&gt;next == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (head-&gt;next-&gt;next == head) &#123;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (fast != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            <span class="keyword">if</span> (fast-&gt;next == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            <span class="keyword">if</span> (fast == slow) &#123;</span><br><span class="line">                ListNode* p = head;</span><br><span class="line">                <span class="comment">//  相遇后和慢指针一起移动，直到再环的入口相遇</span></span><br><span class="line">                <span class="keyword">while</span> (p != slow) &#123;</span><br><span class="line">                    p = p-&gt;next;</span><br><span class="line">                    slow = slow-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> p;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Cpp//" class="article-tag-list-link color4">Cpp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/自习室/Cpp/Medium//" class="article-tag-list-link color2">Medium</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/06/22/leetcode-142/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode-494" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -227,8 +554,8 @@
       
         <h1 id="leetcode-494-目标和"><a href="#leetcode-494-目标和" class="headerlink" title="leetcode-494 目标和"></a>leetcode-494 目标和</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/description/">题目</a></p>
 <h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>数组索引不能是负数,用一个偏移量</li>
-<li>从前一个i继承时不用加1，是+&#x3D;不是&#x3D;否则会覆盖</li>
+<li>数组索引不能是负数,用一个偏移量。</li>
+<li>从前一个i继承时不用加1，是+&#x3D;不是&#x3D;否则会覆盖。</li>
 <li>题解的转移方程：<code>dp[i + 1][c] = dp[i][c] + dp[i][c - nums[i]]</code>（加法原理），相比于我的方案节省了更多空间和效率。</li>
 </ul>
 <h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><ol>
@@ -343,7 +670,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="leetcode-141-回文链表"><a href="#leetcode-141-回文链表" class="headerlink" title="leetcode-141 回文链表"></a>leetcode-141 回文链表</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-linked-list/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
-<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isPalindrome</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; arr;</span><br><span class="line">        <span class="keyword">while</span>(head!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            arr.<span class="built_in">push_back</span>(head-&gt;val);</span><br><span class="line">            head = head-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> j = arr.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[i] == arr[j])&#123;</span><br><span class="line">                i++;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
+<li>思路：用数组存储链表中的元素并判断是否是回文。时间复杂度和空间复杂度都是O(n)。</li>
+</ul>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isPalindrome</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; arr;</span><br><span class="line">        <span class="keyword">while</span>(head!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            arr.<span class="built_in">push_back</span>(head-&gt;val);</span><br><span class="line">            head = head-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> j = arr.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[i] == arr[j])&#123;</span><br><span class="line">                i++;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -453,10 +783,10 @@
       
         <h1 id="leetcode-206-反转链表"><a href="#leetcode-206-反转链表" class="headerlink" title="leetcode 206 反转链表"></a>leetcode 206 反转链表</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
 <h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>用新建节点的方式存储</li>
-<li>注意是返回prev不是newp</li>
+<li>可以用新建节点的方式存储。</li>
+<li>注意是返回prev不是newp。</li>
 </ul>
-<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode* prev = <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* newp = head;</span><br><span class="line">        <span class="keyword">while</span>(newp!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            ListNode* next = newp-&gt;next; <span class="comment">//用新建节点的方式存储而不是原来的</span></span><br><span class="line">            newp-&gt;next = prev;</span><br><span class="line">            prev = newp;</span><br><span class="line">            newp = next;</span><br><span class="line">        &#125;            </span><br><span class="line">        <span class="keyword">return</span> prev; <span class="comment">//注意是返回prev不是newp</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode* prev = <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* newp = head;</span><br><span class="line">        <span class="keyword">while</span>(newp!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            ListNode* next = newp-&gt;next; <span class="comment">//用新建节点的方式存储而不是原来的</span></span><br><span class="line">            newp-&gt;next = prev;</span><br><span class="line">            prev = newp;</span><br><span class="line">            newp = next;</span><br><span class="line">        &#125;            </span><br><span class="line">        <span class="keyword">return</span> prev; <span class="comment">//注意是返回prev不是newp</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -564,10 +894,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="leetcode-189-相交链表"><a href="#leetcode-189-相交链表" class="headerlink" title="leetcode-189 相交链表"></a>leetcode-189 相交链表</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
+        <h1 id="leetcode-160-相交链表"><a href="#leetcode-160-相交链表" class="headerlink" title="leetcode-160 相交链表"></a>leetcode-160 相交链表</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
 <h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
 <li>注意<code>list==NULL</code>和<code>listA-&gt;next==NUL</code>L的区别，推演。最终二者都为null也是相等的条件。</li>
 <li>nullptr解决NULL的遗留问题，更推荐。</li>
+<li>时间复杂度O(m+n)，空间复杂度O(1)。</li>
 </ul>
 <h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">getIntersectionNode</span><span class="params">(ListNode* headA, ListNode* headB)</span> </span>&#123;</span><br><span class="line">        ListNode* listA = headA;</span><br><span class="line">        ListNode* listB = headB;</span><br><span class="line">        <span class="keyword">while</span>(listA!=listB)&#123;</span><br><span class="line">            listA = listA==<span class="literal">nullptr</span>?headB:listA-&gt;next;</span><br><span class="line">            listB = listB==<span class="literal">nullptr</span>?headA:listB-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> listA;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
@@ -689,7 +1020,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2><ol>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><ol>
 <li>BFS尝试<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numIslands</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 模拟BFS，用一个deque队列。</span></span><br><span class="line">        <span class="comment"># 从左上角出发开始遍历。第一个点的坐标（0，0）加入队列。</span></span><br><span class="line">        <span class="comment"># 1 如何遍历</span></span><br><span class="line">        <span class="comment"># 如果队列头坐标对应的元素grid[0][0]是0，则出队，并按从左到右（j++）、从上到下（i++）的顺序查找下一个没遍历过的元素入队（如果遇到n-1就到下一行的第一列，并检查是否已经被遍历过）。</span></span><br><span class="line">        <span class="comment"># 如果队列头元素是1，则向周围4个点（范围不超出边界）查找且没有遍历过的节点加入队列，然后这个遍历过的点出队，直到队列为空。</span></span><br><span class="line">        <span class="comment"># 2 如何确定陆地？</span></span><br><span class="line">        <span class="comment"># 暴力的想法是再设置一个队列记录陆地元素，如果如果队列变为不空又变回空是一次陆地。</span></span><br><span class="line">        <span class="comment"># 或干脆一开始这个队列就只存储陆地元素，另一个队列存储0元素！或者其实对0也可以想成找“完整海域”数目，只是我们不计数。还有可能是联通的海域里两个小岛，那好像还是要中断0的统计，即遇到了1就break0的循环。</span></span><br><span class="line">        <span class="comment"># 是字符串！”0“和”1“，不要混淆！</span></span><br><span class="line">        <span class="comment"># 是存储的idx在队列中。</span></span><br><span class="line">        m = <span class="built_in">len</span>(grid)</span><br><span class="line">        n = <span class="built_in">len</span>(grid[<span class="number">0</span>])  <span class="comment"># (n,m&gt;=1)</span></span><br><span class="line">        grid_flag = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]<span class="comment">#grid_flag = [[0] * n] * m创建方式会导致所有行实际上是同一个列表的引用，不可以</span></span><br><span class="line"></span><br><span class="line">        dq_1 = collections.deque()</span><br><span class="line">        dq_0 = collections.deque()</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="comment"># 第一个元素</span></span><br><span class="line">        <span class="keyword">if</span> grid[<span class="number">0</span>][<span class="number">0</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">            dq_1.append([<span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dq_0.append([<span class="number">0</span>, <span class="number">0</span>])</span><br><span class="line">        grid_flag[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        <span class="comment"># 开始循环直到所有元素都被遍历</span></span><br><span class="line">        <span class="keyword">while</span> dq_1 <span class="keyword">or</span> dq_0:</span><br><span class="line">            <span class="comment"># 优先dq_1</span></span><br><span class="line">            <span class="keyword">if</span> dq_1:</span><br><span class="line">                res += <span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span> dq_1:</span><br><span class="line">                    current_idx = dq_1.popleft()  <span class="comment"># pop</span></span><br><span class="line">                    <span class="comment"># 4个方向:</span></span><br><span class="line">                    <span class="comment"># 注意！等于0也可以</span></span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                       </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] + <span class="number">1</span> &lt; m</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                       </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] + <span class="number">1</span> &lt; n</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                        </span><br><span class="line">            <span class="keyword">if</span> dq_0:</span><br><span class="line">                <span class="keyword">while</span> dq_0 <span class="keyword">and</span> <span class="built_in">len</span>(dq_1) == <span class="number">0</span>:</span><br><span class="line">                    current_idx = dq_0.popleft()  <span class="comment"># pop</span></span><br><span class="line">                    <span class="comment"># 4个方向:</span></span><br><span class="line">                    <span class="comment"># dq_0的访问不记录1的</span></span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] - <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] - <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            </span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">0</span>] + <span class="number">1</span> &lt; m</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>] + <span class="number">1</span>][current_idx[<span class="number">1</span>]] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>] + <span class="number">1</span>, current_idx[<span class="number">1</span>]])</span><br><span class="line">                            </span><br><span class="line">                            </span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] - <span class="number">1</span> &gt;= <span class="number">0</span></span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] - <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] - <span class="number">1</span>])</span><br><span class="line">                            </span><br><span class="line">                        </span><br><span class="line">                    <span class="keyword">if</span> (</span><br><span class="line">                        current_idx[<span class="number">1</span>] + <span class="number">1</span> &lt; n</span><br><span class="line">                        <span class="keyword">and</span> grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] != <span class="number">1</span></span><br><span class="line">                    ):</span><br><span class="line">                        grid_flag[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> grid[current_idx[<span class="number">0</span>]][current_idx[<span class="number">1</span>] + <span class="number">1</span>] == <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                            dq_1.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            dq_0.append([current_idx[<span class="number">0</span>], current_idx[<span class="number">1</span>] + <span class="number">1</span>])</span><br><span class="line">                                                </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ol>
 
@@ -930,7 +1261,7 @@
 <li>即对i(3-&gt;n-1),dp[i] &#x3D; max(nums[i]+dp[i-2],nums[i-1]+dp[i-3])</li>
 <li>参考题解，由于当前只和遍历到前2间的最大和有关，可以通过滚动数组，只2个数。</li>
 </ul>
-<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">rob</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 每次只能间隔选一个，dp[i]为前i个房间最大值。</span></span><br><span class="line">        <span class="comment"># 假设到最后一个房间nums[n-1]，最大为max（当前和+dp[n-2]，上一个，dp[n-1)：max(nums[n-1]+dp[n-3],nums[n-2]+dp[n-4])</span></span><br><span class="line">        <span class="comment"># 即对i(3-&gt;n-1),dp[i] = max(nums[i]+dp[i-2],nums[i-1]+dp[i-3])</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>] + nums[<span class="number">2</span>], nums[<span class="number">1</span>])</span><br><span class="line">        dp = [<span class="number">0</span>] * n</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>])</span><br><span class="line">        dp[<span class="number">2</span>] = <span class="built_in">max</span>(nums[<span class="number">0</span>] + nums[<span class="number">2</span>], nums[<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n):</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(nums[i] + dp[i - <span class="number">2</span>], nums[i - <span class="number">1</span>] + dp[i - <span class="number">3</span>])</span><br><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">rob</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 每次只能间隔选一个，dp[i]为前i个房间最大值。</span></span><br><span class="line">        <span class="comment"># 假设到最后一个房间nums[n-1]，最大为max（当前和+dp[n-2]，上一个，dp[n-1)：max(nums[n-1]+dp[n-3],nums[n-2]+dp[n-4])</span></span><br><span class="line">        <span class="comment"># 即对i(3-&gt;n-1),dp[i] = max(nums[i]+dp[i-2],nums[i-1]+dp[i-3])</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">max</span>(nums[<span class="number">0</span>] + nums[<span class="number">2</span>], nums[<span class="number">1</span>])</span><br><span class="line">        dp = [<span class="number">0</span>] * n</span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="built_in">max</span>(nums[<span class="number">0</span>], nums[<span class="number">1</span>])</span><br><span class="line">        dp[<span class="number">2</span>] = <span class="built_in">max</span>(nums[<span class="number">0</span>] + nums[<span class="number">2</span>], nums[<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n):</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(nums[i] + dp[i - <span class="number">2</span>], nums[i - <span class="number">1</span>] + dp[i - <span class="number">3</span>])</span><br><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
 
       
@@ -985,376 +1316,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2025/05/29/leetcode-198/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-20" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/29/leetcode-20/">算法笔记📒 | leetcode-20 有效的括号</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/29/leetcode-20/" class="archive-article-date">
-  	<time datetime="2025-05-29T15:27:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-20-有效的括号"><a href="#leetcode-20-有效的括号" class="headerlink" title="leetcode-20 有效的括号"></a>leetcode-20 有效的括号</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/description/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
-<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>注意审题：3种括号，可结合哈希表，建立字典快速查找匹配对。此时用in判断的是<code>key</code>是否在<code>dict</code>（右括号）；<code>dict[key]</code>获取右括号对应的左括号。</li>
-<li><code>len(st)==0</code> 也可写：<code>not st</code></li>
-<li>栈和队列不能弄反了。 </li>
-<li>注意边界情况。 </li>
-<li>通过判断长度可直接返回False。</li>
-</ul>
-<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValid</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(s)%<span class="number">2</span> != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        pairs = &#123;</span><br><span class="line">            <span class="string">&quot;&#125;&quot;</span>:<span class="string">&quot;&#123;&quot;</span>,</span><br><span class="line">            <span class="string">&quot;)&quot;</span>:<span class="string">&quot;(&quot;</span>,</span><br><span class="line">            <span class="string">&quot;]&quot;</span>:<span class="string">&quot;[&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        st = deque()</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> pairs:</span><br><span class="line">                st.append(c)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(st)==<span class="number">0</span> <span class="keyword">or</span> pairs[c]!=st[-<span class="number">1</span>]:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                st.pop()</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(st)!=<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">哈希表</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">栈</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Python/Easy//" class="article-tag-list-link color5">Easy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/29/leetcode-20/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-70" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/29/leetcode-70/">算法笔记📒 | leetcode-70 上楼梯</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/29/leetcode-70/" class="archive-article-date">
-  	<time datetime="2025-05-29T15:27:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-70-上楼梯"><a href="#leetcode-70-上楼梯" class="headerlink" title="leetcode-70 上楼梯"></a>leetcode-70 上楼梯</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/description/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
-<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ol>
-<li>发现用递归会超时，但是dp不会；</li>
-<li>注意边界条件（开始&#x2F;结束&#x2F;特殊情况）；</li>
-<li>思考最后一步或中间某一步怎样从上一步获得。</li>
-</ol>
-<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">climbStairs</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 尝试思考</span></span><br><span class="line">        <span class="comment"># 递归：超时，尝试dp</span></span><br><span class="line">        <span class="comment"># n=1 1</span></span><br><span class="line">        <span class="comment"># n=2 2</span></span><br><span class="line">        <span class="comment"># n=3 3=1+2</span></span><br><span class="line">        <span class="comment"># n=4 前一步可能是从n-2跳了一步2阶过来，也可能是从n-1跳了一步1阶过来， dp[i]=dp[i-2]+dp[i-1]</span></span><br><span class="line">        <span class="comment"># 判断边界</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">        dp = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        dp[<span class="number">2</span>] = <span class="number">2</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n + <span class="number">1</span>):</span><br><span class="line">            dp[i] = dp[i - <span class="number">2</span>] + dp[i - <span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> dp[n]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Easy</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">记忆化搜索</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Python/Easy//" class="article-tag-list-link color5">Easy</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/29/leetcode-70/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode-54" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/23/leetcode-54/">算法笔记📒 | leetcode-54 螺旋矩阵</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/23/leetcode-54/" class="archive-article-date">
-  	<time datetime="2025-05-23T15:43:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="leetcode-54-螺旋矩阵"><a href="#leetcode-54-螺旋矩阵" class="headerlink" title="leetcode-54 螺旋矩阵"></a>leetcode-54 螺旋矩阵</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
-<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
-<li>思路1:计算指针的移动方向。<ul>
-<li>4个状态，初始化mode &#x3D; 0，while(len(res)&lt;n*m)。</li>
-<li>p &#x3D; m,q &#x3D; n，存储需要移动的步数。 </li>
-<li>画图看每次移动几步，发现第一行移动n-1次q不动，然后从第二次移动开始每次p–（纵向）或q–（横向）。关键是特殊处理第一行。 <ul>
-<li>mode&#x3D;&#x3D;1:i不动,j++,res.append(matrix[i][j]);当j &#x3D;&#x3D; q时，mode &#x3D; ((mode+1)%4),q–; </li>
-<li>mode&#x3D;&#x3D;0:j不动,i++,res.append(matrix[i][j]);当i &#x3D;&#x3D; p时，mode &#x3D; ((mode+1)%4),p–; </li>
-<li>mode&#x3D;&#x3D;3:i不动,j–,res.append(matrix[i][j]);当j &#x3D;&#x3D; q时，mode &#x3D; ((mode+1)%4),q–; </li>
-<li>mode&#x3D;&#x3D;2:j不动,i–,res.append(matrix[i][j]);当i &#x3D;&#x3D; p时，mode &#x3D; ((mode+1)%4),p–;</li>
-</ul>
-</li>
-<li>有点类似题解的“四个指针转圈”、按层（从最外圈往里）模拟的思路～ </li>
-<li>用一个访问矩阵记录是否被访问过 </li>
-<li>有的题解通过存储4个边界，比较2个相对边界大小（l&amp;r，t&amp;b）等确定是否打印完毕的思想很有趣。 </li>
-<li>有的题解通过存储一个layer变量实现计算每次移动的步数。 </li>
-<li><strong>一个反思是注意考虑特殊情况，比如第一行、单行数据等</strong>‼️</li>
-</ul>
-</li>
-</ul>
-<h2 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h2><ol>
-<li>最初解答<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">spiralOrder</span>(<span class="params">self, matrix: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 思路1:计算指针的移动方向，</span></span><br><span class="line">        <span class="comment"># 4个状态，初始化mode = 0，while(len(res)&lt;n*m)</span></span><br><span class="line">        <span class="comment"># p = m,q = n，存储需要移动的步数。</span></span><br><span class="line">        <span class="comment"># 画图看每次移动几步，发现第一行移动n-1次q不动，然后从第二次移动开始每次p--（纵向）或q--（横向）。关键是特殊处理第一行。</span></span><br><span class="line">        <span class="comment"># mode==1:i不动,j++,res.append(matrix[i][j]);当j == q时，mode = ((mode+1)%4),q--;</span></span><br><span class="line">        <span class="comment"># mode==0:j不动,i++,res.append(matrix[i][j]);当i == p时，mode = ((mode+1)%4),p--;</span></span><br><span class="line">        <span class="comment"># mode==3:i不动,j--,res.append(matrix[i][j]);当j == q时，mode = ((mode+1)%4),q--;</span></span><br><span class="line">         <span class="comment"># mode==2:j不动,i--,res.append(matrix[i][j]);当i == p时，mode = ((mode+1)%4),p--;</span></span><br><span class="line">         <span class="comment"># 有点类似题解的“四个指针转圈”、按层（从最外圈往里）模拟的思路～</span></span><br><span class="line">         <span class="comment"># 用一个访问矩阵记录是否被访问过</span></span><br><span class="line">         <span class="comment"># 有的题解通过存储4个边界，比较2个相对边界大小（l&amp;r，t&amp;b）等确定是否打印完毕的思想很有趣。</span></span><br><span class="line">         <span class="comment"># 有的题解通过存储一个layer变量实现计算每次移动的步数。</span></span><br><span class="line">         <span class="comment"># 一个反思是注意考虑特殊情况，比如第一行、单行数据等</span></span><br><span class="line">        m = <span class="built_in">len</span>(matrix)</span><br><span class="line">        n = <span class="built_in">len</span>(matrix[<span class="number">0</span>])</span><br><span class="line">        p = m-<span class="number">1</span></span><br><span class="line">        q = n-<span class="number">1</span></span><br><span class="line">        i=<span class="number">0</span></span><br><span class="line">        j=<span class="number">0</span></span><br><span class="line">        res = []</span><br><span class="line">        res.append(matrix[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(q):</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">            res.append(matrix[i][j])</span><br><span class="line">        mode = <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">len</span>(res)&lt;=n*m-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> mode == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(q):</span><br><span class="line">                    j += <span class="number">1</span></span><br><span class="line">                    res.append(matrix[i][j])</span><br><span class="line">                mode = ((mode+<span class="number">1</span>)%<span class="number">4</span>)</span><br><span class="line">                q -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> mode == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(p):</span><br><span class="line">                    i += <span class="number">1</span></span><br><span class="line">                    res.append(matrix[i][j])</span><br><span class="line">                mode = ((mode+<span class="number">1</span>)%<span class="number">4</span>)</span><br><span class="line">                p -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> mode == <span class="number">2</span>:</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(q):</span><br><span class="line">                    j -= <span class="number">1</span></span><br><span class="line">                    res.append(matrix[i][j])</span><br><span class="line">                mode = ((mode+<span class="number">1</span>)%<span class="number">4</span>)</span><br><span class="line">                q -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> mode == <span class="number">3</span>:</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(p):</span><br><span class="line">                    i -= <span class="number">1</span></span><br><span class="line">                    res.append(matrix[i][j]) </span><br><span class="line">                mode = ((mode+<span class="number">1</span>)%<span class="number">4</span>)</span><br><span class="line">                p -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        </span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法笔记</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数组</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">矩阵</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室//" class="article-tag-list-link color4">自习室</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Python//" class="article-tag-list-link color2">Python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/自习室/Python/Medium//" class="article-tag-list-link color2">Medium</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/23/leetcode-54/">展开全文 >></a>
         </p>
       
 
@@ -1631,6 +1592,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">-Java - 算法笔记 - 链表 - Medium - Hot100</a>
               </li>
             
             <div class="clearfix"></div>
