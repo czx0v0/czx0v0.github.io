@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://czx0v0.github.io">
   <title>算法笔记📒 | leetcode-19 删除链表的倒数第 N 个结点 | czx0v0的宇宙自习室</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="leetcoe-19 删除链表的倒数第 N 个结点[题目](https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;remove-nth-node-from-end-of-list&#x2F;description&#x2F;?envType&#x3D;study-plan-v2&amp;envId&#x3D;top-100-liked） 反思 最后不返回head，因为可能head也被删除了，返回我们设立的虚拟头节点（head前面的）">
+  <meta name="description" content="leetcoe-19 删除链表的倒数第 N 个结点题目 反思 最后不返回head，因为可能head也被删除了，返回我们设立的虚拟头节点（head前面的）dummy的下一个节点。  解答1234567891011121314151617181920212223242526# Definition for singly-linked list.# class ListNode(object):#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法笔记📒 | leetcode-19 删除链表的倒数第 N 个结点">
 <meta property="og:url" content="https://czx0v0.github.io/2025/10/20/leetcode-19/index.html">
 <meta property="og:site_name" content="czx0v0的宇宙自习室">
-<meta property="og:description" content="leetcoe-19 删除链表的倒数第 N 个结点[题目](https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;remove-nth-node-from-end-of-list&#x2F;description&#x2F;?envType&#x3D;study-plan-v2&amp;envId&#x3D;top-100-liked） 反思 最后不返回head，因为可能head也被删除了，返回我们设立的虚拟头节点（head前面的）">
+<meta property="og:description" content="leetcoe-19 删除链表的倒数第 N 个结点题目 反思 最后不返回head，因为可能head也被删除了，返回我们设立的虚拟头节点（head前面的）dummy的下一个节点。  解答1234567891011121314151617181920212223242526# Definition for singly-linked list.# class ListNode(object):#">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-20T03:33:58.000Z">
-<meta property="article:modified_time" content="2025-10-22T03:04:23.236Z">
+<meta property="article:modified_time" content="2025-10-22T03:07:19.320Z">
 <meta property="article:author" content="czx0v0">
 <meta property="article:tag" content="算法笔记">
 <meta property="article:tag" content="Medium">
@@ -219,7 +219,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="leetcoe-19-删除链表的倒数第-N-个结点"><a href="#leetcoe-19-删除链表的倒数第-N-个结点" class="headerlink" title="leetcoe-19 删除链表的倒数第 N 个结点"></a>leetcoe-19 删除链表的倒数第 N 个结点</h1><p>[题目](<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/?envType=study-plan-v2&envId=top-100-liked%EF%BC%89">https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/?envType=study-plan-v2&amp;envId=top-100-liked）</a></p>
+        <h1 id="leetcoe-19-删除链表的倒数第-N-个结点"><a href="#leetcoe-19-删除链表的倒数第-N-个结点" class="headerlink" title="leetcoe-19 删除链表的倒数第 N 个结点"></a>leetcoe-19 删除链表的倒数第 N 个结点</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/?envType=study-plan-v2&envId=top-100-liked">题目</a></p>
 <h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
 <li>最后不返回head，因为可能head也被删除了，返回我们设立的虚拟头节点（head前面的）dummy的下一个节点。</li>
 </ul>
