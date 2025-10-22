@@ -8,22 +8,21 @@
   <link rel="dns-prefetch" href="https://czx0v0.github.io">
   <title>算法笔记📒 | leetcode-19 删除链表的倒数第 N 个结点 | czx0v0的宇宙自习室</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="leetcoe-19 删除链表的倒数第 N 个结点https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;remove-nth-node-from-end-of-list&#x2F;description&#x2F;?envType&#x3D;study-plan-v2&amp;envId&#x3D;top-100-liked 反思 最后不返回head，因为可能head也被删除了，返回我们设立的虚拟头节点（head前面的）dummy的">
+  <meta name="description" content="leetcoe-19 删除链表的倒数第 N 个结点[题目](https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;remove-nth-node-from-end-of-list&#x2F;description&#x2F;?envType&#x3D;study-plan-v2&amp;envId&#x3D;top-100-liked） 反思 最后不返回head，因为可能head也被删除了，返回我们设立的虚拟头节点（head前面的）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法笔记📒 | leetcode-19 删除链表的倒数第 N 个结点">
 <meta property="og:url" content="https://czx0v0.github.io/2025/10/20/leetcode-19/index.html">
 <meta property="og:site_name" content="czx0v0的宇宙自习室">
-<meta property="og:description" content="leetcoe-19 删除链表的倒数第 N 个结点https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;remove-nth-node-from-end-of-list&#x2F;description&#x2F;?envType&#x3D;study-plan-v2&amp;envId&#x3D;top-100-liked 反思 最后不返回head，因为可能head也被删除了，返回我们设立的虚拟头节点（head前面的）dummy的">
+<meta property="og:description" content="leetcoe-19 删除链表的倒数第 N 个结点[题目](https:&#x2F;&#x2F;leetcode.cn&#x2F;problems&#x2F;remove-nth-node-from-end-of-list&#x2F;description&#x2F;?envType&#x3D;study-plan-v2&amp;envId&#x3D;top-100-liked） 反思 最后不返回head，因为可能head也被删除了，返回我们设立的虚拟头节点（head前面的）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-20T03:33:58.000Z">
-<meta property="article:modified_time" content="2025-10-20T03:40:10.166Z">
+<meta property="article:modified_time" content="2025-10-22T03:04:23.236Z">
 <meta property="article:author" content="czx0v0">
 <meta property="article:tag" content="算法笔记">
+<meta property="article:tag" content="Medium">
 <meta property="article:tag" content="Hot100">
 <meta property="article:tag" content="Python">
-<meta property="article:tag" content="Medium">
 <meta property="article:tag" content="链表">
-<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="czx0v0的宇宙自习室" type="application/atom+xml">
@@ -52,11 +51,11 @@
 <div class="overlay" style="background: #483D8B"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="/panel" class="profilepic">
+		<a href="/panel/" class="profilepic">
 			<img src="/images/IMG_2073.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/panel"></a></h1>
+		  <h1 class="header-author"><a href="/panel/"></a></h1>
 		</hgroup>
 		
 
@@ -67,27 +66,23 @@
 	        
 				<li><a href="/panel/">个人面板</a></li>
 	        
-				<li><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
-	        
-				<li><a href="/tags/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a></li>
-	        
-				<li><a href="/tags/%E6%80%9D%E8%B7%AF%E7%AC%94%E8%AE%B0/">思路笔记</a></li>
-	        
 				<li><a href="/HTML/school_enrollment_distribution.html">教育可视化</a></li>
 	        
 				<li><a href="/HTML/molecular_universe.html">分子宇宙</a></li>
 	        
-				<li><a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">1-哈希表</a></li>
+				<li><a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a></li>
 	        
-				<li><a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">2-双指针</a></li>
+				<li><a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a></li>
 	        
-				<li><a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">3-滑动窗口</a></li>
+				<li><a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a></li>
 	        
-				<li><a href="/tags/%E5%AD%90%E4%B8%B2/">4-子串</a></li>
+				<li><a href="/tags/%E5%AD%90%E4%B8%B2/">子串</a></li>
 	        
-				<li><a href="/tags/%E6%95%B0%E7%BB%84/">5-普通数组</a></li>
+				<li><a href="/tags/%E6%95%B0%E7%BB%84/">普通数组</a></li>
 	        
-				<li><a href="/tags/%E7%9F%A9%E9%98%B5/">6-矩阵（进行中）</a></li>
+				<li><a href="/tags/%E7%9F%A9%E9%98%B5/">矩阵</a></li>
+	        
+				<li><a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a></li>
 	        
 			</ul>
 		</nav>
@@ -155,10 +150,6 @@
 			
 				
 			
-				
-			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -173,31 +164,27 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 7.6923076923076925%"><a href="/">主页</a></li>
+					<li style="width: 9.090909090909092%"><a href="/">主页</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/panel/">个人面板</a></li>
+					<li style="width: 9.090909090909092%"><a href="/panel/">个人面板</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></li>
+					<li style="width: 9.090909090909092%"><a href="/HTML/school_enrollment_distribution.html">教育可视化</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/tags/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a></li>
+					<li style="width: 9.090909090909092%"><a href="/HTML/molecular_universe.html">分子宇宙</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/tags/%E6%80%9D%E8%B7%AF%E7%AC%94%E8%AE%B0/">思路笔记</a></li>
+					<li style="width: 9.090909090909092%"><a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/HTML/school_enrollment_distribution.html">教育可视化</a></li>
+					<li style="width: 9.090909090909092%"><a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/HTML/molecular_universe.html">分子宇宙</a></li>
+					<li style="width: 9.090909090909092%"><a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">滑动窗口</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">1-哈希表</a></li>
+					<li style="width: 9.090909090909092%"><a href="/tags/%E5%AD%90%E4%B8%B2/">子串</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">2-双指针</a></li>
+					<li style="width: 9.090909090909092%"><a href="/tags/%E6%95%B0%E7%BB%84/">普通数组</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">3-滑动窗口</a></li>
+					<li style="width: 9.090909090909092%"><a href="/tags/%E7%9F%A9%E9%98%B5/">矩阵</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/tags/%E5%AD%90%E4%B8%B2/">4-子串</a></li>
-		        
-					<li style="width: 7.6923076923076925%"><a href="/tags/%E6%95%B0%E7%BB%84/">5-普通数组</a></li>
-		        
-					<li style="width: 7.6923076923076925%"><a href="/tags/%E7%9F%A9%E9%98%B5/">6-矩阵（进行中）</a></li>
+					<li style="width: 9.090909090909092%"><a href="/tags/%E9%93%BE%E8%A1%A8/">链表</a></li>
 		        
 				</ul>
 			</nav>
@@ -232,7 +219,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="leetcoe-19-删除链表的倒数第-N-个结点"><a href="#leetcoe-19-删除链表的倒数第-N-个结点" class="headerlink" title="leetcoe-19 删除链表的倒数第 N 个结点"></a>leetcoe-19 删除链表的倒数第 N 个结点</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/?envType=study-plan-v2&envId=top-100-liked">https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/?envType=study-plan-v2&amp;envId=top-100-liked</a></p>
+        <h1 id="leetcoe-19-删除链表的倒数第-N-个结点"><a href="#leetcoe-19-删除链表的倒数第-N-个结点" class="headerlink" title="leetcoe-19 删除链表的倒数第 N 个结点"></a>leetcoe-19 删除链表的倒数第 N 个结点</h1><p>[题目](<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/?envType=study-plan-v2&envId=top-100-liked%EF%BC%89">https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/?envType=study-plan-v2&amp;envId=top-100-liked）</a></p>
 <h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><ul>
 <li>最后不返回head，因为可能head也被删除了，返回我们设立的虚拟头节点（head前面的）dummy的下一个节点。</li>
 </ul>
@@ -275,6 +262,10 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Hot100</a>
         		</li>
       		 
@@ -283,15 +274,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Medium</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		
 		</ul>
@@ -329,6 +312,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2025/10/22/leetcode-24/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          算法笔记📒 | leetcode-24 两两交换链表中的节点
+        
+      </div>
+    </a>
+  
   
     <a href="/2025/08/03/leetcode-2/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">算法笔记📒 | leetcode-2 两数相加</div>
@@ -350,6 +342,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#leetcoe-19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%AC-N-%E4%B8%AA%E7%BB%93%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">leetcoe-19 删除链表的倒数第 N 个结点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E6%80%9D"><span class="toc-number">1.1.</span> <span class="toc-text">反思</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E7%AD%94"><span class="toc-number">1.2.</span> <span class="toc-text">解答</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -482,15 +487,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">哈希表</a>
+                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Easy</a>
+                <a href="javascript:void(0)" class="js-tag color2">Medium</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -502,6 +503,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">哈希表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Easy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划</a>
               </li>
              
@@ -510,15 +523,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Medium</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">链表</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">双指针</a>
+                <a href="javascript:void(0)" class="js-tag color3">数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -526,15 +531,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">前缀和</a>
+                <a href="javascript:void(0)" class="js-tag color2">栈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,15 +551,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">前缀和</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">单调队列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">堆</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">滑动窗口</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,15 +583,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">字符串</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">DP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">分治法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -594,6 +595,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">分治法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
@@ -602,11 +607,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">思路笔记</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+                <a href="javascript:void(0)" class="js-tag color5">思路笔记</a>
               </li>
             
             <div class="clearfix"></div>
@@ -657,7 +662,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">咸鱼｜编程｜心理学｜绘画｜游戏｜学习&lt;br&gt; =w=你好呀！</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">咸鱼｜编程｜心理学｜绘画｜游戏｜学习~ =w=你好呀！</div>
   	  	
     	</section>
     
