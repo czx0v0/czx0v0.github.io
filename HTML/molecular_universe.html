@@ -1205,7 +1205,7 @@
     let molecules = [];
     let labelNames = [];
     let similarity = {};
-    let currentEmbeddingType = "fp_embeddings";
+    let currentEmbeddingType = "fp_coords";
     let currentEmbedding = "pca";
     let selectedMol = 0; // 当前选中分子索引,右侧信息面板显示
     let mwMax = 1000;
@@ -1676,9 +1676,9 @@
     // 更新画布布局
     function updateCanvasLayout() {
       const container = document.getElementById('canvas-container');
-      // 2个画布：0为fp_embeddings，1为lb_embeddings
+      // 2个画布：0为fp_coords，1为lb_coord
       const embNames = ['结构空间', '标签空间'];
-      const embTypes = ['fp_embeddings', 'lb_embeddings'];
+      const embTypes = ['fp_coords', 'lb_coords'];
       container.innerHTML = '';
       for (let i = 0; i < 2; ++i) {
         const div = document.createElement('div');
@@ -1761,7 +1761,7 @@
           container._renderer = null;
         }
       }
-      const embTypes = ['fp_embeddings', 'lb_embeddings'];
+      const embTypes = ['fp_coords', 'lb_coords'];
       for (let i = 0; i < 2; ++i) {
         // 放大时只渲染被放大的画布
         if (enlargedCanvas !== -1 && enlargedCanvas !== i) continue;
