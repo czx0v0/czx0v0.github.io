@@ -9,12 +9,13 @@
   <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono:400,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:400,700&display=swap" rel="stylesheet">
   <!-- Three.js,  D3.js , SmilesDrawer-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<!--  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>-->
-<!--  <script src="https://cdn.jsdelivr.net/npm/smiles-drawer@1.0.10/dist/smiles-drawer.min.js"></script>-->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
   <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script> -->
   <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <!-- <script src="https://unpkg.com/three/examples/jsm/controls/OrbitControls.js"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/smiles-drawer@1.0.10/dist/smiles-drawer.min.js"></script> -->
   <script src="https://unpkg.com/smiles-drawer@1.2.0/dist/smiles-drawer.min.js"></script>
   <style>
     html,
@@ -1022,13 +1023,13 @@
       <div style="margin-bottom:0.2em;">
         <label for="dataset-select" style="font-size:0.97em;">数据集选择</label>
         <select id="dataset-select" style="margin-left:0.5em;">
-          <option value="gs_lf_100.json">100</option>
-          <option value="gs_lf_250.json" selected>250</option>
-          <option value="gs_lf_512.json">512</option>
-          <option value="gs_lf_1024.json">1024</option>
+          <option value="./data/gs_lf_100.json">100</option>
+          <option value="./data/gs_lf_250.json">250</option>
+          <option value="./data/gs_lf_512.json">512</option>
+          <option value="./data/gs_lf_1024.json">1024</option>
           <!-- github有上传文件限制，本地server可以解开注释，并把相关json文件放在HTML文件同路径中 -->
-          <!--          <option value="gs_lf_2048.json">2048</option>-->
-          <!--          <option value="gs_lf_4096.json">4096</option>-->
+                   <option value="./data/gs_lf_2048.json">2048</option>
+                   <option value="./data/gs_lf_4983.json" selected>4983</option>
         </select>
       </div>
       <div class="section-title">TopN聚焦模式切换</div>
@@ -1067,7 +1068,7 @@
       <!-- 滑块 -->
       <div class="section-title">分子量范围</div>
       <div style="display:flex;align-items:center;gap:0.7em;">
-        <input id="mw-range" type="range" min="0" max="1000" value="1000" step="1" class="styled-range">
+        <input id="mw-range" type="range" min="0" max="2000" value="1000" step="1" class="styled-range">
         <span id="mw-range-val" class="range-val">1000</span>
       </div>
       <div class="section-title">分子数目上限</div>
@@ -1125,10 +1126,10 @@
         <div class="section-title">分子特征标签云</div>
         <div id="feature-tag-cloud" class="tag-cloud"></div>
       </div>
-      <div class="section-title">结构相似推荐</div>
-      <ul class="sim-list" id="structural-sim" style="cursor:pointer;"></ul>
-      <div class="section-title">标签相似推荐</div>
-      <ul class="sim-list" id="label-sim" style="cursor:pointer;"></ul>
+      <!-- <div class="section-title">结构相似推荐</div> -->
+      <!-- <ul class="sim-list" id="structural-sim" style="cursor:pointer;"></ul> -->
+      <!-- <div class="section-title">标签相似推荐</div> -->
+      <!-- <ul class="sim-list" id="label-sim" style="cursor:pointer;"></ul> -->
     </div>
     <!-- 问号弹窗 -->
     <div class="help-popover" id="help-popover">
@@ -1160,8 +1161,8 @@
         <li><b>右侧信息面板</b></li>
         <ul>
           <li><b>分子详情</b>：显示分子SMILES、IUPAC名称、2D结构图、气味标签云和特征标签云。其中气味标签云和特征标签云可点击筛选。点击复制可复制分子SMILES。点击加入对比可将分子加入对比。</li>
-          <li><b>结构相似推荐</b>：展示与当前分子结构相似的5个分子，点击加号可将分子加入对比。</li>
-          <li><b>标签相似推荐</b>：展示与当前分子气味标签相似的5个分子，点击加号可将分子加入对比。</li>
+          <!-- <li><b>结构相似推荐</b>：展示与当前分子结构相似的5个分子，点击加号可将分子加入对比。</li> -->
+          <!-- <li><b>标签相似推荐</b>：展示与当前分子气味标签相似的5个分子，点击加号可将分子加入对比。</li> -->
         </ul>
       </ul>
       <b>视觉编码说明</b><br>
@@ -1204,7 +1205,7 @@
     let data = null;
     let molecules = [];
     let labelNames = [];
-    let similarity = {};
+    //let similarity = {};
     let currentEmbeddingType = "fp_coords";
     let currentEmbedding = "pca";
     let selectedMol = 0; // 当前选中分子索引,右侧信息面板显示
@@ -1223,7 +1224,7 @@
     let currentPage = "home";
     let compareList = []; // 用于存储对比分子
     let renderer, scene, camera, controls, raycaster, mouse, particles, particleData;
-    let currentDataset = 'gs_lf_512.json';
+    let currentDataset = './data/gs_lf_512.json';
 
     // 标签专属颜色生成(旧版颜色)
     // function generateLabelColors(n) {
@@ -1248,13 +1249,13 @@
     let labelColors = [];
 
     // 读取数据
-    fetch('gs_lf_512.json')
+    fetch('./data/gs_lf_4983.json')
       .then(res => res.json())
       .then(json => {
         data = json;
         molecules = data.molecules;
         labelNames = data.metadata.label_names;
-        similarity = data.similarity_matrix;
+        //similarity = data.similarity_matrix;
         labelColors = generateLabelColors(labelNames.length);
         initUI();
         updateCanvasLayout();
@@ -1598,7 +1599,7 @@
             data = json;
             molecules = data.molecules;
             labelNames = data.metadata.label_names;
-            similarity = data.similarity_matrix;
+            //similarity = data.similarity_matrix;
             labelColors = generateLabelColors(labelNames.length);
             // 重新初始化所有UI和可视化
             initUI();
@@ -1676,7 +1677,7 @@
     // 更新画布布局
     function updateCanvasLayout() {
       const container = document.getElementById('canvas-container');
-      // 2个画布：0为fp_coords，1为lb_coord
+      // 2个画布：0为fp_coords，1为lb_coords
       const embNames = ['结构空间', '标签空间'];
       const embTypes = ['fp_coords', 'lb_coords'];
       container.innerHTML = '';
@@ -2148,8 +2149,8 @@
         }
       });
       // 推荐
-      renderSimList('structural-sim', similarity.structural[idx], 'Tanimoto');
-      renderSimList('label-sim', similarity.label[idx], 'Jaccard');
+      //renderSimList('structural-sim', similarity.structural[idx], 'Tanimoto');
+      //renderSimList('label-sim', similarity.label[idx], 'Jaccard');
 
       // 特征标签云
       const featureTagCloud = document.getElementById('feature-tag-cloud');
@@ -2257,7 +2258,7 @@
         .attr('text-anchor', 'middle')
         .attr('font-size', '0.98em')
         .attr('fill', '#222')
-        .text(label || '共现次数');
+        .text(label || '共现数');
     }
     // 推荐列表加2D分子图
     function renderSimList(id, simArr, type) {
@@ -2552,7 +2553,7 @@
         .attr('text-anchor', 'middle')
         .attr('font-size', '0.98em')
         .attr('fill', '#888')
-        .text(`每个格表示Top${topN}标签下标签共现次数`);
+        .text(`每个格表示Top${topN}标签下标签共现数`);
 
       const maxVal = d3.max(coMat.flat());
       const colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxVal]);
@@ -2618,7 +2619,7 @@
         n * cellSize, // height，和热力图高度一致
         0,
         maxVal,
-        '共现次数'
+        '共现数'
       );
     }
     function renderChordDiagram(container, matrix, labelNames) {
@@ -2646,7 +2647,7 @@
         .attr('text-anchor', 'middle')
         .attr('font-size', '0.98em')
         .attr('fill', '#888')
-        .text(`每条弦表示Top${topN}标签间的共现关系，弦宽代表共现次数`);
+        .text(`每条弦表示Top${topN}标签间的共现关系，弦宽代表共现数`);
       const g = svg.append('g')
         .attr('transform', `translate(${width / 2},${height / 2})`);
 
@@ -2973,7 +2974,7 @@
         .attr('text-anchor', 'middle')
         .attr('font-size', '0.98em')
         .attr('fill', '#888')
-        .text(`每个格表示Top${topN}标签下特征出现次数`);
+        .text(`每个格表示Top${topN}标签下特征出现数`);
 
       // Tooltip
       let tooltip = d3.select(container).select('.d3-tooltip');
@@ -3070,7 +3071,7 @@
         n * cellH,
         0,
         maxVal,
-        '共现次数'
+        '共现数'
       );
 
     }
