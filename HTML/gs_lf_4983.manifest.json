@@ -1,0 +1,293 @@
+{
+  "schema_version": "v2",
+  "dataset": {
+    "name": "gs_lf_4983",
+    "size": 4983,
+    "legacy_path": "gs_lf_4983.json"
+  },
+  "metadata": {
+    "label_names": [
+      "alcoholic",
+      "aldehydic",
+      "alliaceous",
+      "almond",
+      "amber",
+      "animal",
+      "anisic",
+      "apple",
+      "apricot",
+      "aromatic",
+      "balsamic",
+      "banana",
+      "beefy",
+      "bergamot",
+      "berry",
+      "bitter",
+      "black currant",
+      "brandy",
+      "burnt",
+      "buttery",
+      "cabbage",
+      "camphoreous",
+      "caramellic",
+      "cedar",
+      "celery",
+      "chamomile",
+      "cheesy",
+      "cherry",
+      "chocolate",
+      "cinnamon",
+      "citrus",
+      "clean",
+      "clove",
+      "cocoa",
+      "coconut",
+      "coffee",
+      "cognac",
+      "cooked",
+      "cooling",
+      "cortex",
+      "coumarinic",
+      "creamy",
+      "cucumber",
+      "dairy",
+      "dry",
+      "earthy",
+      "ethereal",
+      "fatty",
+      "fermented",
+      "fishy",
+      "floral",
+      "fresh",
+      "fruit skin",
+      "fruity",
+      "garlic",
+      "gassy",
+      "geranium",
+      "grape",
+      "grapefruit",
+      "grassy",
+      "green",
+      "hawthorn",
+      "hay",
+      "hazelnut",
+      "herbal",
+      "honey",
+      "hyacinth",
+      "jasmin",
+      "juicy",
+      "ketonic",
+      "lactonic",
+      "lavender",
+      "leafy",
+      "leathery",
+      "lemon",
+      "lily",
+      "malty",
+      "meaty",
+      "medicinal",
+      "melon",
+      "metallic",
+      "milky",
+      "mint",
+      "muguet",
+      "mushroom",
+      "musk",
+      "musty",
+      "natural",
+      "nutty",
+      "odorless",
+      "oily",
+      "onion",
+      "orange",
+      "orangeflower",
+      "orris",
+      "ozone",
+      "peach",
+      "pear",
+      "phenolic",
+      "pine",
+      "pineapple",
+      "plum",
+      "popcorn",
+      "potato",
+      "powdery",
+      "pungent",
+      "radish",
+      "raspberry",
+      "ripe",
+      "roasted",
+      "rose",
+      "rummy",
+      "sandalwood",
+      "savory",
+      "sharp",
+      "smoky",
+      "soapy",
+      "solvent",
+      "sour",
+      "spicy",
+      "strawberry",
+      "sulfurous",
+      "sweaty",
+      "sweet",
+      "tea",
+      "terpenic",
+      "tobacco",
+      "tomato",
+      "tropical",
+      "vanilla",
+      "vegetable",
+      "vetiver",
+      "violet",
+      "warm",
+      "waxy",
+      "weedy",
+      "winey",
+      "woody"
+    ],
+    "feature_names": [
+      "sulfur",
+      "carboxylic_acid",
+      "alkyl_four_carbon_chain",
+      "ester",
+      "phenyl",
+      "eight_atoms_or_fewer",
+      "ether",
+      "aldehyde",
+      "hitrile",
+      "thirteen_atoms_or_more",
+      "aromatic_nitrogen",
+      "amine"
+    ]
+  },
+  "layout": {
+    "lite_path": "gs_lf_4983.molecules-lite.jsonl",
+    "chunk_size": 500,
+    "molecule_chunks": [
+      {
+        "chunk_idx": 0,
+        "start": 0,
+        "end": 500,
+        "path": "gs_lf_4983.molecules/chunk_0000.json"
+      },
+      {
+        "chunk_idx": 1,
+        "start": 500,
+        "end": 1000,
+        "path": "gs_lf_4983.molecules/chunk_0001.json"
+      },
+      {
+        "chunk_idx": 2,
+        "start": 1000,
+        "end": 1500,
+        "path": "gs_lf_4983.molecules/chunk_0002.json"
+      },
+      {
+        "chunk_idx": 3,
+        "start": 1500,
+        "end": 2000,
+        "path": "gs_lf_4983.molecules/chunk_0003.json"
+      },
+      {
+        "chunk_idx": 4,
+        "start": 2000,
+        "end": 2500,
+        "path": "gs_lf_4983.molecules/chunk_0004.json"
+      },
+      {
+        "chunk_idx": 5,
+        "start": 2500,
+        "end": 3000,
+        "path": "gs_lf_4983.molecules/chunk_0005.json"
+      },
+      {
+        "chunk_idx": 6,
+        "start": 3000,
+        "end": 3500,
+        "path": "gs_lf_4983.molecules/chunk_0006.json"
+      },
+      {
+        "chunk_idx": 7,
+        "start": 3500,
+        "end": 4000,
+        "path": "gs_lf_4983.molecules/chunk_0007.json"
+      },
+      {
+        "chunk_idx": 8,
+        "start": 4000,
+        "end": 4500,
+        "path": "gs_lf_4983.molecules/chunk_0008.json"
+      },
+      {
+        "chunk_idx": 9,
+        "start": 4500,
+        "end": 4983,
+        "path": "gs_lf_4983.molecules/chunk_0009.json"
+      }
+    ],
+    "neighbor_chunks": [
+      {
+        "chunk_idx": 0,
+        "start": 0,
+        "end": 500,
+        "path": "gs_lf_4983.neighbors/chunk_0000.json"
+      },
+      {
+        "chunk_idx": 1,
+        "start": 500,
+        "end": 1000,
+        "path": "gs_lf_4983.neighbors/chunk_0001.json"
+      },
+      {
+        "chunk_idx": 2,
+        "start": 1000,
+        "end": 1500,
+        "path": "gs_lf_4983.neighbors/chunk_0002.json"
+      },
+      {
+        "chunk_idx": 3,
+        "start": 1500,
+        "end": 2000,
+        "path": "gs_lf_4983.neighbors/chunk_0003.json"
+      },
+      {
+        "chunk_idx": 4,
+        "start": 2000,
+        "end": 2500,
+        "path": "gs_lf_4983.neighbors/chunk_0004.json"
+      },
+      {
+        "chunk_idx": 5,
+        "start": 2500,
+        "end": 3000,
+        "path": "gs_lf_4983.neighbors/chunk_0005.json"
+      },
+      {
+        "chunk_idx": 6,
+        "start": 3000,
+        "end": 3500,
+        "path": "gs_lf_4983.neighbors/chunk_0006.json"
+      },
+      {
+        "chunk_idx": 7,
+        "start": 3500,
+        "end": 4000,
+        "path": "gs_lf_4983.neighbors/chunk_0007.json"
+      },
+      {
+        "chunk_idx": 8,
+        "start": 4000,
+        "end": 4500,
+        "path": "gs_lf_4983.neighbors/chunk_0008.json"
+      },
+      {
+        "chunk_idx": 9,
+        "start": 4500,
+        "end": 4983,
+        "path": "gs_lf_4983.neighbors/chunk_0009.json"
+      }
+    ],
+    "neighbor_topk": 20
+  }
+}

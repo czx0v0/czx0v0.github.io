@@ -1,0 +1,399 @@
+/* ========== 宇宙自习室 · 色彩与设计令牌 ========== */
+:root {
+  --purple: #e39ff6;
+  --bg: #f7f7fa;
+  --purple-44: #e39ff644;
+  --purple-22: #e39ff622;
+  --warm-yellow: #f5d67a;
+  --text: #2d2d3a;
+  --text-soft: #5c5c6e;
+  --deep-space: #120818;
+  --shadow-inset: rgba(120, 40, 160, 0.55);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3.5rem;
+}
+
+/* ========== 第一部分：宇宙飞船窗户 ========== */
+.cosmic-window {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  min-height: 200px;
+  max-height: 420px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--deep-space);
+  box-shadow:
+    inset 0 0 0 3px rgba(227, 159, 246, 0.35),
+    inset 0 12px 48px rgba(60, 20, 90, 0.75),
+    inset 0 -8px 32px rgba(20, 5, 40, 0.9),
+    0 18px 40px var(--purple-44);
+}
+
+.cosmic-window__breath {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse 110% 95% at 45% 42%, #e39ff622 0%, transparent 52%),
+    radial-gradient(ellipse 90% 85% at 68% 58%, rgba(240, 240, 248, 0.06) 0%, transparent 48%),
+    linear-gradient(152deg, #080612 0%, #0a0e18 42%, #0c0818 72%, #080612 100%);
+  background-size: 220% 220%, 180% 180%, 100% 100%;
+  background-position: 0% 0%, 100% 0%, 0 0;
+  animation: cosmic-breathe 14s ease-in-out infinite;
+}
+
+@keyframes cosmic-breathe {
+  0%,
+  100% {
+    background-position: 0% 20%, 100% 80%, 0 0;
+    background-size: 220% 220%, 180% 180%, 100% 100%;
+  }
+  50% {
+    background-position: 100% 70%, 0% 30%, 0 0;
+    background-size: 240% 240%, 200% 200%, 100% 100%;
+  }
+}
+
+#starfield {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cosmic-window__vignette {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 80px rgba(0, 0, 0, 0.45),
+    inset 0 0 24px var(--shadow-inset);
+}
+
+/* ========== 第二部分：对话体自我介绍 ========== */
+.chat-intro {
+  margin-top: 1.75rem;
+}
+
+.chat-intro__row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.avatar-cat {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fff, var(--purple-22));
+  box-shadow: 0 8px 24px var(--purple-44), 0 0 0 3px #fff;
+  display: grid;
+  place-items: center;
+  padding: 6px;
+}
+
+.avatar-cat__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.chat-bubbles {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.bubble {
+  padding: 0.75rem 1rem;
+  border-radius: 18px 18px 6px 18px;
+  font-size: 0.95rem;
+  max-width: min(100%, 34rem);
+  text-align: left;
+  box-shadow: 0 4px 14px rgba(80, 60, 120, 0.08);
+  border: 1px solid rgba(227, 159, 246, 0.2);
+}
+
+.bubble--tint {
+  background: var(--purple-44);
+}
+
+.bubble--white {
+  background: #fff;
+}
+
+/* ========== 第三部分：导航小人 ========== */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2.5rem 0 2rem;
+  padding: 0;
+}
+
+.float-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.float-nav__bob {
+  animation: float 3s ease-in-out infinite;
+  display: block;
+}
+
+.float-nav__item:nth-child(2) .float-nav__bob {
+  animation-delay: -1s;
+}
+
+.float-nav__item:nth-child(3) .float-nav__bob {
+  animation-delay: -2s;
+}
+
+.float-nav__item:hover {
+  color: var(--purple);
+  transform: scale(1.08);
+}
+
+.float-nav__icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 8px 22px var(--purple-44), 0 0 0 2px rgba(227, 159, 246, 0.35);
+  display: grid;
+  place-items: center;
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.float-nav__icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.float-nav__item:hover .float-nav__icon {
+  background: var(--purple-44);
+  box-shadow: 0 12px 28px var(--purple-44), 0 0 0 3px var(--purple);
+}
+
+.float-nav__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ========== 第四部分：档案存储架 ========== */
+.storage {
+  margin-top: 0.5rem;
+  padding: 2rem 1.5rem 2.25rem;
+  border-radius: 24px;
+  background: var(--purple-22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.storage__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.04em;
+}
+
+.storage__subtitle {
+  margin: 0 0 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+.shelf {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.book {
+  display: flex;
+  min-height: 108px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 14px;
+  overflow: visible;
+  transition: transform 0.38s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.38s ease;
+  box-shadow: 0 10px 28px rgba(60, 40, 100, 0.12);
+}
+
+.book:hover {
+  transform: translate(12px, -6px);
+  box-shadow: 0 18px 40px rgba(100, 60, 140, 0.22);
+}
+
+.book:active {
+  transform: translate(8px, -4px);
+}
+
+.book__spine {
+  width: 28px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    var(--warm-yellow) 0%,
+    #e8c85a 35%,
+    var(--warm-yellow) 70%,
+    #dcb040 100%
+  );
+  border-radius: 10px 0 0 10px;
+  box-shadow: inset -4px 0 8px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+.book__spine::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 6px;
+  width: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.book__face {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1rem 1.15rem;
+  background: linear-gradient(135deg, #ffffff 0%, #faf8fc 50%, #f3eef8 100%);
+  border-radius: 0 14px 14px 0;
+  border: 1px solid rgba(227, 159, 246, 0.35);
+  border-left: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.book__tag {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  background: var(--purple-44);
+  color: #6b3d7a;
+}
+
+.book__tag--ext {
+  background: rgba(245, 214, 122, 0.45);
+  color: #7a5a20;
+}
+
+.book__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.book__hint {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 1rem 0.9rem 2.5rem;
+  }
+
+  .cosmic-window {
+    border-radius: 20px;
+    aspect-ratio: 4 / 3;
+    max-height: none;
+  }
+
+  .chat-intro__row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chat-bubbles {
+    width: 100%;
+  }
+
+  .avatar-cat {
+    width: 84px;
+    height: 84px;
+  }
+
+  .float-nav {
+    gap: 1rem;
+  }
+
+  .book:hover {
+    transform: translate(8px, -4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-window__breath {
+    animation: none;
+    background-position: 50% 50%, 50% 50%, 0 0;
+    background-size: 220% 220%, 180% 180%, 100% 100%;
+  }
+
+  .float-nav__bob {
+    animation: none;
+  }
+
+  .book {
+    transition: none;
+  }
+}
